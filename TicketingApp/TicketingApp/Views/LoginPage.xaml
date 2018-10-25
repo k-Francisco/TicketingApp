@@ -1,0 +1,29 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:prism="clr-namespace:Prism.Mvvm;assembly=Prism.Forms"
+             xmlns:controls="clr-namespace:TicketingApp.CustomControls"
+             xmlns:converters="clr-namespace:TicketingApp.Converters"
+             xmlns:behaviors="clr-namespace:Prism.Behaviors;assembly=Prism.Forms"
+             prism:ViewModelLocator.AutowireViewModel="True"
+             x:Class="TicketingApp.Views.LoginPage">
+
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <converters:WebNavigatingEventArgsConverter x:Key="webNavigatingEventArgs"/>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
+    <controls:CustomWebView x:Name="webView"
+                            Source="{Binding LoginSiteUrl}"
+                            HorizontalOptions="FillAndExpand"
+                            VerticalOptions="FillAndExpand">
+        <controls:CustomWebView.Behaviors>
+            <behaviors:EventToCommandBehavior EventName="Navigating"
+                                              Command="{Binding WebNavigatingCommand}"
+                                              EventArgsConverter="{StaticResource webNavigatingEventArgs}"/>
+        </controls:CustomWebView.Behaviors>
+        
+    </controls:CustomWebView>
+
+</ContentPage>
