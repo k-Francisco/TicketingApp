@@ -2,12 +2,62 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:prism="clr-namespace:Prism.Mvvm;assembly=Prism.Forms"
+             xmlns:converter="clr-namespace:TicketingApp.Converters"
+             xmlns:behavior="clr-namespace:Prism.Behaviors;assembly=Prism.Forms"
              prism:ViewModelLocator.AutowireViewModel="True"
              x:Class="TicketingApp.Views.TicketsPage">
 
-    <StackLayout HorizontalOptions="Center"
-                 VerticalOptions="Center">
-        <Label Text="Ticketing Page"/>
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            
+            <converter:ItemTappedEventArgsConverter x:Key="itemTappedEventArgsConverter"/>
+            
+            <DataTemplate x:Key="TicketsDataTemplate">
+                <ViewCell>
+                    <StackLayout HorizontalOptions="FillAndExpand"
+                                 Orientation="Horizontal"
+                                 Spacing="0"
+                                 CompressedLayout.IsHeadless="True">
+                        <!--<StackLayout.GestureRecognizers>
+                            <TapGestureRecognizer/>
+                        </StackLayout.GestureRecognizers>-->
+
+                        <BoxView HeightRequest="100"
+                                 BackgroundColor="Red"/>
+
+                        <StackLayout Orientation="Vertical"
+                                     CompressedLayout.IsHeadless="True">
+
+                            <Label Text="{Binding Title, StringFormat='Ticket Number: {0}'}"/>
+                            <Label Text="{Binding JobName}"/>
+                            <Label Text="{Binding JobLocation}"/>
+                            <Label Text="{Binding CommentsToOffice}"/>
+
+                        </StackLayout>
+
+                    </StackLayout>
+                </ViewCell>
+            </DataTemplate>
+            
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
+    <StackLayout HorizontalOptions="FillAndExpand"
+                 VerticalOptions="FillAndExpand">
+        <ListView x:Name="listy"
+                  HasUnevenRows="True"
+                  SeparatorVisibility="None"
+                  ItemTemplate="{StaticResource TicketsDataTemplate}"
+                  ItemsSource="{Binding TicketCollection}">
+            <x:Arguments>
+                <ListViewCachingStrategy>RecycleElementAndDataTemplate</ListViewCachingStrategy>
+            </x:Arguments>
+            <ListView.Behaviors>
+                <behavior:EventToCommandBehavior EventName="ItemTapped"
+                                                 Command="{Binding ItemTappedCommand}"
+                                                 EventArgsConverter="{StaticResource itemTappedEventArgsConverter}"/>
+            </ListView.Behaviors>
+        </ListView>
         
     </StackLayout>
   

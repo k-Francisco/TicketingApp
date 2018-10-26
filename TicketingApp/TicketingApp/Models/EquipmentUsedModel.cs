@@ -3,10 +3,11 @@ using Realms;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using TicketingApp.Services;
 
 namespace TicketingApp.Models.EquipmentUsed
 {
-    public class RootObject
+    public class RootObject : SyncService<EquipmentUsed>
     {
         [JsonProperty("d")]
         public D D { get; set; }
