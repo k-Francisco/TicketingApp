@@ -32,13 +32,11 @@ namespace TicketingApp.ViewModels
             set { _ticketCollection = value; }
         }
 
-
         public TicketsPageViewModel(INavigationService navigationService, ISharepointAPI sharepointAPI) 
             : base(navigationService, sharepointAPI)
         {
             SharepointAPI.Init(App.SiteUrl);
             SyncData();
-            GetTickets();
         }
 
         private async void SyncData()
@@ -177,6 +175,8 @@ namespace TicketingApp.ViewModels
 
                     System.Diagnostics.Debug.WriteLine("tix", "Done saving data");
                 }
+
+                GetTickets();
             }
             catch (Exception e)
             {
@@ -193,16 +193,31 @@ namespace TicketingApp.ViewModels
             }
         }
 
-        private DelegateCommand<ItemTappedEventArgs> _itemTappepdCommand;
-        public DelegateCommand<ItemTappedEventArgs> ItemTappedCommand
+        private DelegateCommand<Ticket> _itemTappepdCommand;
+        public DelegateCommand<Ticket> ItemTappedCommand
         {
             get
             {
                 if (_itemTappepdCommand == null)
                 {
-                    _itemTappepdCommand = new DelegateCommand<ItemTappedEventArgs>((e) =>
+                    _itemTappepdCommand = new DelegateCommand<Ticket>(async (tix) =>
                     {
-                        System.Diagnostics.Debug.WriteLine("TAP!", (e.Item as Ticket).Title);
+                        var job = realm.All<Job>()
+                                   .Where(j => j.Title.Equals(tix.JobName))
+                                   .FirstOrDefault();
+
+                        var customer = realm.All<Customer>()
+                                       .Where(c => c.CustReferenceNo.Equals(tix.CustRefNo))
+                                       .FirstOrDefault();
+
+                        var navParams = new NavigationParameters();
+                        navParams.Add("customer", customer);
+                        navParams.Add("job", job);
+                        navParams.Add("ticket", tix);
+                        await NavigationService.NavigateAsync(nameof(Views.TicketDetailsPage),
+                                                        navParams,
+                                                        false,
+                                                        true);
                     });
                 }
 

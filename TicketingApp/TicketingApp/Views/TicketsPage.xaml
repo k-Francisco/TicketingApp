@@ -18,9 +18,6 @@
                                  Orientation="Horizontal"
                                  Spacing="0"
                                  CompressedLayout.IsHeadless="True">
-                        <!--<StackLayout.GestureRecognizers>
-                            <TapGestureRecognizer/>
-                        </StackLayout.GestureRecognizers>-->
 
                         <BoxView HeightRequest="100"
                                  BackgroundColor="Red"/>
@@ -42,7 +39,8 @@
         </ResourceDictionary>
     </ContentPage.Resources>
 
-    <StackLayout HorizontalOptions="FillAndExpand"
+    <StackLayout x:Name="mainLayout"
+                 HorizontalOptions="FillAndExpand"
                  VerticalOptions="FillAndExpand">
         <ListView x:Name="listy"
                   HasUnevenRows="True"

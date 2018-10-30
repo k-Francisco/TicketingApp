@@ -40,6 +40,8 @@ namespace TicketingApp
             containerRegistry.RegisterForNavigation<NavigationPage>();
             containerRegistry.RegisterForNavigation<LoginPage, LoginPageViewModel>();
             containerRegistry.RegisterForNavigation<TicketsPage, TicketsPageViewModel>();
+            containerRegistry.RegisterForNavigation<InvoicePage, InvoicePageViewModel>();
+            containerRegistry.RegisterForNavigation<TicketDetailsPage, TicketDetailsPageViewModel>();
 
             //instances
             containerRegistry.RegisterInstance<ITokenService>(TokenService.GetInstance());

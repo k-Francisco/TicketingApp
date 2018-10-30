@@ -1,0 +1,52 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:prism="clr-namespace:Prism.Mvvm;assembly=Prism.Forms"
+             prism:ViewModelLocator.AutowireViewModel="True"
+             x:Class="TicketingApp.Views.TicketDetailsPage">
+
+    <StackLayout x:Name="mainLayout"
+                 HorizontalOptions="FillAndExpand"
+                 VerticalOptions="FillAndExpand"
+                 Spacing="1"
+                 BackgroundColor="White">
+        <Label Text="Customer"
+               Style="{StaticResource DetailHeaders}"/>
+
+        <Label Text="Customer Name and Reference Number: "
+               Style="{StaticResource DetailFieldNames}"/>
+
+        <Label>
+            <Label.FormattedText>
+                <FormattedString>
+                    <FormattedString.Spans>
+                        <Span Text="{Binding Customer.CustomerName}" TextColor="Black" FontSize="Large"/>
+                        <Span Text="{Binding Customer.CustReferenceNo, StringFormat=' ({0})'}" TextColor="Black" FontSize="Large"/>
+                    </FormattedString.Spans>
+                </FormattedString>
+            </Label.FormattedText>
+        </Label>
+
+        <Label Text="Contact: "
+               Style="{StaticResource DetailFieldNames}"/>
+
+        <Label Text="{Binding Customer.CustomerContactName}"
+               Style="{StaticResource DetailFieldValues}"/>
+
+        <Label Text="Contact Email and Phone Number: "
+               Style="{StaticResource DetailFieldNames}"/>
+
+        <Label MaxLines="2">
+            <Label.FormattedText>
+                <FormattedString>
+                    <FormattedString.Spans>
+                        <Span Text="{Binding Customer.CustomerContactEmail}" TextColor="Black" FontSize="Large"/>
+                        <Span Text="{Binding Customer.CustomerContactPhoneNo, StringFormat=' ({0})'}" TextColor="Black" FontSize="Large"/>
+                    </FormattedString.Spans>
+                </FormattedString>
+            </Label.FormattedText>
+        </Label>
+
+    </StackLayout>
+  
+</ContentPage>

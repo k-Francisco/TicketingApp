@@ -5,7 +5,9 @@ using Realms;
 using SpevoCore.Services.Sharepoint_API;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using TicketingApp.Models.Customers;
@@ -23,12 +25,12 @@ using Xamarin.Essentials;
 
 namespace TicketingApp.ViewModels
 {
-    public class ViewModelBase : BindableBase, INavigationAware, IDestructible
+    public class ViewModelBase : BindableBase, IDestructible, INavigationAware
     {
         protected INavigationService NavigationService { get; private set; }
         protected ISharepointAPI SharepointAPI { get; private set; }
-        protected Realm realm;
-        protected bool connected;
+        protected Realm realm { get; private set; }
+        protected bool connected { get; private set; }
 
         public ViewModelBase(INavigationService navigationService, ISharepointAPI sharepointAPI)
         {
@@ -50,17 +52,15 @@ namespace TicketingApp.ViewModels
 
         public virtual void OnNavigatedFrom(INavigationParameters parameters)
         {
-
         }
 
         public virtual void OnNavigatedTo(INavigationParameters parameters)
         {
-
+            
         }
 
         public virtual void OnNavigatingTo(INavigationParameters parameters)
         {
-
         }
 
         public virtual void Destroy()

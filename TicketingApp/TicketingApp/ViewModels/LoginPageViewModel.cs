@@ -44,7 +44,6 @@ namespace TicketingApp.ViewModels
                         else
                         {
                             await _navigationService.NavigateAsync(new Uri("app:///NavigationPage/TicketsPage", UriKind.Absolute));
-                            
                         }
                         
                     });

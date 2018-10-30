@@ -5,7 +5,9 @@ D:\Xamarin Projects\TicketingApp\TicketingApp\TicketingApp\bin\Debug\netstandard
 D:\Xamarin Projects\TicketingApp\TicketingApp\TicketingApp\bin\Debug\netstandard2.0\SpevoCore.pdb
 D:\Xamarin Projects\TicketingApp\TicketingApp\TicketingApp\obj\Debug\netstandard2.0\TicketingApp.csprojAssemblyReference.cache
 D:\Xamarin Projects\TicketingApp\TicketingApp\TicketingApp\obj\Debug\netstandard2.0\App.xaml.g.cs
+D:\Xamarin Projects\TicketingApp\TicketingApp\TicketingApp\obj\Debug\netstandard2.0\Views\InvoicePage.xaml.g.cs
 D:\Xamarin Projects\TicketingApp\TicketingApp\TicketingApp\obj\Debug\netstandard2.0\Views\LoginPage.xaml.g.cs
+D:\Xamarin Projects\TicketingApp\TicketingApp\TicketingApp\obj\Debug\netstandard2.0\Views\TicketDetailsPage.xaml.g.cs
 D:\Xamarin Projects\TicketingApp\TicketingApp\TicketingApp\obj\Debug\netstandard2.0\Views\TicketsPage.xaml.g.cs
 D:\Xamarin Projects\TicketingApp\TicketingApp\TicketingApp\obj\Debug\netstandard2.0\TicketingApp.csproj.CoreCompileInputs.cache
 D:\Xamarin Projects\TicketingApp\TicketingApp\TicketingApp\obj\Debug\netstandard2.0\TicketingApp.AssemblyInfoInputs.cache
