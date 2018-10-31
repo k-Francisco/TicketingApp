@@ -2,7 +2,84 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:prism="clr-namespace:Prism.Mvvm;assembly=Prism.Forms"
+             xmlns:signaturepad="clr-namespace:SignaturePad.Forms;assembly=SignaturePad.Forms"
              prism:ViewModelLocator.AutowireViewModel="True"
              x:Class="TicketingApp.Views.InvoicePage">
+
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
+    <ScrollView Orientation="Vertical"
+                VerticalScrollBarVisibility="Never">
+        
+        <StackLayout Orientation="Vertical"
+                 HorizontalOptions="FillAndExpand"
+                 VerticalOptions="FillAndExpand"
+                 BackgroundColor="White"
+                 Spacing="1"
+                 Padding="8">
+
+            <Label Text="Bill To: "
+               Style="{StaticResource DetailFieldNames}"/>
+
+            <Label Text="{Binding Ticket.CusomterName}"
+               Style="{StaticResource DetailFieldValues}"/>
+
+            <Label Text="AFE: "
+               Style="{StaticResource DetailFieldNames}"/>
+
+            <Label Text="{Binding Ticket.JobAfe}"
+               Style="{StaticResource DetailFieldValues}"/>
+
+            <Label Text="Location: "
+               Style="{StaticResource DetailFieldNames}"/>
+
+            <Label Text="{Binding Ticket.JobLocation}"
+               Style="{StaticResource DetailFieldValues}"/>
+
+            <Label Text="Code: "
+               Style="{StaticResource DetailFieldNames}"/>
+
+            <Label Text="{Binding CostCode}"
+               Style="{StaticResource DetailFieldValues}"/>
+
+            <Label Text="Contact: "
+               Style="{StaticResource DetailFieldNames}"/>
+
+            <Label Text="{Binding Ticket.CustContactName}"
+               Style="{StaticResource DetailFieldValues}"/>
+
+            <Label Text="Contact Email: "
+               Style="{StaticResource DetailFieldNames}"/>
+
+            <Label Text="{Binding Ticket.CustContactEmail}"
+               Style="{StaticResource DetailFieldValues}"/>
+            
+            
+
+            <signaturepad:SignaturePadView x:Name="signaturePad"
+                                           HorizontalOptions="FillAndExpand"
+                                           HeightRequest="200"
+                                           BackgroundColor="Silver"
+                                           StrokeColor="Black"
+                                           StrokeWidth="3"
+                                           CaptionText="Customer Signature Stamp"
+                                           CaptionTextColor="Black"
+                                           ClearText="Clear"
+                                           ClearTextColor="Black"
+                                           SignatureLineColor="Silver"/>
+
+            <Button Text="Save"
+                    TextColor="White"
+                    BackgroundColor="RoyalBlue"
+                    HorizontalOptions="FillAndExpand"
+                    Command="{Binding Save}"/>
+
+        </StackLayout>
+
+    </ScrollView>
   
 </ContentPage>

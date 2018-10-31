@@ -1,4 +1,5 @@
-﻿using Prism.Navigation;
+﻿using Prism.Commands;
+using Prism.Navigation;
 using SpevoCore.Services.Sharepoint_API;
 using TicketingApp.Models.Customers;
 using TicketingApp.Models.Jobs;
@@ -37,9 +38,36 @@ namespace TicketingApp.ViewModels
 
         public override void OnNavigatedTo(INavigationParameters parameters)
         {
-            Ticket = parameters.GetValue<Ticket>("ticket");
-            Customer = parameters.GetValue<Customer>("customer");
-            Job = parameters.GetValue<Job>("job");
+            if(parameters.GetNavigationMode() == NavigationMode.New)
+            {
+                Ticket = parameters.GetValue<Ticket>("ticket");
+                Customer = parameters.GetValue<Customer>("customer");
+                Job = parameters.GetValue<Job>("job");
+            }
+        }
+
+        private DelegateCommand _previewInvoiceCommand;
+        public DelegateCommand PreviewInvoiceCommand
+        {
+            get
+            {
+                if (_previewInvoiceCommand == null)
+                {
+                    _previewInvoiceCommand = new DelegateCommand(async () =>
+                    {
+
+                        var navParams = new NavigationParameters();
+                        navParams.Add("ticket", Ticket);
+                        navParams.Add("job", Job);
+                        await NavigationService.NavigateAsync(nameof(Views.InvoicePage),
+                                                        navParams,
+                                                        false,
+                                                        true);
+                    });
+                }
+
+                return _previewInvoiceCommand;
+            }
         }
     }
 }

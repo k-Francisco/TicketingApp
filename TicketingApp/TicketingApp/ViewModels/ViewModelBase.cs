@@ -34,6 +34,8 @@ namespace TicketingApp.ViewModels
 
         public ViewModelBase(INavigationService navigationService, ISharepointAPI sharepointAPI)
         {
+            RealmConfiguration.DefaultConfiguration.SchemaVersion = 1;
+
             NavigationService = navigationService;
             SharepointAPI = sharepointAPI;
             realm = Realm.GetInstance();

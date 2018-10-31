@@ -4,49 +4,133 @@
              xmlns:prism="clr-namespace:Prism.Mvvm;assembly=Prism.Forms"
              prism:ViewModelLocator.AutowireViewModel="True"
              x:Class="TicketingApp.Views.TicketDetailsPage">
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            
+        </ResourceDictionary>
+    </ContentPage.Resources>
 
-    <StackLayout x:Name="mainLayout"
+    <ScrollView VerticalScrollBarVisibility="Never">
+
+        <StackLayout x:Name="mainLayout"
                  HorizontalOptions="FillAndExpand"
                  VerticalOptions="FillAndExpand"
                  Spacing="1"
                  BackgroundColor="White">
-        <Label Text="Customer"
+
+            <!--Customer-->
+
+            <Label Text="Customer"
                Style="{StaticResource DetailHeaders}"/>
 
-        <Label Text="Customer Name and Reference Number: "
+            <Label Text="Customer Name and Reference Number: "
                Style="{StaticResource DetailFieldNames}"/>
 
-        <Label>
-            <Label.FormattedText>
-                <FormattedString>
-                    <FormattedString.Spans>
-                        <Span Text="{Binding Customer.CustomerName}" TextColor="Black" FontSize="Large"/>
-                        <Span Text="{Binding Customer.CustReferenceNo, StringFormat=' ({0})'}" TextColor="Black" FontSize="Large"/>
-                    </FormattedString.Spans>
-                </FormattedString>
-            </Label.FormattedText>
-        </Label>
+            <Label>
+                <Label.FormattedText>
+                    <FormattedString>
+                        <FormattedString.Spans>
+                            <Span Text="{Binding Customer.CustomerName,Mode=TwoWay}" TextColor="Black" FontSize="Medium"/>
+                            <Span Text=" (" TextColor="Black" FontSize="Medium"/>
+                            <Span Text="{Binding Customer.CustReferenceNo, Mode=TwoWay}" TextColor="Black" FontSize="Medium"/>
+                            <Span Text=")" TextColor="Black" FontSize="Medium"/>
+                        </FormattedString.Spans>
+                    </FormattedString>
+                </Label.FormattedText>
+            </Label>
 
-        <Label Text="Contact: "
+            <Label Text="Contact: "
                Style="{StaticResource DetailFieldNames}"/>
 
-        <Label Text="{Binding Customer.CustomerContactName}"
+            <Label Text="{Binding Customer.CustomerContactName}"
                Style="{StaticResource DetailFieldValues}"/>
 
-        <Label Text="Contact Email and Phone Number: "
+            <Label Text="Contact Email and Phone Number: "
                Style="{StaticResource DetailFieldNames}"/>
 
-        <Label MaxLines="2">
-            <Label.FormattedText>
-                <FormattedString>
-                    <FormattedString.Spans>
-                        <Span Text="{Binding Customer.CustomerContactEmail}" TextColor="Black" FontSize="Large"/>
-                        <Span Text="{Binding Customer.CustomerContactPhoneNo, StringFormat=' ({0})'}" TextColor="Black" FontSize="Large"/>
-                    </FormattedString.Spans>
-                </FormattedString>
-            </Label.FormattedText>
-        </Label>
+            <Label MaxLines="2">
+                <Label.FormattedText>
+                    <FormattedString>
+                        <FormattedString.Spans>
+                            <Span Text="{Binding Customer.CustomerContactEmail, Mode=TwoWay}" TextColor="Black" FontSize="Medium"/>
+                            <Span Text=" (" TextColor="Black" FontSize="Medium"/>
+                            <Span Text="{Binding Customer.CustomerContactPhoneNo, Mode=TwoWay}" TextColor="Black" FontSize="Medium"/>
+                            <Span Text=")" TextColor="Black" FontSize="Medium"/>
+                        </FormattedString.Spans>
+                    </FormattedString>
+                </Label.FormattedText>
+            </Label>
 
-    </StackLayout>
-  
+            <!--Job-->
+
+            <Label Text="Job"
+               Style="{StaticResource DetailHeaders}"/>
+
+            <Label Text="Job Name and ID: "
+               Style="{StaticResource DetailFieldNames}"/>
+
+            <Label>
+                <Label.FormattedText>
+                    <FormattedString>
+                        <FormattedString.Spans>
+                            <Span Text="{Binding Job.Title,Mode=TwoWay}" TextColor="Black" FontSize="Medium"/>
+                            <Span Text=" (" TextColor="Black" FontSize="Medium"/>
+                            <Span Text="{Binding Job.JobId, Mode=TwoWay}" TextColor="Black" FontSize="Medium"/>
+                            <Span Text=")" TextColor="Black" FontSize="Medium"/>
+                        </FormattedString.Spans>
+                    </FormattedString>
+                </Label.FormattedText>
+            </Label>
+
+            <Label Text="Job Type and Location: "
+               Style="{StaticResource DetailFieldNames}"/>
+
+            <Label MaxLines="2">
+                <Label.FormattedText>
+                    <FormattedString>
+                        <FormattedString.Spans>
+                            <Span Text="{Binding Job.JobType, Mode=TwoWay}" TextColor="Black" FontSize="Medium"/>
+                            <Span Text=" (" TextColor="Black" FontSize="Medium"/>
+                            <Span Text="{Binding Job.LocationName, Mode=TwoWay}" TextColor="Black" FontSize="Medium"/>
+                            <Span Text=")" TextColor="Black" FontSize="Medium"/>
+                        </FormattedString.Spans>
+                    </FormattedString>
+                </Label.FormattedText>
+            </Label>
+
+            <Label Text="Created Date: "
+               Style="{StaticResource DetailFieldNames}"/>
+
+            <Label Text="{Binding Job.Created, StringFormat='{0:MMMM dd, yyyy}'}"
+               Style="{StaticResource DetailFieldValues}"/>
+
+            <!--Ticket-->
+
+            <Label Text="Ticket"
+               Style="{StaticResource DetailHeaders}"/>
+
+            <Label Text="Work Completed: "
+               Style="{StaticResource DetailFieldNames}"/>
+
+            <Label Text="{Binding Ticket.WorkCompletedDescription}"
+               Style="{StaticResource DetailFieldValues}"/>
+
+            <Label Text="Comments to Office: "
+               Style="{StaticResource DetailFieldNames}"/>
+
+            <Label Text="{Binding Ticket.CommentsToOffice}"
+               Style="{StaticResource DetailFieldValues}"/>
+
+            <Button Text="Preview Invoice"
+                TextColor="White"
+                FontSize="Medium"
+                FontAttributes="Bold"
+                BackgroundColor="RoyalBlue"
+                HorizontalOptions="FillAndExpand"
+                Command="{Binding PreviewInvoiceCommand}"/>
+
+        </StackLayout>
+
+    </ScrollView>
+
 </ContentPage>
