@@ -20,17 +20,17 @@ namespace TicketingApp.Models.Tickets
 
     public class Ticket : RealmObject
     {
-        [JsonProperty("FileSystemObjectType")]
-        public int FileSystemObjectType { get; set; }
+        //[JsonProperty("FileSystemObjectType")]
+        //public int FileSystemObjectType { get; set; }
 
-        [JsonProperty("Id")]
-        public int Id { get; set; }
+        //[JsonProperty("Id")]
+        //public int Id { get; set; }
 
-        [JsonProperty("ServerRedirectedEmbedUrl")]
-        public string ServerRedirectedEmbedUrl { get; set; }
+        //[JsonProperty("ServerRedirectedEmbedUrl")]
+        //public string ServerRedirectedEmbedUrl { get; set; }
 
-        [JsonProperty("ContentTypeId")]
-        public string ContentTypeId { get; set; }
+        //[JsonProperty("ContentTypeId")]
+        //public string ContentTypeId { get; set; }
 
         [JsonProperty("Title")]
         public string Title { get; set; }
@@ -116,17 +116,17 @@ namespace TicketingApp.Models.Tickets
         [JsonProperty("Created")]
         public DateTimeOffset Created { get; set; }
 
-        [JsonProperty("AuthorId")]
-        public int AuthorId { get; set; }
+        //[JsonProperty("AuthorId")]
+        //public int AuthorId { get; set; }
 
-        [JsonProperty("EditorId")]
-        public int EditorId { get; set; }
+        //[JsonProperty("EditorId")]
+        //public int EditorId { get; set; }
 
-        [JsonProperty("OData__UIVersionString")]
-        public string ODataUIVersionString { get; set; }
+        //[JsonProperty("OData__UIVersionString")]
+        //public string ODataUIVersionString { get; set; }
 
-        [JsonProperty("Attachments")]
-        public bool Attachments { get; set; }
+        //[JsonProperty("Attachments")]
+        //public bool Attachments { get; set; }
 
         [JsonProperty("GUID")]
         public string GUID { get; set; }

@@ -19,6 +19,7 @@ using TicketingApp.Models.Material;
 using TicketingApp.Models.MaterialUsed;
 using TicketingApp.Models.ThirdPartyUsed;
 using TicketingApp.Models.Tickets;
+using TicketingApp.Models.Users;
 using Xamarin.Forms;
 
 namespace TicketingApp.ViewModels
@@ -29,14 +30,39 @@ namespace TicketingApp.ViewModels
         public ObservableCollection<Ticket> TicketCollection
         {
             get { return _ticketCollection; }
-            set { _ticketCollection = value; }
         }
 
         public TicketsPageViewModel(INavigationService navigationService, ISharepointAPI sharepointAPI) 
             : base(navigationService, sharepointAPI)
         {
             SharepointAPI.Init(App.SiteUrl);
+            SaveUser();
             SyncData();
+        }
+
+        private async void SaveUser()
+        {
+            try
+            {
+                if (connected)
+                {
+                    var savedUser = realm.All<User>().FirstOrDefault();
+                    if(savedUser == null)
+                    {
+                        var user = await SharepointAPI.GetCurrentUser();
+                        realm.Add(new User() {
+                            IsSiteAdmin = user.D.IsSiteAdmin,
+                            UserEmail = user.D.Email,
+                            UserId = user.D.Id,
+                            UserName = user.D.Title
+                        });
+                    }
+                }
+            }
+            catch(Exception e)
+            {
+                System.Diagnostics.Debug.WriteLine("SaveUser", e.Message);
+            }
         }
 
         private async void SyncData()

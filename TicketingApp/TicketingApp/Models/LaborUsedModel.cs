@@ -19,16 +19,10 @@ namespace TicketingApp.Models.LaborUsed
     }
     public class LaborUsed : RealmObject
     {
-        [JsonProperty("FileSystemObjectType")]
-        public int FileSystemObjectType { get; set; }
+        [JsonProperty("Employee")]
+        public Employee Employee { get; set; }
         [JsonProperty("Id")]
         public int Id { get; set; }
-        //[JsonProperty("ServerRedirectedEmbedUri")]
-        //public object ServerRedirectedEmbedUri { get; set; }
-        [JsonProperty("ServerRedirectedEmbedUrl")]
-        public string ServerRedirectedEmbedUrl { get; set; }
-        [JsonProperty("ContentTypeId")]
-        public string ContentTypeId { get; set; }
         [JsonProperty("Title")]
         public string Title { get; set; }
         [JsonProperty("WorkType")]
@@ -41,10 +35,6 @@ namespace TicketingApp.Models.LaborUsed
         public bool PerDiem { get; set; }
         [JsonProperty("Billable")]
         public bool Billable { get; set; }
-        [JsonProperty("EmployeeId")]
-        public int EmployeeId { get; set; }
-        [JsonProperty("EmployeeStringId")]
-        public string EmployeeStringId { get; set; }
         [JsonProperty("TicketId")]
         public int TicketId { get; set; }
         [JsonProperty("ID")]
@@ -53,16 +43,13 @@ namespace TicketingApp.Models.LaborUsed
         public DateTimeOffset Modified { get; set; }
         [JsonProperty("Created")]
         public DateTimeOffset Created { get; set; }
-        [JsonProperty("AuthorId")]
-        public int AuthorId { get; set; }
-        [JsonProperty("EditorId")]
-        public int EditorId { get; set; }
-        [JsonProperty("OData__UIVersionString")]
-        public string ODataUIVersionString { get; set; }
-        [JsonProperty("Attachments")]
-        public bool Attachments { get; set; }
         [JsonProperty("GUID")]
         public string GUID { get; set; }
+    }
+    public class Employee : RealmObject
+    {
+        [JsonProperty("Title")]
+        public string Title { get; set; }
     }
 
 }

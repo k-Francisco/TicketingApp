@@ -19,16 +19,16 @@ namespace TicketingApp.Models.EquipmentUsed
     }
     public class EquipmentUsed : RealmObject
     {
-        [JsonProperty("FileSystemObjectType")]
-        public int FileSystemObjectType { get; set; }
-        [JsonProperty("Id")]
-        public int Id { get; set; }
+        //[JsonProperty("FileSystemObjectType")]
+        //public int FileSystemObjectType { get; set; }
+        //[JsonProperty("Id")]
+        //public int Id { get; set; }
         //[JsonProperty("ServerRedirectedEmbedUri")]
         //public object ServerRedirectedEmbedUri { get; set; }
-        [JsonProperty("ServerRedirectedEmbedUrl")]
-        public string ServerRedirectedEmbedUrl { get; set; }
-        [JsonProperty("ContentTypeId")]
-        public string ContentTypeId { get; set; }
+        //[JsonProperty("ServerRedirectedEmbedUrl")]
+        //public string ServerRedirectedEmbedUrl { get; set; }
+        //[JsonProperty("ContentTypeId")]
+        //public string ContentTypeId { get; set; }
         //[JsonProperty("Title")]
         //public object Title { get; set; }
         [JsonProperty("Rate")]
@@ -51,14 +51,14 @@ namespace TicketingApp.Models.EquipmentUsed
         public DateTimeOffset Modified { get; set; }
         [JsonProperty("Created")]
         public DateTimeOffset Created { get; set; }
-        [JsonProperty("AuthorId")]
-        public int AuthorId { get; set; }
-        [JsonProperty("EditorId")]
-        public int EditorId { get; set; }
-        [JsonProperty("OData__UIVersionString")]
-        public string ODataUIVersionString { get; set; }
-        [JsonProperty("Attachments")]
-        public bool Attachments { get; set; }
+        //[JsonProperty("AuthorId")]
+        //public int AuthorId { get; set; }
+        //[JsonProperty("EditorId")]
+        //public int EditorId { get; set; }
+        //[JsonProperty("OData__UIVersionString")]
+        //public string ODataUIVersionString { get; set; }
+        //[JsonProperty("Attachments")]
+        //public bool Attachments { get; set; }
         [JsonProperty("GUID")]
         public string GUID { get; set; }
     }
