@@ -12,7 +12,7 @@ D:\Xamarin Projects\TicketingApp\TicketingApp\TicketingApp\obj\Debug\netstandard
 D:\Xamarin Projects\TicketingApp\TicketingApp\TicketingApp\obj\Debug\netstandard2.0\TicketingApp.csproj.CoreCompileInputs.cache
 D:\Xamarin Projects\TicketingApp\TicketingApp\TicketingApp\obj\Debug\netstandard2.0\TicketingApp.AssemblyInfoInputs.cache
 D:\Xamarin Projects\TicketingApp\TicketingApp\TicketingApp\obj\Debug\netstandard2.0\TicketingApp.AssemblyInfo.cs
-D:\Xamarin Projects\TicketingApp\TicketingApp\TicketingApp\obj\Debug\netstandard2.0\XamlC.stamp
 D:\Xamarin Projects\TicketingApp\TicketingApp\TicketingApp\obj\Debug\netstandard2.0\TicketingApp.csproj.CopyComplete
 D:\Xamarin Projects\TicketingApp\TicketingApp\TicketingApp\obj\Debug\netstandard2.0\TicketingApp.dll
 D:\Xamarin Projects\TicketingApp\TicketingApp\TicketingApp\obj\Debug\netstandard2.0\TicketingApp.pdb
+D:\Xamarin Projects\TicketingApp\TicketingApp\TicketingApp\obj\Debug\netstandard2.0\XamlC.stamp
