@@ -34,6 +34,7 @@ namespace TicketingApp.ViewModels
         public TicketDetailsPageViewModel(INavigationService navigationService, ISharepointAPI sharepointAPI)
             : base(navigationService, sharepointAPI)
         {
+            Title = "Details";
         }
 
         public override void OnNavigatedTo(INavigationParameters parameters)
@@ -62,7 +63,7 @@ namespace TicketingApp.ViewModels
                         await NavigationService.NavigateAsync(nameof(Views.InvoicePage),
                                                         navParams,
                                                         false,
-                                                        true);
+                                                        false);
                     });
                 }
 

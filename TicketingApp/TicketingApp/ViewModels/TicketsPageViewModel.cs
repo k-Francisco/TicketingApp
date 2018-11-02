@@ -35,6 +35,7 @@ namespace TicketingApp.ViewModels
         public TicketsPageViewModel(INavigationService navigationService, ISharepointAPI sharepointAPI) 
             : base(navigationService, sharepointAPI)
         {
+            Title = "Tickets";
             SharepointAPI.Init(App.SiteUrl);
             SaveUser();
             SyncData();
@@ -50,11 +51,14 @@ namespace TicketingApp.ViewModels
                     if(savedUser == null)
                     {
                         var user = await SharepointAPI.GetCurrentUser();
-                        realm.Add(new User() {
-                            IsSiteAdmin = user.D.IsSiteAdmin,
-                            UserEmail = user.D.Email,
-                            UserId = user.D.Id,
-                            UserName = user.D.Title
+                        realm.Write(()=> {
+                            realm.Add(new User()
+                            {
+                                IsSiteAdmin = user.D.IsSiteAdmin,
+                                UserEmail = user.D.Email,
+                                UserId = user.D.Id,
+                                UserName = user.D.Title
+                            });
                         });
                     }
                 }
@@ -71,6 +75,11 @@ namespace TicketingApp.ViewModels
             {
                 if (connected)
                 {
+                    var laborUsedQuery = "$select=ID,Title,WorkType,STHours,OTHours,PerDiem,Billable,TicketId,Created,Modified,GUID" +
+                                         ",Employee/Title&$expand=Employee";
+                    var thirdPartUsedQuery = "$select=ID,RequestDate,Description,Amount,MarkUp,Billable,ChargeType,TicketId,Created," +
+                                             "Modified,Vendor/Title&$expand=Vendor";
+
                     var batchRequests = new List<Task<HttpResponseMessage>>() {
                         SharepointAPI.GetListItemsByListTitle("Tickets"),
                         SharepointAPI.GetListItemsByListTitle("Customers"),
@@ -78,10 +87,10 @@ namespace TicketingApp.ViewModels
                         SharepointAPI.GetListItemsByListTitle("EquipmentUsed"),
                         SharepointAPI.GetListItemsByListTitle("Invoiced Tickets"),
                         SharepointAPI.GetListItemsByListTitle("Jobs"),
-                        SharepointAPI.GetListItemsByListTitle("Labor Used"),
+                        SharepointAPI.GetListItemsByListTitle("Labor Used",laborUsedQuery),
                         SharepointAPI.GetListItemsByListTitle("Material"),
                         SharepointAPI.GetListItemsByListTitle("Material Used"),
-                        SharepointAPI.GetListItemsByListTitle("Third Party Used"),
+                        SharepointAPI.GetListItemsByListTitle("Third Party Used", thirdPartUsedQuery),
                     };
 
                     System.Diagnostics.Debug.WriteLine("tix", "Done getting response");
@@ -243,7 +252,7 @@ namespace TicketingApp.ViewModels
                         await NavigationService.NavigateAsync(nameof(Views.TicketDetailsPage),
                                                         navParams,
                                                         false,
-                                                        true);
+                                                        false);
                     });
                 }
 

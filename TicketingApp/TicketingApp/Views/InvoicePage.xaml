@@ -4,10 +4,19 @@
              xmlns:prism="clr-namespace:Prism.Mvvm;assembly=Prism.Forms"
              xmlns:signaturepad="clr-namespace:SignaturePad.Forms;assembly=SignaturePad.Forms"
              prism:ViewModelLocator.AutowireViewModel="True"
-             x:Class="TicketingApp.Views.InvoicePage">
+             x:Class="TicketingApp.Views.InvoicePage"
+             Title="{Binding Title}">
 
     <ContentPage.Resources>
         <ResourceDictionary>
+
+            <DataTemplate x:Key="LaborUsedDataTemplate">
+                <ViewCell>
+                    <StackLayout>
+                        
+                    </StackLayout>
+                </ViewCell>
+            </DataTemplate>
             
         </ResourceDictionary>
     </ContentPage.Resources>
@@ -57,8 +66,19 @@
 
             <Label Text="{Binding Ticket.CustContactEmail}"
                Style="{StaticResource DetailFieldValues}"/>
-            
-            
+
+
+            <!--<ListView
+                  HasUnevenRows="True"
+                  SeparatorVisibility="None"
+                  ItemTemplate="{StaticResource LaborUsedDataTemplate}"
+                  ItemsSource="{Binding LaborUsed}">
+                <x:Arguments>
+                    <ListViewCachingStrategy>RecycleElementAndDataTemplate</ListViewCachingStrategy>
+                </x:Arguments>
+            </ListView>-->
+
+
 
             <signaturepad:SignaturePadView x:Name="signaturePad"
                                            HorizontalOptions="FillAndExpand"

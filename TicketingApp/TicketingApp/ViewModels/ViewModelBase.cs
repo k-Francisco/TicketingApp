@@ -32,6 +32,14 @@ namespace TicketingApp.ViewModels
         protected Realm realm { get; private set; }
         protected bool connected { get; private set; }
 
+        private string _title;
+        public string Title
+        {
+            get { return _title; }
+            set { _title = value; }
+        }
+
+
         public ViewModelBase(INavigationService navigationService, ISharepointAPI sharepointAPI)
         {
             RealmConfiguration.DefaultConfiguration.SchemaVersion = 1;

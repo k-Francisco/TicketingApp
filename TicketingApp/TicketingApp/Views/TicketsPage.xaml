@@ -5,7 +5,8 @@
              xmlns:converter="clr-namespace:TicketingApp.Converters"
              xmlns:behavior="clr-namespace:Prism.Behaviors;assembly=Prism.Forms"
              prism:ViewModelLocator.AutowireViewModel="True"
-             x:Class="TicketingApp.Views.TicketsPage">
+             x:Class="TicketingApp.Views.TicketsPage"
+             Title="{Binding Title}">
 
     <ContentPage.Resources>
         <ResourceDictionary>
@@ -19,16 +20,40 @@
                                  Spacing="0"
                                  CompressedLayout.IsHeadless="True">
 
-                        <BoxView HeightRequest="100"
-                                 BackgroundColor="Red"/>
+                        <BoxView HeightRequest="120"
+                                 WidthRequest="8"
+                                 BackgroundColor="Green">
+                            <BoxView.Triggers>
+                                <DataTrigger TargetType="BoxView"
+                                             Binding="{Binding Status}"
+                                             Value="Open">
+                                    <Setter Property="BackgroundColor" Value="Orange"/>
+                                </DataTrigger>
+                            </BoxView.Triggers>
+                        </BoxView>
 
                         <StackLayout Orientation="Vertical"
-                                     CompressedLayout.IsHeadless="True">
+                                     CompressedLayout.IsHeadless="True"
+                                     Spacing="0"
+                                     Margin="8,0,0,0"
+                                     HorizontalOptions="FillAndExpand"
+                                     HeightRequest="120">
 
                             <Label Text="{Binding Title, StringFormat='Ticket Number: {0}'}"/>
-                            <Label Text="{Binding JobName}"/>
-                            <Label Text="{Binding JobLocation}"/>
-                            <Label Text="{Binding CommentsToOffice}"/>
+                            <Label Text="{Binding JobName}"
+                                   FontAttributes="Bold"
+                                   TextColor="Black"
+                                   FontSize="24"
+                                   Margin="0,4,0,0"/>
+                            <Label Text="{Binding JobLocation}"
+                                   FontSize="Medium"/>
+                            <Label Text="{Binding CommentsToOffice}"
+                                   FontSize="Small"/>
+                            
+                            <BoxView HorizontalOptions="FillAndExpand"
+                                     HeightRequest="2"
+                                     BackgroundColor="RoyalBlue"
+                                     VerticalOptions="End"/>
 
                         </StackLayout>
 
