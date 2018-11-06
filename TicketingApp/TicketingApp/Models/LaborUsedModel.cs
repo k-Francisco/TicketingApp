@@ -45,6 +45,10 @@ namespace TicketingApp.Models.LaborUsed
         public DateTimeOffset Created { get; set; }
         [JsonProperty("GUID")]
         public string GUID { get; set; }
+
+        public string Total {
+            get { return String.Format("${0}", Convert.ToString((100 * STHours) + (150 * OTHours))); }
+        }
     }
     public class Employee : RealmObject
     {

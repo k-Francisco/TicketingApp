@@ -1,7 +1,9 @@
-﻿using Prism.Commands;
+﻿using Newtonsoft.Json;
+using Prism.Commands;
 using Prism.Navigation;
 using SpevoCore.Services.Sharepoint_API;
 using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.IO;
 using System.Linq;
@@ -15,6 +17,7 @@ using TicketingApp.Models.Jobs;
 using TicketingApp.Models.LaborUsed;
 using TicketingApp.Models.Material;
 using TicketingApp.Models.MaterialUsed;
+using TicketingApp.Models.SavedRequests;
 using TicketingApp.Models.ThirdPartyUsed;
 using TicketingApp.Models.Tickets;
 using TicketingApp.Models.Users;
@@ -24,7 +27,7 @@ namespace TicketingApp.ViewModels
 {
     public class InvoicePageViewModel : ViewModelBase
     {
-        private ObservableCollection<LaborUsed> _laborUsed;
+        private ObservableCollection<LaborUsed> _laborUsed = new ObservableCollection<LaborUsed>();
 
         public ObservableCollection<LaborUsed> LaborUsed
         {
@@ -32,7 +35,7 @@ namespace TicketingApp.ViewModels
             set { SetProperty(ref _laborUsed, value); }
         }
 
-        private ObservableCollection<MaterialUsed> _materialUsed;
+        private ObservableCollection<MaterialUsed> _materialUsed = new ObservableCollection<MaterialUsed>();
 
         public ObservableCollection<MaterialUsed> MaterialUsed
         {
@@ -40,7 +43,7 @@ namespace TicketingApp.ViewModels
             set { SetProperty(ref _materialUsed, value); }
         }
 
-        private ObservableCollection<EquipmentUsed> _equipmentUsed;
+        private ObservableCollection<EquipmentUsed> _equipmentUsed = new ObservableCollection<EquipmentUsed>();
 
         public ObservableCollection<EquipmentUsed> EquipmentUsed
         {
@@ -48,7 +51,7 @@ namespace TicketingApp.ViewModels
             set { SetProperty(ref _equipmentUsed, value); }
         }
 
-        private ObservableCollection<ThirdPartyUsed> _thirdPartyUsed;
+        private ObservableCollection<ThirdPartyUsed> _thirdPartyUsed = new ObservableCollection<ThirdPartyUsed>();
 
         public ObservableCollection<ThirdPartyUsed> ThirdPartyUsed
         {
@@ -57,7 +60,6 @@ namespace TicketingApp.ViewModels
         }
 
         private string _costCode;
-
         public string CostCode
         {
             get { return _costCode; }
@@ -65,23 +67,86 @@ namespace TicketingApp.ViewModels
         }
 
         private Ticket _ticket;
-
         public Ticket Ticket
         {
             get { return _ticket; }
             set { SetProperty(ref _ticket, value); }
         }
 
+        private int _laborUsedHeight;
+        public int LaborUsedHeight
+        {
+            get { return _laborUsedHeight; }
+            set { SetProperty(ref _laborUsedHeight, value); }
+        }
+
+        private int _equipmentUsedHeight;
+        public int EquipmentUsedHeight
+        {
+            get { return _equipmentUsedHeight; }
+            set { SetProperty(ref _equipmentUsedHeight, value); }
+        }
+
+        private int _materialUsedHeight;
+        public int MaterialUsedHeight
+        {
+            get { return _materialUsedHeight; }
+            set { SetProperty(ref _materialUsedHeight, value); }
+        }
+
+        private int _thirdPTUsedHeight;
+        public int ThirdPTUsedHeight
+        {
+            get { return _thirdPTUsedHeight; }
+            set { SetProperty(ref _thirdPTUsedHeight, value); }
+        }
+
+        private double _laborUsedTotal;
+        public double LaborUsedTotal
+        {
+            get { return _laborUsedTotal; }
+            set { SetProperty(ref _laborUsedTotal, value); }
+        }
+
+        private double _equipmentUsedTotal;
+        public double EquipmentUsedTotal
+        {
+            get { return _equipmentUsedTotal; }
+            set { SetProperty(ref _equipmentUsedTotal, value); }
+        }
+
+        private double _materialUsedTotal;
+        public double MaterialUsedTotal
+        {
+            get { return _materialUsedTotal; }
+            set { SetProperty(ref _materialUsedTotal, value); }
+        }
+
+        private double _thirdPTUsedTotal;
+        public double ThirdPTUsedTotal
+        {
+            get { return _thirdPTUsedTotal; }
+            set { SetProperty(ref _thirdPTUsedTotal, value); }
+        }
+
         public Func<Task<byte[]>> SignatureFromStream { get; set; }
-        private double laborUsedTotal { get; set; }
-        private double equipmentUsedTotal { get; set; }
-        private double materialUsedTotal { get; set; }
-        private double thirdPartyUsedTotal { get; set; }
+
+        private string _status = "Open";
+        private bool _approvalStatus = false;
 
         public InvoicePageViewModel(INavigationService navigationService, ISharepointAPI sharepointAPI)
             : base(navigationService, sharepointAPI)
         {
             Title = "Invoice";
+
+            Connectivity.ConnectivityChanged += (s, e) =>
+            {
+                if (Connectivity.NetworkAccess == NetworkAccess.Internet)
+                {
+                    System.Diagnostics.Debug.WriteLine("connect", "yeah");
+                    CheckSavedRequests();
+                }
+            };
         }
 
         public override void OnNavigatedTo(INavigationParameters parameters)
@@ -96,26 +161,92 @@ namespace TicketingApp.ViewModels
                 var savedLaborUsed = realm.All<LaborUsed>()
                                     .Where(l => l.TicketId == Ticket.ID)
                                     .ToList();
-
-                LaborUsed = new ObservableCollection<LaborUsed>(savedLaborUsed);
+                foreach (var item in savedLaborUsed)
+                {
+                    LaborUsed.Add(item);
+                    LaborUsedHeight += 170;
+                    //todo: labor used total
+                }
 
                 var savedMaterialUsed = realm.All<MaterialUsed>()
                                         .Where(m => m.TicketId == Ticket.ID)
                                         .ToList();
 
-                MaterialUsed = new ObservableCollection<MaterialUsed>(savedMaterialUsed);
+                foreach (var item in savedMaterialUsed)
+                {
+                    MaterialUsed.Add(item);
+                    MaterialUsedHeight += 250;
+                    //todo: material used total
+                }
 
                 var savedEquipmentUsed = realm.All<EquipmentUsed>()
                                         .Where(e => e.TicketId == Ticket.ID)
                                         .ToList();
 
-                EquipmentUsed = new ObservableCollection<EquipmentUsed>(savedEquipmentUsed);
+                foreach (var item in savedEquipmentUsed)
+                {
+                    EquipmentUsed.Add(item);
+                    EquipmentUsedHeight += 200;
+                    //todo: equipment used total
+                }
 
                 var savedThirdPartyUsed = realm.All<ThirdPartyUsed>()
                                           .Where(t => t.TicketId == Ticket.ID)
                                           .ToList();
 
-                ThirdPartyUsed = new ObservableCollection<ThirdPartyUsed>(savedThirdPartyUsed);
+                foreach (var item in savedThirdPartyUsed)
+                {
+                    ThirdPartyUsed.Add(item);
+                    ThirdPTUsedHeight += 180;
+                    //todo: third party used total
+                }
+
+            }
+        }
+
+        public async Task<HttpResponseMessage[]> CheckSavedRequests()
+        {
+            try
+            {
+                var savedRequests = realm.All<SavedRequests>()
+                                .ToList();
+
+                var batch = new List<Task<HttpResponseMessage>>();
+
+                var formDigest = await SharepointAPI.GetFormDigest();
+
+                if (savedRequests != null || savedRequests.Any())
+                {
+                    foreach (var body in savedRequests)
+                    {
+                        var item = new StringContent(body.requestBody);
+                        item.Headers.ContentType = System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json;odata=verbose");
+
+                        batch.Add(SharepointAPI.AddListItemByListTitle(formDigest.D.GetContextWebInformation.FormDigestValue,
+                                               "Invoiced Tickets", item));
+                    }
+
+                    var results = await Task.WhenAll(batch);
+
+                    for (int i = 0; i < results.Length; i++)
+                    {
+                        if (results[i].IsSuccessStatusCode)
+                            realm.Write(()=> {
+                                realm.Remove(savedRequests[i]);
+                            });
+                    }
+
+                    System.Diagnostics.Debug.WriteLine("connect","success");
+
+                    return results;
+                }
+
+                return null;
+            }
+            catch(Exception e)
+            {
+                System.Diagnostics.Debug.WriteLine("connect", e.Message);
+                return null;
             }
         }
 
@@ -133,13 +264,13 @@ namespace TicketingApp.ViewModels
                         {
                             var signature = await SignatureFromStream();
 
-                            using (var stream = await FileSystem.OpenAppPackageFileAsync("pdfStyles.txt"))
-                            {
-                                using (var reader = new StreamReader(stream))
-                                {
-                                    var fileContents = await reader.ReadToEndAsync();
-                                }
-                            }
+                            //using (var stream = await FileSystem.OpenAppPackageFileAsync("pdfStyles.txt"))
+                            //{
+                            //    using (var reader = new StreamReader(stream))
+                            //    {
+                            //        var fileContents = await reader.ReadToEndAsync();
+                            //    }
+                            //}
 
                             var body = GetInvoiceBody(signature);
 
@@ -150,6 +281,8 @@ namespace TicketingApp.ViewModels
 
                                 var formDigest = await SharepointAPI.GetFormDigest();
 
+                                //TODO: sync invoices first before adding
+
                                 var addInvoice = await SharepointAPI.AddListItemByListTitle(formDigest.D.GetContextWebInformation.FormDigestValue,
                                                        "Invoiced Tickets", item);
 
@@ -159,8 +292,14 @@ namespace TicketingApp.ViewModels
                                 {
                                     //TODO: prompt for successful request
                                     System.Diagnostics.Debug.WriteLine("Success!");
-                                    //TODO: Sync the Invoiced tickets
-                                    //TODO: Update the Ticket Item {ApprovalStatus and Stauts}
+
+                                    var response = JsonConvert.DeserializeObject<RootObject2>(await addInvoice.Content.ReadAsStringAsync());
+                                    var invoice = response.invoice;
+                                    realm.Write(()=> {
+                                        realm.Add(invoice);
+                                    });
+
+                                    UpdateTicket(formDigest.D.GetContextWebInformation.FormDigestValue);
                                 }
                                 else
                                 {
@@ -170,7 +309,11 @@ namespace TicketingApp.ViewModels
                             }
                             else
                             {
-                                //TODO: Save to DB
+                                realm.Write(()=> {
+                                    realm.Add<SavedRequests>(new SavedRequests() {
+                                        requestBody = body,
+                                    });
+                                });
                             }
                         }
                         catch (Exception e)
@@ -181,6 +324,44 @@ namespace TicketingApp.ViewModels
                 }
 
                 return _saveCommand;
+            }
+        }
+
+        private async void UpdateTicket(string formDigest)
+        {
+            try
+            {
+                if (connected)
+                {
+                    var builder = new StringBuilder();
+                    builder.Append("{'__metadata':{'type':'SP.Data.TicketsListItem'},");
+
+                    builder.Append("'ApprovedStatus':'" + _approvalStatus + "',");
+                    builder.Append("'Status':'" + _status + "'");
+                    builder.Append("}");
+
+                    var body = builder.ToString();
+
+                    var item = new StringContent(body);
+                    item.Headers.ContentType = System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json;odata=verbose");
+
+                    var updateTix = await SharepointAPI.UpdateListItemByListTitle(formDigest, "Tickets", item, Ticket.ID.ToString());
+
+                    var ensure = updateTix.EnsureSuccessStatusCode();
+
+                    if (ensure.IsSuccessStatusCode)
+                    {
+                        System.Diagnostics.Debug.WriteLine("update tix", "success");
+                    }
+                    else
+                    {
+                        System.Diagnostics.Debug.WriteLine("update tix", "failed");
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                System.Diagnostics.Debug.WriteLine("update tix error", e.Message);
             }
         }
 
@@ -204,17 +385,22 @@ namespace TicketingApp.ViewModels
                     invoiceCount = invoicedTickets.Count + 1;
                 }
 
+                if(signature != null)
+                {
+                    _status = "Approved";
+                    _approvalStatus = true;
+                }
+
                 var invoiceHtml = GetInvoiceHTML(Ticket.Title.Replace("TN", "IN") + invoiceCount.ToString(),
                                   "data:image/png;base64," + Convert.ToBase64String(signature));
-
-                //var pdf = HtmlToPdfConvert(invoiceHtml);
 
                 builder.Append("'TicketID':'" + Ticket.ID.ToString() + "',");
                 builder.Append("'TicketNumber':'" + Ticket.Title + "',");
                 builder.Append("'InvoiceVersion':'" + invoiceCount.ToString() + "',");
                 builder.Append("'InvoiceHTML':'" + invoiceHtml + "',");
                 builder.Append("'InvoiceNumber':'" + Ticket.Title.Replace("TN", "IN") + invoiceCount.ToString() + "',");
-                builder.Append("'Status':'Approved',");
+                builder.Append("'Status':'"+ _status +"',");
+                builder.Append("'Trigger':'generatePDF',");
                 builder.Append("'SignatureCode':'" + "data:image/png;base64," + Convert.ToBase64String(signature) + "',");
                 builder.Append("'ResponseById':'" + user.UserId.ToString() + "'");
                 builder.Append("}");
@@ -321,7 +507,7 @@ namespace TicketingApp.ViewModels
                         oddOrEven = "even";
 
                     var total = (LaborUsed[i].STHours * 100) + (LaborUsed[i].OTHours * 150);
-                    laborUsedTotal += total;
+                    LaborUsedTotal += total;
 
                     builder.Append("<tr role = \"row\" class=\"" + oddOrEven + "\"><td>" + LaborUsed[i].Employee.Title +
                         "</td><td>" + LaborUsed[i].WorkType + "</td><td>" + LaborUsed[i].STHours.ToString() +
@@ -364,7 +550,7 @@ namespace TicketingApp.ViewModels
                         oddOrEven = "even";
 
                     var total = Convert.ToInt32(EquipmentUsed[i].Rate) * EquipmentUsed[i].Quantity;
-                    equipmentUsedTotal += total;
+                    EquipmentUsedTotal += total;
                     var equipment = realm.All<EquipmentUnit>()
                                     .Where(e => e.ID == EquipmentUsed[i].EquipmentId)
                                     .FirstOrDefault();
@@ -408,7 +594,7 @@ namespace TicketingApp.ViewModels
                             oddOrEven = "even";
 
                         var total = Convert.ToInt32(MaterialUsed[i].Rate) * MaterialUsed[i].QuantityUsed;
-                        materialUsedTotal += total;
+                        MaterialUsedTotal += total;
                         var material = realm.All<Material>()
                                         .Where(e => e.ID == MaterialUsed[i].MaterialId)
                                         .FirstOrDefault();
@@ -448,7 +634,7 @@ namespace TicketingApp.ViewModels
                     if (i % 2 == 0)
                         oddOrEven = "even";
 
-                    thirdPartyUsedTotal += ThirdPartyUsed[i].Amount;
+                    ThirdPTUsedTotal += ThirdPartyUsed[i].Amount;
 
                     builder.Append("<tr role = \"row\" class=\"" + oddOrEven + "\"><td>" + ThirdPartyUsed[i].Vendor.Title +
                         "</td><td>$" + ThirdPartyUsed[i].Amount.ToString() + "</td><td>" + ThirdPartyUsed[i].MarkUp +
@@ -478,7 +664,7 @@ namespace TicketingApp.ViewModels
         {
             try
             {
-                var total = laborUsedTotal + equipmentUsedTotal + materialUsedTotal + thirdPartyUsedTotal;
+                var total = LaborUsedTotal + EquipmentUsedTotal + MaterialUsedTotal + ThirdPTUsedTotal;
                 string lbs = "<div class=\"col - md - 6\" id=\"summOfchargesDiv\">" +
                                         "<div class=\"panel panel-default\">" +
                                         "<div class=\"panel-heading panel-heading-style\">Summary of Charges</div>" +
@@ -487,19 +673,19 @@ namespace TicketingApp.ViewModels
                                             "</tr>" +
                                             "<tr id=\"labourUsed\">" +
                                                 "<td class=\"tdLabels\">Labour Charges</td>" +
-                                                "<td id = \"labourTotal\" >$" + laborUsedTotal + "</td>" +
+                                                "<td id = \"labourTotal\" >$" + LaborUsedTotal + "</td>" +
                                             "</tr>" +
                                             "<tr id = \"equipmentUsed\" >" +
                                                 "<td class=\"tdLabels\">Equipment Charges</td>" +
-                                                "<td id = \"equipmentTotal\" >$" + equipmentUsedTotal + "</td>" +
+                                                "<td id = \"equipmentTotal\" >$" + EquipmentUsedTotal + "</td>" +
                                             "</tr>" +
                                             "<tr id = \"materialUsed\">" +
                                                  "<td class=\"tdLabels\">Material Charges</td>" +
-                                                "<td id = \"materialTotal\" >$" + materialUsedTotal + "</td>" +
+                                                "<td id = \"materialTotal\" >$" + MaterialUsedTotal + "</td>" +
                                             "</tr>" +
                                             "<tr id = \"thirdParty\" >" +
                                                   "<td class=\"tdLabels\">3<sup>rd</sup> Party Charges</td>" +
-                                                "<td id = \"thirdPartyTotal\" >$" + thirdPartyUsedTotal + "</td>" +
+                                                "<td id = \"thirdPartyTotal\" >$" + ThirdPTUsedTotal + "</td>" +
                                             "</tr>" +
                                             "<tr id = \"totalCharges\" >" +
                                                 "<td > Total </td >" +

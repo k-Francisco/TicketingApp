@@ -12,12 +12,258 @@
 
             <DataTemplate x:Key="LaborUsedDataTemplate">
                 <ViewCell>
-                    <StackLayout>
+                    <StackLayout Orientation="Vertical"
+                                 CompressedLayout.IsHeadless="True"
+                                 Spacing="0">
+                        <StackLayout.GestureRecognizers>
+                            <TapGestureRecognizer/>
+                        </StackLayout.GestureRecognizers>
                         
+                        <Label Text="Name and Type"
+                               Style="{StaticResource DetailFieldNames}"/>
+
+                        <Label>
+                            <Label.FormattedText>
+                                <FormattedString>
+                                    <FormattedString.Spans>
+                                        <Span Text=" "/>
+                                        <Span Text="{Binding Employee.Title,Mode=TwoWay}" TextColor="Black" FontSize="Medium"/>
+                                        <Span Text=" (" TextColor="Black" FontSize="Medium"/>
+                                        <Span Text="{Binding WorkType, Mode=TwoWay}" TextColor="Black" FontSize="Medium"/>
+                                        <Span Text=")" TextColor="Black" FontSize="Medium"/>
+                                    </FormattedString.Spans>
+                                </FormattedString>
+                            </Label.FormattedText>
+                        </Label>
+
+                        <Label Text="ST Rate | OT Rate"
+                               Style="{StaticResource DetailFieldNames}"/>
+
+                        <Label>
+                            <Label.FormattedText>
+                                <FormattedString>
+                                    <FormattedString.Spans>
+                                        <Span Text=" "/>
+                                        <Span Text="$100" TextColor="Black" FontSize="Medium"/>
+                                        <Span Text=" | " TextColor="Black" FontSize="Medium"/>
+                                        <Span Text="$150" TextColor="Black" FontSize="Medium"/>
+                                    </FormattedString.Spans>
+                                </FormattedString>
+                            </Label.FormattedText>
+                        </Label>
+
+                        <Label Text="Standard Hours | Over-time Hours"
+                               Style="{StaticResource DetailFieldNames}"/>
+
+                        <Label>
+                            <Label.FormattedText>
+                                <FormattedString>
+                                    <FormattedString.Spans>
+                                        <Span Text=" "/>
+                                        <Span Text="{Binding STHours, StringFormat='{0}'}" TextColor="Black" FontSize="Medium"/>
+                                        <Span Text=" | " TextColor="Black" FontSize="Medium"/>
+                                        <Span Text="{Binding OTHours, StringFormat='{0}'}" TextColor="Black" FontSize="Medium"/>
+                                    </FormattedString.Spans>
+                                </FormattedString>
+                            </Label.FormattedText>
+                        </Label>
+
+                        <Label>
+                            <Label.FormattedText>
+                                <FormattedString>
+                                    <FormattedString.Spans>
+                                        <Span Text=" "/>
+                                        <Span Text="Total: " TextColor="Black" FontSize="Medium"/>
+                                        <Span Text="{Binding Total}" TextColor="Black" FontSize="Medium"/>
+                                    </FormattedString.Spans>
+                                </FormattedString>
+                            </Label.FormattedText>
+                        </Label>
+
+                        <BoxView HeightRequest="1"
+                                 HorizontalOptions="FillAndExpand"
+                                 BackgroundColor="#444446"/>
+
                     </StackLayout>
                 </ViewCell>
             </DataTemplate>
-            
+
+            <DataTemplate x:Key="EquipmentUsedDataTemplate">
+                <ViewCell>
+                    <StackLayout Orientation="Vertical"
+                                 CompressedLayout.IsHeadless="True"
+                                 Spacing="0">
+                        <StackLayout.GestureRecognizers>
+                            <TapGestureRecognizer/>
+                        </StackLayout.GestureRecognizers>
+
+                        <Label Text="Equipment Name and Unit Number"
+                               Style="{StaticResource DetailFieldNames}"/>
+
+                        <Label>
+                            <Label.FormattedText>
+                                <FormattedString>
+                                    <FormattedString.Spans>
+                                        <Span Text=" "/>
+                                        <Span Text="{Binding EquipmentName}" TextColor="Black" FontSize="Medium"/>
+                                        <Span Text=" (" TextColor="Black" FontSize="Medium"/>
+                                        <Span Text="{Binding UnitNumber}" TextColor="Black" FontSize="Medium"/>
+                                        <Span Text=")" TextColor="Black" FontSize="Medium"/>
+                                    </FormattedString.Spans>
+                                </FormattedString>
+                            </Label.FormattedText>
+                        </Label>
+
+                        <Label Text="Unit of Measure: "
+                               Style="{StaticResource DetailFieldNames}"/>
+
+                        <Label Text="{Binding UnitOfMeasure, StringFormat=' {0}'}}"
+                               TextColor="Black"
+                               FontSize="Medium"/>
+
+                        <Label Text="Quantity | Rate"
+                               Style="{StaticResource DetailFieldNames}"/>
+
+                        <Label>
+                            <Label.FormattedText>
+                                <FormattedString>
+                                    <FormattedString.Spans>
+                                        <Span Text=" "/>
+                                        <Span Text="{Binding Quantity, StringFormat='{0}'}" TextColor="Black" FontSize="Medium"/>
+                                        <Span Text=" | " TextColor="Black" FontSize="Medium"/>
+                                        <Span Text="{Binding Rate, StringFormat='${0}'}" TextColor="Black" FontSize="Medium"/>
+                                    </FormattedString.Spans>
+                                </FormattedString>
+                            </Label.FormattedText>
+                        </Label>
+
+                        <Label>
+                            <Label.FormattedText>
+                                <FormattedString>
+                                    <FormattedString.Spans>
+                                        <Span Text=" "/>
+                                        <Span Text="Total: " TextColor="Black" FontSize="Medium"/>
+                                        <Span Text="{Binding Total}" TextColor="Black" FontSize="Medium"/>
+                                    </FormattedString.Spans>
+                                </FormattedString>
+                            </Label.FormattedText>
+                        </Label>
+
+                        <BoxView HeightRequest="1"
+                                 HorizontalOptions="FillAndExpand"
+                                 BackgroundColor="#444446"/>
+
+                    </StackLayout>
+                </ViewCell>
+            </DataTemplate>
+
+            <DataTemplate x:Key="MaterialUsedDataTemplate">
+                <ViewCell>
+                    <StackLayout Orientation="Vertical"
+                                 CompressedLayout.IsHeadless="True"
+                                 Spacing="0">
+                        <StackLayout.GestureRecognizers>
+                            <TapGestureRecognizer/>
+                        </StackLayout.GestureRecognizers>
+
+                        <Label Text="Item Name: "
+                               Style="{StaticResource DetailFieldNames}"/>
+
+                        <Label Text="{Binding ItemName, StringFormat=' {0}'}"
+                               TextColor="Black"
+                               FontSize="Medium"/>
+
+                        <Label Text="Quantity: "
+                               Style="{StaticResource DetailFieldNames}"/>
+
+                        <Label Text="{Binding QuantityUsed, StringFormat=' {0}'}"
+                               TextColor="Black"
+                               FontSize="Medium"/>
+
+                        <Label Text="Unit of Measure: "
+                               Style="{StaticResource DetailFieldNames}"/>
+
+                        <Label Text="{Binding UnitOfMeasure, StringFormat=' {0}'}"
+                               TextColor="Black"
+                               FontSize="Medium"/>
+
+                        <Label Text="Cost per Unit: "
+                               Style="{StaticResource DetailFieldNames}"/>
+
+                        <Label Text="{Binding Rate, StringFormat=' ${0}'}"
+                               TextColor="Black"
+                               FontSize="Medium"/>
+
+                        <Label>
+                            <Label.FormattedText>
+                                <FormattedString>
+                                    <FormattedString.Spans>
+                                        <Span Text=" "/>
+                                        <Span Text="Total: " TextColor="Black" FontSize="Medium"/>
+                                        <Span Text="{Binding Total}" TextColor="Black" FontSize="Medium"/>
+                                    </FormattedString.Spans>
+                                </FormattedString>
+                            </Label.FormattedText>
+                        </Label>
+
+                        <BoxView HeightRequest="1"
+                                 HorizontalOptions="FillAndExpand"
+                                 BackgroundColor="#444446"/>
+
+                    </StackLayout>
+                </ViewCell>
+            </DataTemplate>
+
+            <DataTemplate x:Key="ThirdPartyUsedDataTemplate">
+                <ViewCell>
+                    <StackLayout Orientation="Vertical"
+                                 CompressedLayout.IsHeadless="True"
+                                 Spacing="0">
+                        <StackLayout.GestureRecognizers>
+                            <TapGestureRecognizer/>
+                        </StackLayout.GestureRecognizers>
+
+                        <Label Text="Vendor Name: "
+                               Style="{StaticResource DetailFieldNames}"/>
+
+                        <Label Text="{Binding Vendor.Title, StringFormat=' {0}'}"
+                               TextColor="Black"
+                               FontSize="Medium"/>
+
+                        <Label Text="MarkUp: "
+                               Style="{StaticResource DetailFieldNames}"/>
+
+                        <Label Text="{Binding MarkUp, StringFormat=' {0}'}"
+                               TextColor="Black"
+                               FontSize="Medium"/>
+
+                        <Label Text="Final Price: "
+                               Style="{StaticResource DetailFieldNames}"/>
+
+                        <Label Text="{Binding Amount, StringFormat=' ${0}'}"
+                               TextColor="Black"
+                               FontSize="Medium"/>
+
+                        <Label>
+                            <Label.FormattedText>
+                                <FormattedString>
+                                    <FormattedString.Spans>
+                                        <Span Text=" "/>
+                                        <Span Text="Total: " TextColor="Black" FontSize="Medium"/>
+                                        <Span Text="{Binding Total}" TextColor="Black" FontSize="Medium"/>
+                                    </FormattedString.Spans>
+                                </FormattedString>
+                            </Label.FormattedText>
+                        </Label>
+
+                        <BoxView HeightRequest="1"
+                                 HorizontalOptions="FillAndExpand"
+                                 BackgroundColor="#444446"/>
+
+                    </StackLayout>
+                </ViewCell>
+            </DataTemplate>
+
         </ResourceDictionary>
     </ContentPage.Resources>
 
@@ -68,15 +314,113 @@
                Style="{StaticResource DetailFieldValues}"/>
 
 
-            <!--<ListView
-                  HasUnevenRows="True"
-                  SeparatorVisibility="None"
-                  ItemTemplate="{StaticResource LaborUsedDataTemplate}"
-                  ItemsSource="{Binding LaborUsed}">
+            <ListView x:Name="LaborUsed"
+                      HasUnevenRows="True"
+                      SeparatorVisibility="None"
+                      ItemTemplate="{StaticResource LaborUsedDataTemplate}"
+                      ItemsSource="{Binding LaborUsed}"
+                      HeightRequest="{Binding LaborUsedHeight}"
+                      Header="Labor Used"
+                      Margin="0,16,0,0">
                 <x:Arguments>
                     <ListViewCachingStrategy>RecycleElementAndDataTemplate</ListViewCachingStrategy>
                 </x:Arguments>
-            </ListView>-->
+
+                <ListView.HeaderTemplate>
+                    <DataTemplate>
+                        <ContentView BackgroundColor="#444446">
+                            <Label Margin="10"
+                                   HorizontalOptions="Start"
+                                   FontAttributes="Bold"
+                                   FontSize="Large"
+                                   TextColor="White"
+                                   Text="Labor Used"/>
+                        </ContentView>
+                    </DataTemplate>
+                </ListView.HeaderTemplate>
+                
+            </ListView>
+
+            <ListView x:Name="EquipmentUsed"
+                      HasUnevenRows="True"
+                      SeparatorVisibility="None"
+                      ItemTemplate="{StaticResource EquipmentUsedDataTemplate}"
+                      ItemsSource="{Binding EquipmentUsed}"
+                      HeightRequest="{Binding EquipmentUsedHeight}"
+                      Header="Equipment Used"
+                      Margin="0,16,0,0">
+                <x:Arguments>
+                    <ListViewCachingStrategy>RecycleElementAndDataTemplate</ListViewCachingStrategy>
+                </x:Arguments>
+
+                <ListView.HeaderTemplate>
+                    <DataTemplate>
+                        <ContentView BackgroundColor="#444446">
+                            <Label Margin="10"
+                                   HorizontalOptions="Start"
+                                   FontAttributes="Bold"
+                                   FontSize="Large"
+                                   TextColor="White"
+                                   Text="Equipment Used"/>
+                        </ContentView>
+                    </DataTemplate>
+                </ListView.HeaderTemplate>
+
+            </ListView>
+
+            <ListView x:Name="MaterialUsed"
+                      HasUnevenRows="True"
+                      SeparatorVisibility="None"
+                      ItemTemplate="{StaticResource MaterialUsedDataTemplate}"
+                      ItemsSource="{Binding MaterialUsed}"
+                      HeightRequest="{Binding MaterialUsedHeight}"
+                      Header="Material Used"
+                      Margin="0,16,0,0">
+                <x:Arguments>
+                    <ListViewCachingStrategy>RecycleElementAndDataTemplate</ListViewCachingStrategy>
+                </x:Arguments>
+
+                <ListView.HeaderTemplate>
+                    <DataTemplate>
+                        <ContentView BackgroundColor="#444446">
+                            <Label Margin="10"
+                                   HorizontalOptions="Start"
+                                   FontAttributes="Bold"
+                                   FontSize="Large"
+                                   TextColor="White"
+                                   Text="Material Used"/>
+                        </ContentView>
+                    </DataTemplate>
+                </ListView.HeaderTemplate>
+
+            </ListView>
+
+            <ListView x:Name="ThirdPartyUsed"
+                      HasUnevenRows="True"
+                      SeparatorVisibility="None"
+                      ItemTemplate="{StaticResource ThirdPartyUsedDataTemplate}"
+                      ItemsSource="{Binding ThirdPartyUsed}"
+                      HeightRequest="{Binding ThirdPTUsedHeight}"
+                      Header="Third Party Used"
+                      Margin="0,16,0,0">
+                <x:Arguments>
+                    <ListViewCachingStrategy>RecycleElementAndDataTemplate</ListViewCachingStrategy>
+                </x:Arguments>
+
+                <ListView.HeaderTemplate>
+                    <DataTemplate>
+                        <ContentView BackgroundColor="#444446">
+                            <Label Margin="10"
+                                   HorizontalOptions="Start"
+                                   FontAttributes="Bold"
+                                   FontSize="Large"
+                                   TextColor="White"
+                                   Text="Third Party Used"/>
+                        </ContentView>
+                    </DataTemplate>
+                </ListView.HeaderTemplate>
+
+            </ListView>
 
 
 
@@ -86,6 +430,7 @@
                                            BackgroundColor="Silver"
                                            StrokeColor="Black"
                                            StrokeWidth="3"
+                                           PromptText=""
                                            CaptionText="Customer Signature Stamp"
                                            CaptionTextColor="Black"
                                            ClearText="Clear"

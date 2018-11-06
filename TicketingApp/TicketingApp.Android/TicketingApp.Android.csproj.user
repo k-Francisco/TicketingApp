@@ -3,5 +3,6 @@
   <PropertyGroup>
     <SelectedDevice>Asus _X013D</SelectedDevice>
     <ProjectView>ProjectFiles</ProjectView>
+    <AndroidDesignerPreferredTheme>Theme.DeviceDefault.NoActionBar.Fullscreen</AndroidDesignerPreferredTheme>
   </PropertyGroup>
 </Project>

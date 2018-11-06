@@ -77,4 +77,11 @@ namespace TicketingApp.Models.InvoicedTickets
         [JsonProperty("GUID")]
         public string GUID { get; set; }
     }
+
+    public class RootObject2
+    {
+        [JsonProperty("d")]
+        public InvoicedTickets invoice { get; set; }
+    }
+
 }

@@ -2,6 +2,7 @@
 using Realms;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using TicketingApp.Services;
 
@@ -19,18 +20,6 @@ namespace TicketingApp.Models.MaterialUsed
     }
     public class MaterialUsed : RealmObject
     {
-        //[JsonProperty("FileSystemObjectType")]
-        //public int FileSystemObjectType { get; set; }
-        //[JsonProperty("Id")]
-        //public int Id { get; set; }
-        //[JsonProperty("ServerRedirectedEmbedUri")]
-        //public object ServerRedirectedEmbedUri { get; set; }
-        //[JsonProperty("ServerRedirectedEmbedUrl")]
-        //public string ServerRedirectedEmbedUrl { get; set; }
-        //[JsonProperty("ContentTypeId")]
-        //public string ContentTypeId { get; set; }
-        //[JsonProperty("Title")]
-        //public object Title { get; set; }
         [JsonProperty("QuantityUsed")]
         public int QuantityUsed { get; set; }
         [JsonProperty("UnitOfMeasure")]
@@ -49,16 +38,22 @@ namespace TicketingApp.Models.MaterialUsed
         public DateTimeOffset Modified { get; set; }
         [JsonProperty("Created")]
         public DateTimeOffset Created { get; set; }
-        //[JsonProperty("AuthorId")]
-        //public int AuthorId { get; set; }
-        //[JsonProperty("EditorId")]
-        //public int EditorId { get; set; }
-        //[JsonProperty("OData__UIVersionString")]
-        //public string ODataUIVersionString { get; set; }
-        //[JsonProperty("Attachments")]
-        //public bool Attachments { get; set; }
         [JsonProperty("GUID")]
         public string GUID { get; set; }
+
+        public string ItemName {
+            get {
+                var material = Realm.GetInstance().All<Material.Material>()
+                               .Where(m => m.ID == MaterialId)
+                               .FirstOrDefault();
+
+                return material.Title;
+            }
+        }
+
+        public string Total {
+            get { return String.Format("${0}", Convert.ToString(Convert.ToInt32(Rate) * QuantityUsed)); }
+        }
     }
 
 }

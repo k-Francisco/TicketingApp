@@ -20,6 +20,7 @@
                 <Setter Property="TextColor" Value="LightSlateGray"/>
                 <Setter Property="FontAttributes" Value="None"/>
                 <Setter Property="FontSize" Value="Small"/>
+                <Setter Property="Margin" Value="4,0,0,0"/>
             </Style>
 
             <Style x:Key="DetailFieldValues" TargetType="Label">
@@ -27,6 +28,7 @@
                 <Setter Property="TextColor" Value="Black"/>
                 <Setter Property="FontAttributes" Value="None"/>
                 <Setter Property="FontSize" Value="Large"/>
+                <Setter Property="Margin" Value="4,0,0,0"/>
             </Style>
 
         </ResourceDictionary>

@@ -7,6 +7,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
+using System.Net.Http;
 using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
@@ -18,6 +19,7 @@ using TicketingApp.Models.Jobs;
 using TicketingApp.Models.LaborUsed;
 using TicketingApp.Models.Material;
 using TicketingApp.Models.MaterialUsed;
+using TicketingApp.Models.SavedRequests;
 using TicketingApp.Models.ThirdPartyUsed;
 using TicketingApp.Models.Tickets;
 using TicketingApp.Services;
@@ -42,7 +44,7 @@ namespace TicketingApp.ViewModels
 
         public ViewModelBase(INavigationService navigationService, ISharepointAPI sharepointAPI)
         {
-            RealmConfiguration.DefaultConfiguration.SchemaVersion = 1;
+            RealmConfiguration.DefaultConfiguration.SchemaVersion = 3;
 
             NavigationService = navigationService;
             SharepointAPI = sharepointAPI;
@@ -59,6 +61,8 @@ namespace TicketingApp.ViewModels
                     connected = false;
             };
         }
+
+        
 
         public virtual void OnNavigatedFrom(INavigationParameters parameters)
         {

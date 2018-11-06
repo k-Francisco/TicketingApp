@@ -43,6 +43,10 @@ namespace TicketingApp.Models.ThirdPartyUsed
         public DateTimeOffset Modified { get; set; }
         [JsonProperty("Created")]
         public DateTimeOffset Created { get; set; }
+
+        public string Total {
+            get { return String.Format("${0}", Amount); }
+        }
     }
     
     public class Vendor : RealmObject

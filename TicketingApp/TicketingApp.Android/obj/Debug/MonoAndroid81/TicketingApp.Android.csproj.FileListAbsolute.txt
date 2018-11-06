@@ -122,7 +122,6 @@ D:\Xamarin Projects\TicketingApp\TicketingApp\TicketingApp.Android\obj\Debug\Mon
 D:\Xamarin Projects\TicketingApp\TicketingApp\TicketingApp.Android\obj\Debug\MonoAndroid81\android\assets\Xamarin.Forms.Core.pdb
 D:\Xamarin Projects\TicketingApp\TicketingApp\TicketingApp.Android\obj\Debug\MonoAndroid81\android\assets\Xamarin.Forms.Xaml.pdb
 D:\Xamarin Projects\TicketingApp\TicketingApp\TicketingApp.Android\bin\Debug\TicketingApp.Android.dll
-D:\Xamarin Projects\TicketingApp\TicketingApp\TicketingApp.Android\obj\Debug\MonoAndroid81\linksrc\TicketingApp.pdb
 D:\Xamarin Projects\TicketingApp\TicketingApp\TicketingApp.Android\obj\Debug\MonoAndroid81\linksrc\TicketingApp.Android.dll.mdb
 D:\Xamarin Projects\TicketingApp\TicketingApp\TicketingApp.Android\obj\Debug\MonoAndroid81\linksrc\FormsViewGroup.dll.mdb
 D:\Xamarin Projects\TicketingApp\TicketingApp\TicketingApp.Android\obj\Debug\MonoAndroid81\linksrc\Prism.dll.mdb

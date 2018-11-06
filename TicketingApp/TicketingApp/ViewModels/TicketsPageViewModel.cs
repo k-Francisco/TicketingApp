@@ -17,6 +17,7 @@ using TicketingApp.Models.Jobs;
 using TicketingApp.Models.LaborUsed;
 using TicketingApp.Models.Material;
 using TicketingApp.Models.MaterialUsed;
+using TicketingApp.Models.SavedRequests;
 using TicketingApp.Models.ThirdPartyUsed;
 using TicketingApp.Models.Tickets;
 using TicketingApp.Models.Users;
@@ -75,6 +76,12 @@ namespace TicketingApp.ViewModels
             {
                 if (connected)
                 {
+
+                    System.Diagnostics.Debug.WriteLine("rtFa", TokenService.GetInstance().ExtractRtFa());
+
+                    //to upload all the items that were saved during offline situations
+                    var results = await CheckSavedRequests();
+
                     var laborUsedQuery = "$select=ID,Title,WorkType,STHours,OTHours,PerDiem,Billable,TicketId,Created,Modified,GUID" +
                                          ",Employee/Title&$expand=Employee";
                     var thirdPartUsedQuery = "$select=ID,RequestDate,Description,Amount,MarkUp,Billable,ChargeType,TicketId,Created," +
@@ -216,6 +223,52 @@ namespace TicketingApp.ViewModels
             catch (Exception e)
             {
                 System.Diagnostics.Debug.WriteLine("SyncData", e.Message);
+            }
+        }
+
+        public async Task<HttpResponseMessage[]> CheckSavedRequests()
+        {   //fix this shit
+            try
+            {
+                var savedRequests = realm.All<SavedRequests>()
+                                .ToList();
+
+                var batch = new List<Task<HttpResponseMessage>>();
+
+                var formDigest = await SharepointAPI.GetFormDigest();
+
+                if (savedRequests != null || savedRequests.Any())
+                {
+                    foreach (var body in savedRequests)
+                    {
+                        var item = new StringContent(body.requestBody);
+                        item.Headers.ContentType = System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json;odata=verbose");
+
+                        batch.Add(SharepointAPI.AddListItemByListTitle(formDigest.D.GetContextWebInformation.FormDigestValue,
+                                               "Invoiced Tickets", item));
+                    }
+
+                    var results = await Task.WhenAll(batch);
+
+                    for (int i = 0; i < results.Length; i++)
+                    {
+                        if (results[i].IsSuccessStatusCode)
+                            realm.Write(() => {
+                                realm.Remove(savedRequests[i]);
+                            });
+                    }
+
+                    System.Diagnostics.Debug.WriteLine("connect", "success");
+
+                    return results;
+                }
+
+                return null;
+            }
+            catch (Exception e)
+            {
+                System.Diagnostics.Debug.WriteLine("connect", e.Message);
+                return null;
             }
         }
 

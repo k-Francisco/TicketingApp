@@ -2,6 +2,7 @@
 using Realms;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using TicketingApp.Services;
 
@@ -19,18 +20,6 @@ namespace TicketingApp.Models.EquipmentUsed
     }
     public class EquipmentUsed : RealmObject
     {
-        //[JsonProperty("FileSystemObjectType")]
-        //public int FileSystemObjectType { get; set; }
-        //[JsonProperty("Id")]
-        //public int Id { get; set; }
-        //[JsonProperty("ServerRedirectedEmbedUri")]
-        //public object ServerRedirectedEmbedUri { get; set; }
-        //[JsonProperty("ServerRedirectedEmbedUrl")]
-        //public string ServerRedirectedEmbedUrl { get; set; }
-        //[JsonProperty("ContentTypeId")]
-        //public string ContentTypeId { get; set; }
-        //[JsonProperty("Title")]
-        //public object Title { get; set; }
         [JsonProperty("Rate")]
         public string Rate { get; set; }
         [JsonProperty("Billable")]
@@ -51,16 +40,36 @@ namespace TicketingApp.Models.EquipmentUsed
         public DateTimeOffset Modified { get; set; }
         [JsonProperty("Created")]
         public DateTimeOffset Created { get; set; }
-        //[JsonProperty("AuthorId")]
-        //public int AuthorId { get; set; }
-        //[JsonProperty("EditorId")]
-        //public int EditorId { get; set; }
-        //[JsonProperty("OData__UIVersionString")]
-        //public string ODataUIVersionString { get; set; }
-        //[JsonProperty("Attachments")]
-        //public bool Attachments { get; set; }
         [JsonProperty("GUID")]
         public string GUID { get; set; }
+
+        public string EquipmentName
+        {
+            get
+            {
+                var equipment = Realm.GetInstance().All<EquipmentUnit.EquipmentUnit>()
+                                .Where(e => e.ID == EquipmentId)
+                                .FirstOrDefault();
+
+                return equipment.Title;
+            }
+        }
+
+        public string UnitNumber
+        {
+            get
+            {
+                var equipment = Realm.GetInstance().All<EquipmentUnit.EquipmentUnit>()
+                                .Where(e => e.ID == EquipmentId)
+                                .FirstOrDefault();
+
+                return equipment.ModelNumber;
+            }
+        }
+
+        public string Total {
+            get { return String.Format("${0}", Convert.ToString(Quantity * Convert.ToInt32(Rate))); }
+        }
     }
 
 }

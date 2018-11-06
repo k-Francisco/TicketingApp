@@ -21,7 +21,7 @@
 
             <!--Customer-->
 
-            <Label Text="Customer"
+            <Label Text=" Customer"
                Style="{StaticResource DetailHeaders}"/>
 
             <Label Text="Customer Name and Reference Number: "
@@ -31,6 +31,7 @@
                 <Label.FormattedText>
                     <FormattedString>
                         <FormattedString.Spans>
+                            <Span Text=" "/>
                             <Span Text="{Binding Customer.CustomerName,Mode=TwoWay}" TextColor="Black" FontSize="Medium"/>
                             <Span Text=" (" TextColor="Black" FontSize="Medium"/>
                             <Span Text="{Binding Customer.CustReferenceNo, Mode=TwoWay}" TextColor="Black" FontSize="Medium"/>
@@ -53,6 +54,7 @@
                 <Label.FormattedText>
                     <FormattedString>
                         <FormattedString.Spans>
+                            <Span Text=" "/>
                             <Span Text="{Binding Customer.CustomerContactEmail, Mode=TwoWay}" TextColor="Black" FontSize="Medium"/>
                             <Span Text=" (" TextColor="Black" FontSize="Medium"/>
                             <Span Text="{Binding Customer.CustomerContactPhoneNo, Mode=TwoWay}" TextColor="Black" FontSize="Medium"/>
@@ -64,7 +66,7 @@
 
             <!--Job-->
 
-            <Label Text="Job"
+            <Label Text=" Job"
                Style="{StaticResource DetailHeaders}"/>
 
             <Label Text="Job Name and ID: "
@@ -74,6 +76,7 @@
                 <Label.FormattedText>
                     <FormattedString>
                         <FormattedString.Spans>
+                            <Span Text=" "/>
                             <Span Text="{Binding Job.Title,Mode=TwoWay}" TextColor="Black" FontSize="Medium"/>
                             <Span Text=" (" TextColor="Black" FontSize="Medium"/>
                             <Span Text="{Binding Job.JobId, Mode=TwoWay}" TextColor="Black" FontSize="Medium"/>
@@ -90,6 +93,7 @@
                 <Label.FormattedText>
                     <FormattedString>
                         <FormattedString.Spans>
+                            <Span Text=" "/>
                             <Span Text="{Binding Job.JobType, Mode=TwoWay}" TextColor="Black" FontSize="Medium"/>
                             <Span Text=" (" TextColor="Black" FontSize="Medium"/>
                             <Span Text="{Binding Job.LocationName, Mode=TwoWay}" TextColor="Black" FontSize="Medium"/>
@@ -107,7 +111,7 @@
 
             <!--Ticket-->
 
-            <Label Text="Ticket"
+            <Label Text=" Ticket"
                Style="{StaticResource DetailHeaders}"/>
 
             <Label Text="Work Completed: "
