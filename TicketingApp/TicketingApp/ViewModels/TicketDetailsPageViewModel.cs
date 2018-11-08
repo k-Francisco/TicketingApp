@@ -1,5 +1,7 @@
 ﻿using Prism.Commands;
+using Prism.Events;
 using Prism.Navigation;
+using Prism.Services;
 using SpevoCore.Services.Sharepoint_API;
 using TicketingApp.Models.Customers;
 using TicketingApp.Models.Jobs;
@@ -31,8 +33,9 @@ namespace TicketingApp.ViewModels
         }
 
 
-        public TicketDetailsPageViewModel(INavigationService navigationService, ISharepointAPI sharepointAPI)
-            : base(navigationService, sharepointAPI)
+        public TicketDetailsPageViewModel(INavigationService navigationService, ISharepointAPI sharepointAPI,
+                                          IPageDialogService pageDialogService, IEventAggregator eventAggregator)
+            : base(navigationService, sharepointAPI, pageDialogService, eventAggregator)
         {
             Title = "Details";
         }

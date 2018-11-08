@@ -1,28 +1,9 @@
-﻿using Prism.Commands;
+﻿using Prism.Events;
 using Prism.Mvvm;
 using Prism.Navigation;
+using Prism.Services;
 using Realms;
 using SpevoCore.Services.Sharepoint_API;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Net.Http;
-using System.Runtime.CompilerServices;
-using System.Text;
-using System.Threading.Tasks;
-using TicketingApp.Models.Customers;
-using TicketingApp.Models.EquipmentUnit;
-using TicketingApp.Models.EquipmentUsed;
-using TicketingApp.Models.InvoicedTickets;
-using TicketingApp.Models.Jobs;
-using TicketingApp.Models.LaborUsed;
-using TicketingApp.Models.Material;
-using TicketingApp.Models.MaterialUsed;
-using TicketingApp.Models.SavedRequests;
-using TicketingApp.Models.ThirdPartyUsed;
-using TicketingApp.Models.Tickets;
-using TicketingApp.Services;
 using Xamarin.Essentials;
 
 namespace TicketingApp.ViewModels
@@ -31,6 +12,8 @@ namespace TicketingApp.ViewModels
     {
         protected INavigationService NavigationService { get; private set; }
         protected ISharepointAPI SharepointAPI { get; private set; }
+        protected IPageDialogService PageDialogService { get; private set; }
+        protected IEventAggregator EventAggregator { get; private set; }
         protected Realm realm { get; private set; }
         protected bool connected { get; private set; }
 
@@ -42,11 +25,15 @@ namespace TicketingApp.ViewModels
         }
 
 
-        public ViewModelBase(INavigationService navigationService, ISharepointAPI sharepointAPI)
+        public ViewModelBase(INavigationService navigationService, ISharepointAPI sharepointAPI,
+                             IPageDialogService pageDialogService, IEventAggregator eventAggregator)
         {
-            RealmConfiguration.DefaultConfiguration.SchemaVersion = 3;
+            RealmConfiguration.DefaultConfiguration.SchemaVersion = 2;
 
             NavigationService = navigationService;
+            PageDialogService = pageDialogService;
+            EventAggregator = eventAggregator;
+
             SharepointAPI = sharepointAPI;
             realm = Realm.GetInstance();
 

@@ -6,7 +6,9 @@ using System.Net.Http;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
 using Prism.Commands;
+using Prism.Events;
 using Prism.Navigation;
+using Prism.Services;
 using SpevoCore.Services;
 using SpevoCore.Services.Sharepoint_API;
 using TicketingApp.Models.Customers;
@@ -21,7 +23,7 @@ using TicketingApp.Models.SavedRequests;
 using TicketingApp.Models.ThirdPartyUsed;
 using TicketingApp.Models.Tickets;
 using TicketingApp.Models.Users;
-using Xamarin.Forms;
+using Xamarin.Essentials;
 
 namespace TicketingApp.ViewModels
 {
@@ -33,11 +35,36 @@ namespace TicketingApp.ViewModels
             get { return _ticketCollection; }
         }
 
-        public TicketsPageViewModel(INavigationService navigationService, ISharepointAPI sharepointAPI) 
-            : base(navigationService, sharepointAPI)
+        private bool _refreshing;
+        public bool Refreshing
+        {
+            get { return _refreshing; }
+            set { SetProperty(ref _refreshing, value); }
+        }
+
+        private string _syncStage;
+        public string SyncStage
+        {
+            get { return _syncStage; }
+            set { SetProperty(ref _syncStage, value); }
+        }
+
+        public TicketsPageViewModel(INavigationService navigationService, ISharepointAPI sharepointAPI,
+                                    IPageDialogService pageDialogService, IEventAggregator eventAggregator) 
+            : base(navigationService, sharepointAPI, pageDialogService, eventAggregator)
         {
             Title = "Tickets";
             SharepointAPI.Init(App.SiteUrl);
+
+            Connectivity.ConnectivityChanged += (s, e) =>
+            {
+                if (Connectivity.NetworkAccess == NetworkAccess.Internet)
+                {
+                    System.Diagnostics.Debug.WriteLine("connect", "yeah");
+                    //CheckSavedRequests();
+                }
+            };
+
             SaveUser();
             SyncData();
         }
@@ -79,8 +106,7 @@ namespace TicketingApp.ViewModels
 
                     System.Diagnostics.Debug.WriteLine("rtFa", TokenService.GetInstance().ExtractRtFa());
 
-                    //to upload all the items that were saved during offline situations
-                    var results = await CheckSavedRequests();
+                    Refreshing = true;
 
                     var laborUsedQuery = "$select=ID,Title,WorkType,STHours,OTHours,PerDiem,Billable,TicketId,Created,Modified,GUID" +
                                          ",Employee/Title&$expand=Employee";
@@ -100,7 +126,7 @@ namespace TicketingApp.ViewModels
                         SharepointAPI.GetListItemsByListTitle("Third Party Used", thirdPartUsedQuery),
                     };
 
-                    System.Diagnostics.Debug.WriteLine("tix", "Done getting response");
+                    SyncStage = "Getting data from server...";
 
                     var responses = await Task.WhenAll(batchRequests.ToArray());
 
@@ -118,9 +144,9 @@ namespace TicketingApp.ViewModels
                         responses[9].Content.ReadAsStringAsync(),
                     };
 
-                    var batchConversionResults = await Task.WhenAll(batchConversion.ToArray());
+                    SyncStage = "Converting data...";
 
-                    System.Diagnostics.Debug.WriteLine("tix", "Done converting response");
+                    var batchConversionResults = await Task.WhenAll(batchConversion.ToArray());
 
                     #region saved data
                     var savedTickets = realm.All<Ticket>().ToList();
@@ -134,6 +160,8 @@ namespace TicketingApp.ViewModels
                     var savedMaterialUsed = realm.All<MaterialUsed>().ToList();
                     var savedThirdPartyUsed = realm.All<ThirdPartyUsed>().ToList();
                     #endregion
+
+                    SyncStage = "Serializing data...";
 
                     #region response conversion
                     var tickets = JsonConvert.DeserializeObject<Models.Tickets.RootObject>(batchConversionResults[0],
@@ -198,8 +226,6 @@ namespace TicketingApp.ViewModels
                     System.Diagnostics.Debug.WriteLine("tix", "Done converting tpu");
                     #endregion
 
-                    System.Diagnostics.Debug.WriteLine("tix", "Done deserializing");
-
                     var batchSync = new List<Task<bool>>() {
                         tickets.SyncData(savedTickets,tickets.D.Results),
                         customers.SyncData(savedCustomers, customers.D.Results),
@@ -213,10 +239,16 @@ namespace TicketingApp.ViewModels
                         thirdPartyUsed.SyncData(savedThirdPartyUsed, thirdPartyUsed.D.Results),
                     };
 
+                    SyncStage = "Syncing...";
+
                     var doneSync = await Task.WhenAll(batchSync.ToArray());
 
-                    System.Diagnostics.Debug.WriteLine("tix", "Done saving data");
+                    //to upload all the items that were saved during offline situations
+                    //var results = await CheckSavedRequests();
                 }
+
+                SyncStage = "";
+                Refreshing = false;
 
                 GetTickets();
             }
@@ -226,42 +258,92 @@ namespace TicketingApp.ViewModels
             }
         }
 
+        private void GetTickets()
+        {
+            var tickets = realm.All<Ticket>();
+            if (tickets != null || tickets.Any())
+            {
+                foreach (var item in tickets)
+                {
+                    TicketCollection.Add(item);
+                }
+            }
+            else
+                SyncStage = "No tickets to display";
+        }
+
         public async Task<HttpResponseMessage[]> CheckSavedRequests()
         {   //fix this shit
             try
             {
                 var savedRequests = realm.All<SavedRequests>()
-                                .ToList();
-
-                var batch = new List<Task<HttpResponseMessage>>();
-
-                var formDigest = await SharepointAPI.GetFormDigest();
+                                    .ToList();
 
                 if (savedRequests != null || savedRequests.Any())
                 {
-                    foreach (var body in savedRequests)
+                    if (connected)
                     {
-                        var item = new StringContent(body.requestBody);
-                        item.Headers.ContentType = System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json;odata=verbose");
+                        foreach (var item in savedRequests)
+                        {
+                            var invoiceCount = 0;
 
-                        batch.Add(SharepointAPI.AddListItemByListTitle(formDigest.D.GetContextWebInformation.FormDigestValue,
-                                               "Invoiced Tickets", item));
+                            var invoices = await SharepointAPI.GetListItemsByListTitle("Invoiced Tickets");
+
+                            if (invoices.IsSuccessStatusCode)
+                            {
+                                var invoicesString = await invoices.Content.ReadAsStringAsync();
+                                var invoicedTicketsResults = JsonConvert.DeserializeObject<Models.InvoicedTickets.RootObject>(invoicesString,
+                                    new JsonSerializerSettings
+                                    {
+                                        NullValueHandling = NullValueHandling.Ignore
+                                    });
+
+                                var invoicedTickets = invoicedTicketsResults.D.Results
+                                                      .Where(i => i.TicketNumber.Equals(item.TicketNumber))
+                                                      .ToList();
+
+                                if (invoicedTickets != null && invoicedTickets.Count != 0)
+                                {
+                                    invoiceCount = invoicedTickets.Count + 1;
+                                }
+
+                                var metadata = JsonConvert.DeserializeObject<List<string>>(item.RequestBody);
+
+
+                            }
+                        }
                     }
-
-                    var results = await Task.WhenAll(batch);
-
-                    for (int i = 0; i < results.Length; i++)
-                    {
-                        if (results[i].IsSuccessStatusCode)
-                            realm.Write(() => {
-                                realm.Remove(savedRequests[i]);
-                            });
-                    }
-
-                    System.Diagnostics.Debug.WriteLine("connect", "success");
-
-                    return results;
                 }
+
+                //var batch = new List<Task<HttpResponseMessage>>();
+
+                //var formDigest = await SharepointAPI.GetFormDigest();
+
+                //if (savedRequests != null || savedRequests.Any())
+                //{
+                //    foreach (var body in savedRequests)
+                //    {
+                //        var item = new StringContent(body.requestBody);
+                //        item.Headers.ContentType = System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json;odata=verbose");
+
+                //        batch.Add(SharepointAPI.AddListItemByListTitle(formDigest.D.GetContextWebInformation.FormDigestValue,
+                //                               "Invoiced Tickets", item));
+                //    }
+
+                //    var results = await Task.WhenAll(batch);
+
+                //    for (int i = 0; i < results.Length; i++)
+                //    {
+                //        if (results[i].IsSuccessStatusCode)
+                //            realm.Write(() => {
+                //                realm.Remove(savedRequests[i]);
+                //            });
+                //    }
+
+                //    System.Diagnostics.Debug.WriteLine("connect", "success");
+
+                //    return results;
+                //}
 
                 return null;
             }
@@ -272,12 +354,22 @@ namespace TicketingApp.ViewModels
             }
         }
 
-        private void GetTickets()
+        private DelegateCommand _refreshCommand;
+        public DelegateCommand RefreshCommand
         {
-            var tickets = realm.All<Ticket>();
-            foreach (var item in tickets)
+            get
             {
-                TicketCollection.Add(item);
+                if(_refreshCommand == null)
+                {
+                    _refreshCommand = new DelegateCommand(()=> {
+
+                        TicketCollection.Clear();
+                        SyncData();
+
+                    });
+                }
+
+                return _refreshCommand;
             }
         }
 

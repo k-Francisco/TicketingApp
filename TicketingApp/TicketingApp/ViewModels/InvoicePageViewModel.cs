@@ -1,11 +1,12 @@
 ﻿using Newtonsoft.Json;
 using Prism.Commands;
+using Prism.Events;
 using Prism.Navigation;
+using Prism.Services;
 using SpevoCore.Services.Sharepoint_API;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.IO;
 using System.Linq;
 using System.Net.Http;
 using System.Text;
@@ -28,7 +29,6 @@ namespace TicketingApp.ViewModels
     public class InvoicePageViewModel : ViewModelBase
     {
         private ObservableCollection<LaborUsed> _laborUsed = new ObservableCollection<LaborUsed>();
-
         public ObservableCollection<LaborUsed> LaborUsed
         {
             get { return _laborUsed; }
@@ -36,7 +36,6 @@ namespace TicketingApp.ViewModels
         }
 
         private ObservableCollection<MaterialUsed> _materialUsed = new ObservableCollection<MaterialUsed>();
-
         public ObservableCollection<MaterialUsed> MaterialUsed
         {
             get { return _materialUsed; }
@@ -44,7 +43,6 @@ namespace TicketingApp.ViewModels
         }
 
         private ObservableCollection<EquipmentUsed> _equipmentUsed = new ObservableCollection<EquipmentUsed>();
-
         public ObservableCollection<EquipmentUsed> EquipmentUsed
         {
             get { return _equipmentUsed; }
@@ -52,7 +50,6 @@ namespace TicketingApp.ViewModels
         }
 
         private ObservableCollection<ThirdPartyUsed> _thirdPartyUsed = new ObservableCollection<ThirdPartyUsed>();
-
         public ObservableCollection<ThirdPartyUsed> ThirdPartyUsed
         {
             get { return _thirdPartyUsed; }
@@ -129,24 +126,14 @@ namespace TicketingApp.ViewModels
             set { SetProperty(ref _thirdPTUsedTotal, value); }
         }
 
-        public Func<Task<byte[]>> SignatureFromStream { get; set; }
+        private string _status;
+        private bool _approvalStatus;
 
-        private string _status = "Open";
-        private bool _approvalStatus = false;
-
-        public InvoicePageViewModel(INavigationService navigationService, ISharepointAPI sharepointAPI)
-            : base(navigationService, sharepointAPI)
+        public InvoicePageViewModel(INavigationService navigationService, ISharepointAPI sharepointAPI,
+                                    IPageDialogService pageDialogService, IEventAggregator eventAggregator)
+            : base(navigationService, sharepointAPI, pageDialogService, eventAggregator)
         {
             Title = "Invoice";
-
-            Connectivity.ConnectivityChanged += (s, e) =>
-            {
-                if (Connectivity.NetworkAccess == NetworkAccess.Internet)
-                {
-                    System.Diagnostics.Debug.WriteLine("connect", "yeah");
-                    CheckSavedRequests();
-                }
-            };
         }
 
         public override void OnNavigatedTo(INavigationParameters parameters)
@@ -200,55 +187,10 @@ namespace TicketingApp.ViewModels
                     ThirdPTUsedHeight += 180;
                     //todo: third party used total
                 }
-
             }
         }
 
-        public async Task<HttpResponseMessage[]> CheckSavedRequests()
-        {
-            try
-            {
-                var savedRequests = realm.All<SavedRequests>()
-                                .ToList();
-
-                var batch = new List<Task<HttpResponseMessage>>();
-
-                var formDigest = await SharepointAPI.GetFormDigest();
-
-                if (savedRequests != null || savedRequests.Any())
-                {
-                    foreach (var body in savedRequests)
-                    {
-                        var item = new StringContent(body.requestBody);
-                        item.Headers.ContentType = System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json;odata=verbose");
-
-                        batch.Add(SharepointAPI.AddListItemByListTitle(formDigest.D.GetContextWebInformation.FormDigestValue,
-                                               "Invoiced Tickets", item));
-                    }
-
-                    var results = await Task.WhenAll(batch);
-
-                    for (int i = 0; i < results.Length; i++)
-                    {
-                        if (results[i].IsSuccessStatusCode)
-                            realm.Write(()=> {
-                                realm.Remove(savedRequests[i]);
-                            });
-                    }
-
-                    System.Diagnostics.Debug.WriteLine("connect","success");
-
-                    return results;
-                }
-
-                return null;
-            }
-            catch(Exception e)
-            {
-                System.Diagnostics.Debug.WriteLine("connect", e.Message);
-                return null;
-            }
-        }
+        public Func<Task<byte[]>> SignatureFromStream { get; set; }
 
         private DelegateCommand _saveCommand;
 
@@ -264,24 +206,20 @@ namespace TicketingApp.ViewModels
                         {
                             var signature = await SignatureFromStream();
 
-                            //using (var stream = await FileSystem.OpenAppPackageFileAsync("pdfStyles.txt"))
-                            //{
-                            //    using (var reader = new StreamReader(stream))
-                            //    {
-                            //        var fileContents = await reader.ReadToEndAsync();
-                            //    }
-                            //}
-
-                            var body = GetInvoiceBody(signature);
+                            var builder = new StringBuilder();
+                            
+                            var invoiceBody = await GetInvoiceBody(signature);
+                            foreach (var item in invoiceBody)
+                            {
+                                builder.Append(item);
+                            }
 
                             if (connected)
                             {
-                                var item = new StringContent(body);
+                                var item = new StringContent(builder.ToString());
                                 item.Headers.ContentType = System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json;odata=verbose");
 
                                 var formDigest = await SharepointAPI.GetFormDigest();
-
-                                //TODO: sync invoices first before adding
 
                                 var addInvoice = await SharepointAPI.AddListItemByListTitle(formDigest.D.GetContextWebInformation.FormDigestValue,
                                                        "Invoiced Tickets", item);
@@ -295,7 +233,8 @@ namespace TicketingApp.ViewModels
 
                                     var response = JsonConvert.DeserializeObject<RootObject2>(await addInvoice.Content.ReadAsStringAsync());
                                     var invoice = response.invoice;
-                                    realm.Write(()=> {
+                                    realm.Write(() =>
+                                    {
                                         realm.Add(invoice);
                                     });
 
@@ -309,9 +248,12 @@ namespace TicketingApp.ViewModels
                             }
                             else
                             {
-                                realm.Write(()=> {
-                                    realm.Add<SavedRequests>(new SavedRequests() {
-                                        requestBody = body,
+                                realm.Write(() =>
+                                {
+                                    realm.Add<SavedRequests>(new SavedRequests()
+                                    {
+                                        RequestBody = JsonConvert.SerializeObject(invoiceBody),
+                                        TicketNumber = Ticket.Title,
                                     });
                                 });
                             }
@@ -365,56 +307,71 @@ namespace TicketingApp.ViewModels
             }
         }
 
-        private string GetInvoiceBody(byte[] signature)
+        private async Task<List<string>> GetInvoiceBody(byte[] signature)
         {
             try
             {
-                var builder = new StringBuilder();
-                builder.Append("{'__metadata':{'type':'SP.Data.InvoicedTicketsListItem'},");
-
                 var user = realm.All<User>().FirstOrDefault();
-
                 var invoiceCount = 0;
 
-                var invoicedTickets = realm.All<InvoicedTickets>()
-                                      .Where(i => i.TicketNumber.Equals(Ticket.Title))
-                                      .ToList();
+                var metadata = new List<string>();
+                metadata.Add("{'__metadata':{'type':'SP.Data.InvoicedTicketsListItem'},");
 
-                if (invoicedTickets != null && invoicedTickets.Count != 0)
+                var invoices = await SharepointAPI.GetListItemsByListTitle("Invoiced Tickets");
+
+                if (invoices.IsSuccessStatusCode)
                 {
-                    invoiceCount = invoicedTickets.Count + 1;
+
+                    var invoicesString = await invoices.Content.ReadAsStringAsync();
+                    var invoicedTicketsResults = JsonConvert.DeserializeObject<Models.InvoicedTickets.RootObject>(invoicesString,
+                        new JsonSerializerSettings
+                        {
+                            NullValueHandling = NullValueHandling.Ignore
+                        });
+
+                    var invoicedTickets = invoicedTicketsResults.D.Results
+                                          .Where(i => i.TicketNumber.Equals(Ticket.Title))
+                                          .ToList();
+
+                    if (invoicedTickets != null && invoicedTickets.Count != 0)
+                    {
+                        invoiceCount = invoicedTickets.Count + 1;
+                    }
+
+                    if (signature != null)
+                    {
+                        _status = "Approved";
+                        _approvalStatus = true;
+                    }
+                    else
+                    {
+                        _status = "Open";
+                        _approvalStatus = false;
+                    }
+
+                    var invoiceHtml = GetInvoiceHTML(Ticket.Title.Replace("TN", "IN") + invoiceCount.ToString(),
+                                      "data:image/png;base64," + Convert.ToBase64String(signature));
+
+                    metadata.Add("'TicketID':'" + Ticket.ID.ToString() + "',");
+                    metadata.Add("'TicketNumber':'" + Ticket.Title + "',");
+                    metadata.Add("'InvoiceVersion':'" + invoiceCount.ToString() + "',");
+                    metadata.Add("'InvoiceHTML':'" + invoiceHtml + "',");
+                    metadata.Add("'InvoiceNumber':'" + Ticket.Title.Replace("TN", "IN") + invoiceCount.ToString() + "',");
+                    metadata.Add("'Status':'" + _status + "',");
+                    metadata.Add("'Trigger':'generatePDF',");
+                    metadata.Add("'SignatureCode':'" + "data:image/png;base64," + Convert.ToBase64String(signature) + "',");
+                    metadata.Add("'ResponseById':'" + user.UserId.ToString() + "'");
+                    metadata.Add("}");
+
+                    return metadata;
                 }
 
-                if(signature != null)
-                {
-                    _status = "Approved";
-                    _approvalStatus = true;
-                }
-
-                var invoiceHtml = GetInvoiceHTML(Ticket.Title.Replace("TN", "IN") + invoiceCount.ToString(),
-                                  "data:image/png;base64," + Convert.ToBase64String(signature));
-
-                builder.Append("'TicketID':'" + Ticket.ID.ToString() + "',");
-                builder.Append("'TicketNumber':'" + Ticket.Title + "',");
-                builder.Append("'InvoiceVersion':'" + invoiceCount.ToString() + "',");
-                builder.Append("'InvoiceHTML':'" + invoiceHtml + "',");
-                builder.Append("'InvoiceNumber':'" + Ticket.Title.Replace("TN", "IN") + invoiceCount.ToString() + "',");
-                builder.Append("'Status':'"+ _status +"',");
-                builder.Append("'Trigger':'generatePDF',");
-                builder.Append("'SignatureCode':'" + "data:image/png;base64," + Convert.ToBase64String(signature) + "',");
-                builder.Append("'ResponseById':'" + user.UserId.ToString() + "'");
-                builder.Append("}");
-
-                var invoiceHTML = builder.ToString();
-
-                System.Diagnostics.Debug.WriteLine("invoicehtml", invoiceHTML);
-
-                return invoiceHTML;
+                return null;
             }
             catch (Exception e)
             {
                 System.Diagnostics.Debug.WriteLine("invoicebodyerror", e.Message);
-                return string.Empty;
+                return null;
             }
         }
 

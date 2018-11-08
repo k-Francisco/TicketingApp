@@ -81,14 +81,18 @@
         </ResourceDictionary>
     </ContentPage.Resources>
 
-    <StackLayout x:Name="mainLayout"
-                 HorizontalOptions="FillAndExpand"
-                 VerticalOptions="FillAndExpand">
+    <Grid x:Name="mainLayout"
+          HorizontalOptions="FillAndExpand"
+          VerticalOptions="FillAndExpand">
+
         <ListView x:Name="listy"
                   HasUnevenRows="True"
                   SeparatorVisibility="None"
                   ItemTemplate="{StaticResource TicketsDataTemplate}"
-                  ItemsSource="{Binding TicketCollection}">
+                  ItemsSource="{Binding TicketCollection}"
+                  IsRefreshing="{Binding Refreshing}"
+                  IsPullToRefreshEnabled="True"
+                  RefreshCommand="{Binding RefreshCommand}">
             <x:Arguments>
                 <ListViewCachingStrategy>RecycleElementAndDataTemplate</ListViewCachingStrategy>
             </x:Arguments>
@@ -98,7 +102,11 @@
                                                  EventArgsConverter="{StaticResource itemTappedEventArgsConverter}"/>
             </ListView.Behaviors>
         </ListView>
-        
-    </StackLayout>
-  
+
+        <Label Text="{Binding SyncStage}"
+               HorizontalOptions="Center"
+               VerticalOptions="Center"
+               TextColor="Black"/>
+
+    </Grid>
 </ContentPage>
