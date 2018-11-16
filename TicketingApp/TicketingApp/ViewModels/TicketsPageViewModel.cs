@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Net.Http;
+using System.Text;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
 using Prism.Commands;
@@ -108,6 +109,9 @@ namespace TicketingApp.ViewModels
 
                     Refreshing = true;
 
+                    //to upload all the items that were saved during offline situations
+                    CheckSavedRequests();
+
                     var laborUsedQuery = "$select=ID,Title,WorkType,STHours,OTHours,PerDiem,Billable,TicketId,Created,Modified,GUID" +
                                          ",Employee/Title&$expand=Employee";
                     var thirdPartUsedQuery = "$select=ID,RequestDate,Description,Amount,MarkUp,Billable,ChargeType,TicketId,Created," +
@@ -144,7 +148,7 @@ namespace TicketingApp.ViewModels
                         responses[9].Content.ReadAsStringAsync(),
                     };
 
-                    SyncStage = "Converting data...";
+                    //SyncStage = "Converting data...";
 
                     var batchConversionResults = await Task.WhenAll(batchConversion.ToArray());
 
@@ -242,9 +246,6 @@ namespace TicketingApp.ViewModels
                     SyncStage = "Syncing...";
 
                     var doneSync = await Task.WhenAll(batchSync.ToArray());
-
-                    //to upload all the items that were saved during offline situations
-                    //var results = await CheckSavedRequests();
                 }
 
                 SyncStage = "";
@@ -272,85 +273,98 @@ namespace TicketingApp.ViewModels
                 SyncStage = "No tickets to display";
         }
 
-        public async Task<HttpResponseMessage[]> CheckSavedRequests()
-        {   //fix this shit
+        public async void CheckSavedRequests()
+        {   
             try
             {
                 var savedRequests = realm.All<SavedRequests>()
                                     .ToList();
 
+                Dictionary<string, int> invoiceCounts = new Dictionary<string, int>();
+
                 if (savedRequests != null || savedRequests.Any())
                 {
                     if (connected)
                     {
-                        foreach (var item in savedRequests)
+                        var invoices = await SharepointAPI.GetListItemsByListTitle("Invoiced Tickets");
+
+                        if (invoices.IsSuccessStatusCode)
                         {
-                            var invoiceCount = 0;
-
-                            var invoices = await SharepointAPI.GetListItemsByListTitle("Invoiced Tickets");
-
-                            if (invoices.IsSuccessStatusCode)
-                            {
-                                var invoicesString = await invoices.Content.ReadAsStringAsync();
-                                var invoicedTicketsResults = JsonConvert.DeserializeObject<Models.InvoicedTickets.RootObject>(invoicesString,
-                                    new JsonSerializerSettings
-                                    {
-                                        NullValueHandling = NullValueHandling.Ignore
-                                    });
-
-                                var invoicedTickets = invoicedTicketsResults.D.Results
-                                                      .Where(i => i.TicketNumber.Equals(item.TicketNumber))
-                                                      .ToList();
-
-                                if (invoicedTickets != null && invoicedTickets.Count != 0)
+                            var invoicesString = await invoices.Content.ReadAsStringAsync();
+                            var invoicedTicketsResults = JsonConvert.DeserializeObject<Models.InvoicedTickets.RootObject>(invoicesString,
+                                new JsonSerializerSettings
                                 {
-                                    invoiceCount = invoicedTickets.Count + 1;
+                                    NullValueHandling = NullValueHandling.Ignore
+                                });
+
+                            var ticketNumbers = new List<string>();
+
+                            foreach (var item in invoicedTicketsResults.D.Results)
+                            {
+                                if (!ticketNumbers.Contains(item.TicketNumber))
+                                    ticketNumbers.Add(item.TicketNumber);
+                            }
+
+                            foreach (var item in ticketNumbers)
+                            {
+                                var count = 0;
+                                foreach (var item2 in invoicedTicketsResults.D.Results)
+                                {
+                                    if (item.Equals(item2.TicketNumber))
+                                        count++;
                                 }
 
-                                var metadata = JsonConvert.DeserializeObject<List<string>>(item.RequestBody);
-
-
+                                invoiceCounts.Add(item, count);
                             }
                         }
+
+                        foreach (var item in invoiceCounts)
+                        {
+                            //realm.Write(()=> {
+                            //    var request = savedRequests.Where(s => s.TicketNumber.Equals(item.Key)).FirstOrDefault();
+                            //    request.InvoiceCount = Convert.ToString(item.Value + 1);
+                            //});
+                            System.Diagnostics.Debug.WriteLine("Dictionary", "ticketnumber: " + item.Key + " | value: " + item.Value);
+                        }
+
+                    //    var formDigest = await SharepointAPI.GetFormDigest();
+
+                    //    var batch = new List<Task<HttpResponseMessage>>();
+
+                    //    foreach (var request in savedRequests)
+                    //    {
+                    //        var builder = new StringBuilder();
+                    //        var invoiceBody = GetInvoiceBody(request);
+                    //        foreach (var metadata in invoiceBody)
+                    //        {
+                    //            builder.Append(metadata);
+                    //        }
+
+                    //        var item = new StringContent(builder.ToString());
+                    //        item.Headers.ContentType = System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json;odata=verbose");
+
+                    //        batch.Add(SharepointAPI.AddListItemByListTitle(formDigest.D.GetContextWebInformation.FormDigestValue,
+                    //                    "Invoiced Tickets",item));
+                    //    }
+
+                    //    var results = await Task.WhenAll(batch);
+
+                    //    realm.Write(() => {
+                    //        for (int i = 0; i < results.Length; i++)
+                    //        {
+                    //            if (results[i].IsSuccessStatusCode)
+                    //            {
+                    //                //TODO: update ticket
+                    //                realm.Remove(savedRequests[i]);
+                    //            }
+                    //        }
+                    //    });
                     }
                 }
-
-                //var batch = new List<Task<HttpResponseMessage>>();
-
-                //var formDigest = await SharepointAPI.GetFormDigest();
-
-                //if (savedRequests != null || savedRequests.Any())
-                //{
-                //    foreach (var body in savedRequests)
-                //    {
-                //        var item = new StringContent(body.requestBody);
-                //        item.Headers.ContentType = System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json;odata=verbose");
-
-                //        batch.Add(SharepointAPI.AddListItemByListTitle(formDigest.D.GetContextWebInformation.FormDigestValue,
-                //                               "Invoiced Tickets", item));
-                //    }
-
-                //    var results = await Task.WhenAll(batch);
-
-                //    for (int i = 0; i < results.Length; i++)
-                //    {
-                //        if (results[i].IsSuccessStatusCode)
-                //            realm.Write(() => {
-                //                realm.Remove(savedRequests[i]);
-                //            });
-                //    }
-
-                //    System.Diagnostics.Debug.WriteLine("connect", "success");
-
-                //    return results;
-                //}
-
-                return null;
             }
             catch (Exception e)
             {
-                System.Diagnostics.Debug.WriteLine("connect", e.Message);
-                return null;
+                System.Diagnostics.Debug.WriteLine("check saved requests", e.Message);
             }
         }
 
