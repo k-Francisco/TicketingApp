@@ -26,6 +26,43 @@ namespace TicketingApp.Droid
 		
 		public static void UpdateIdValues()
 		{
+			global::AndroidHUD.Resource.Attribute.ahBarColor = global::TicketingApp.Droid.Resource.Attribute.ahBarColor;
+			global::AndroidHUD.Resource.Attribute.ahBarLength = global::TicketingApp.Droid.Resource.Attribute.ahBarLength;
+			global::AndroidHUD.Resource.Attribute.ahBarWidth = global::TicketingApp.Droid.Resource.Attribute.ahBarWidth;
+			global::AndroidHUD.Resource.Attribute.ahCircleColor = global::TicketingApp.Droid.Resource.Attribute.ahCircleColor;
+			global::AndroidHUD.Resource.Attribute.ahDelayMillis = global::TicketingApp.Droid.Resource.Attribute.ahDelayMillis;
+			global::AndroidHUD.Resource.Attribute.ahRadius = global::TicketingApp.Droid.Resource.Attribute.ahRadius;
+			global::AndroidHUD.Resource.Attribute.ahRimColor = global::TicketingApp.Droid.Resource.Attribute.ahRimColor;
+			global::AndroidHUD.Resource.Attribute.ahRimWidth = global::TicketingApp.Droid.Resource.Attribute.ahRimWidth;
+			global::AndroidHUD.Resource.Attribute.ahSpinSpeed = global::TicketingApp.Droid.Resource.Attribute.ahSpinSpeed;
+			global::AndroidHUD.Resource.Attribute.ahText = global::TicketingApp.Droid.Resource.Attribute.ahText;
+			global::AndroidHUD.Resource.Attribute.ahTextColor = global::TicketingApp.Droid.Resource.Attribute.ahTextColor;
+			global::AndroidHUD.Resource.Attribute.ahTextSize = global::TicketingApp.Droid.Resource.Attribute.ahTextSize;
+			global::AndroidHUD.Resource.Drawable.ic_errorstatus = global::TicketingApp.Droid.Resource.Drawable.ic_errorstatus;
+			global::AndroidHUD.Resource.Drawable.ic_successstatus = global::TicketingApp.Droid.Resource.Drawable.ic_successstatus;
+			global::AndroidHUD.Resource.Drawable.roundedbg = global::TicketingApp.Droid.Resource.Drawable.roundedbg;
+			global::AndroidHUD.Resource.Drawable.roundedbgdark = global::TicketingApp.Droid.Resource.Drawable.roundedbgdark;
+			global::AndroidHUD.Resource.Id.loadingImage = global::TicketingApp.Droid.Resource.Id.loadingImage;
+			global::AndroidHUD.Resource.Id.loadingProgressBar = global::TicketingApp.Droid.Resource.Id.loadingProgressBar;
+			global::AndroidHUD.Resource.Id.loadingProgressWheel = global::TicketingApp.Droid.Resource.Id.loadingProgressWheel;
+			global::AndroidHUD.Resource.Id.textViewStatus = global::TicketingApp.Droid.Resource.Id.textViewStatus;
+			global::AndroidHUD.Resource.Layout.loading = global::TicketingApp.Droid.Resource.Layout.loading;
+			global::AndroidHUD.Resource.Layout.loadingimage = global::TicketingApp.Droid.Resource.Layout.loadingimage;
+			global::AndroidHUD.Resource.Layout.loadingprogress = global::TicketingApp.Droid.Resource.Layout.loadingprogress;
+			global::AndroidHUD.Resource.String.library_name = global::TicketingApp.Droid.Resource.String.library_name;
+			global::AndroidHUD.Resource.Styleable.ProgressWheel = global::TicketingApp.Droid.Resource.Styleable.ProgressWheel;
+			global::AndroidHUD.Resource.Styleable.ProgressWheel_ahBarColor = global::TicketingApp.Droid.Resource.Styleable.ProgressWheel_ahBarColor;
+			global::AndroidHUD.Resource.Styleable.ProgressWheel_ahBarLength = global::TicketingApp.Droid.Resource.Styleable.ProgressWheel_ahBarLength;
+			global::AndroidHUD.Resource.Styleable.ProgressWheel_ahBarWidth = global::TicketingApp.Droid.Resource.Styleable.ProgressWheel_ahBarWidth;
+			global::AndroidHUD.Resource.Styleable.ProgressWheel_ahCircleColor = global::TicketingApp.Droid.Resource.Styleable.ProgressWheel_ahCircleColor;
+			global::AndroidHUD.Resource.Styleable.ProgressWheel_ahDelayMillis = global::TicketingApp.Droid.Resource.Styleable.ProgressWheel_ahDelayMillis;
+			global::AndroidHUD.Resource.Styleable.ProgressWheel_ahRadius = global::TicketingApp.Droid.Resource.Styleable.ProgressWheel_ahRadius;
+			global::AndroidHUD.Resource.Styleable.ProgressWheel_ahRimColor = global::TicketingApp.Droid.Resource.Styleable.ProgressWheel_ahRimColor;
+			global::AndroidHUD.Resource.Styleable.ProgressWheel_ahRimWidth = global::TicketingApp.Droid.Resource.Styleable.ProgressWheel_ahRimWidth;
+			global::AndroidHUD.Resource.Styleable.ProgressWheel_ahSpinSpeed = global::TicketingApp.Droid.Resource.Styleable.ProgressWheel_ahSpinSpeed;
+			global::AndroidHUD.Resource.Styleable.ProgressWheel_ahText = global::TicketingApp.Droid.Resource.Styleable.ProgressWheel_ahText;
+			global::AndroidHUD.Resource.Styleable.ProgressWheel_ahTextColor = global::TicketingApp.Droid.Resource.Styleable.ProgressWheel_ahTextColor;
+			global::AndroidHUD.Resource.Styleable.ProgressWheel_ahTextSize = global::TicketingApp.Droid.Resource.Styleable.ProgressWheel_ahTextSize;
 			global::Xamarin.Controls.Resource.Attribute.captionText = global::TicketingApp.Droid.Resource.Attribute.captionText;
 			global::Xamarin.Controls.Resource.Attribute.captionTextColor = global::TicketingApp.Droid.Resource.Attribute.captionTextColor;
 			global::Xamarin.Controls.Resource.Attribute.captionTextSize = global::TicketingApp.Droid.Resource.Attribute.captionTextSize;
@@ -72,6 +109,7 @@ namespace TicketingApp.Droid
 			global::Xamarin.Controls.Resource.Styleable.SignaturePadView_signaturePromptTextSize = global::TicketingApp.Droid.Resource.Styleable.SignaturePadView_signaturePromptTextSize;
 			global::Xamarin.Controls.Resource.Styleable.SignaturePadView_strokeColor = global::TicketingApp.Droid.Resource.Styleable.SignaturePadView_strokeColor;
 			global::Xamarin.Controls.Resource.Styleable.SignaturePadView_strokeWidth = global::TicketingApp.Droid.Resource.Styleable.SignaturePadView_strokeWidth;
+			global::Splat.Resource.String.library_name = global::TicketingApp.Droid.Resource.String.library_name;
 			global::Xamarin.Forms.Platform.Android.Resource.Attribute.actionBarSize = global::TicketingApp.Droid.Resource.Attribute.actionBarSize;
 		}
 		
@@ -257,6 +295,42 @@ namespace TicketingApp.Droid
 			// aapt resource value: 0x7F040022
 			public const int activityChooserViewStyle = 2130968610;
 			
+			// aapt resource value: 0x7F080005
+			public const int ahBarColor = 2131230725;
+			
+			// aapt resource value: 0x7F080013
+			public const int ahBarLength = 2131230739;
+			
+			// aapt resource value: 0x7F080012
+			public const int ahBarWidth = 2131230738;
+			
+			// aapt resource value: 0x7F080010
+			public const int ahCircleColor = 2131230736;
+			
+			// aapt resource value: 0x7F080009
+			public const int ahDelayMillis = 2131230729;
+			
+			// aapt resource value: 0x7F080011
+			public const int ahRadius = 2131230737;
+			
+			// aapt resource value: 0x7F080006
+			public const int ahRimColor = 2131230726;
+			
+			// aapt resource value: 0x7F080007
+			public const int ahRimWidth = 2131230727;
+			
+			// aapt resource value: 0x7F080008
+			public const int ahSpinSpeed = 2131230728;
+			
+			// aapt resource value: 0x7F080002
+			public const int ahText = 2131230722;
+			
+			// aapt resource value: 0x7F080003
+			public const int ahTextColor = 2131230723;
+			
+			// aapt resource value: 0x7F080004
+			public const int ahTextSize = 2131230724;
+			
 			// aapt resource value: 0x7F040023
 			public const int alertDialogButtonGroupStyle = 2130968611;
 			
@@ -380,14 +454,14 @@ namespace TicketingApp.Droid
 			// aapt resource value: 0x7F04004B
 			public const int buttonTintMode = 2130968651;
 			
-			// aapt resource value: 0x7F080007
-			public const int captionText = 2131230727;
+			// aapt resource value: 0x7F080019
+			public const int captionText = 2131230745;
 			
-			// aapt resource value: 0x7F080009
-			public const int captionTextColor = 2131230729;
+			// aapt resource value: 0x7F080021
+			public const int captionTextColor = 2131230753;
 			
-			// aapt resource value: 0x7F080008
-			public const int captionTextSize = 2131230728;
+			// aapt resource value: 0x7F080020
+			public const int captionTextSize = 2131230752;
 			
 			// aapt resource value: 0x7F040001
 			public const int cardBackgroundColor = 2130968577;
@@ -413,14 +487,14 @@ namespace TicketingApp.Droid
 			// aapt resource value: 0x7F04004D
 			public const int checkedTextViewStyle = 2130968653;
 			
-			// aapt resource value: 0x7F080013
-			public const int clearLabelText = 2131230739;
+			// aapt resource value: 0x7F080025
+			public const int clearLabelText = 2131230757;
 			
-			// aapt resource value: 0x7F080015
-			public const int clearLabelTextColor = 2131230741;
+			// aapt resource value: 0x7F080027
+			public const int clearLabelTextColor = 2131230759;
 			
-			// aapt resource value: 0x7F080014
-			public const int clearLabelTextSize = 2131230740;
+			// aapt resource value: 0x7F080026
+			public const int clearLabelTextSize = 2131230758;
 			
 			// aapt resource value: 0x7F04004E
 			public const int closeIcon = 2130968654;
@@ -1004,23 +1078,23 @@ namespace TicketingApp.Droid
 			// aapt resource value: 0x7F0400FC
 			public const int showTitle = 2130968828;
 			
-			// aapt resource value: 0x7F080004
-			public const int signatureLineColor = 2131230724;
+			// aapt resource value: 0x7F080016
+			public const int signatureLineColor = 2131230742;
 			
-			// aapt resource value: 0x7F080006
-			public const int signatureLineSpacing = 2131230726;
+			// aapt resource value: 0x7F080018
+			public const int signatureLineSpacing = 2131230744;
 			
-			// aapt resource value: 0x7F080005
-			public const int signatureLineWidth = 2131230725;
+			// aapt resource value: 0x7F080017
+			public const int signatureLineWidth = 2131230743;
 			
-			// aapt resource value: 0x7F080010
-			public const int signaturePromptText = 2131230736;
+			// aapt resource value: 0x7F080022
+			public const int signaturePromptText = 2131230754;
 			
-			// aapt resource value: 0x7F080012
-			public const int signaturePromptTextColor = 2131230738;
+			// aapt resource value: 0x7F080024
+			public const int signaturePromptTextColor = 2131230756;
 			
-			// aapt resource value: 0x7F080011
-			public const int signaturePromptTextSize = 2131230737;
+			// aapt resource value: 0x7F080023
+			public const int signaturePromptTextSize = 2131230755;
 			
 			// aapt resource value: 0x7F0400FD
 			public const int singleChoiceItemLayout = 2130968829;
@@ -1061,11 +1135,11 @@ namespace TicketingApp.Droid
 			// aapt resource value: 0x7F040109
 			public const int statusBarScrim = 2130968841;
 			
-			// aapt resource value: 0x7F080002
-			public const int strokeColor = 2131230722;
+			// aapt resource value: 0x7F080014
+			public const int strokeColor = 2131230740;
 			
-			// aapt resource value: 0x7F080003
-			public const int strokeWidth = 2131230723;
+			// aapt resource value: 0x7F080015
+			public const int strokeWidth = 2131230741;
 			
 			// aapt resource value: 0x7F04010A
 			public const int subMenuArrow = 2130968842;
@@ -2469,6 +2543,9 @@ namespace TicketingApp.Droid
 			// aapt resource value: 0x7F090057
 			public const int ic_dialog_close_light = 2131296343;
 			
+			// aapt resource value: 0x7F060004
+			public const int ic_errorstatus = 2131099652;
+			
 			// aapt resource value: 0x7F090058
 			public const int ic_group_collapse_00 = 2131296344;
 			
@@ -2970,6 +3047,9 @@ namespace TicketingApp.Droid
 			// aapt resource value: 0x7F0900FE
 			public const int ic_mr_button_grey = 2131296510;
 			
+			// aapt resource value: 0x7F060005
+			public const int ic_successstatus = 2131099653;
+			
 			// aapt resource value: 0x7F0900FF
 			public const int ic_vol_type_speaker_dark = 2131296511;
 			
@@ -3088,7 +3168,13 @@ namespace TicketingApp.Droid
 			public const int notify_panel_notification_icon_bg = 2131296268;
 			
 			// aapt resource value: 0x7F060002
-			public const int signature_pad_background = 2131099650;
+			public const int roundedbg = 2131099650;
+			
+			// aapt resource value: 0x7F060003
+			public const int roundedbgdark = 2131099651;
+			
+			// aapt resource value: 0x7F060006
+			public const int signature_pad_background = 2131099654;
 			
 			// aapt resource value: 0x7F090069
 			public const int tooltip_frame_dark = 2131296361;
@@ -3181,8 +3267,8 @@ namespace TicketingApp.Droid
 			// aapt resource value: 0x7F0C0018
 			public const int auto = 2131492888;
 			
-			// aapt resource value: 0x7F010005
-			public const int background_image = 2130771973;
+			// aapt resource value: 0x7F010009
+			public const int background_image = 2130771977;
 			
 			// aapt resource value: 0x7F0C0007
 			public const int blocking = 2131492871;
@@ -3196,8 +3282,8 @@ namespace TicketingApp.Droid
 			// aapt resource value: 0x7F0C001C
 			public const int cancel_action = 2131492892;
 			
-			// aapt resource value: 0x7F010007
-			public const int caption = 2130771975;
+			// aapt resource value: 0x7F010011
+			public const int caption = 2130771985;
 			
 			// aapt resource value: 0x7F0C001D
 			public const int center = 2131492893;
@@ -3208,8 +3294,8 @@ namespace TicketingApp.Droid
 			// aapt resource value: 0x7F0C0008
 			public const int chronometer = 2131492872;
 			
-			// aapt resource value: 0x7F010010
-			public const int clear_label = 2130771984;
+			// aapt resource value: 0x7F010014
+			public const int clear_label = 2130771988;
 			
 			// aapt resource value: 0x7F0C0020
 			public const int container = 2131492896;
@@ -3312,6 +3398,15 @@ namespace TicketingApp.Droid
 			
 			// aapt resource value: 0x7F0C0041
 			public const int list_item = 2131492929;
+			
+			// aapt resource value: 0x7F010007
+			public const int loadingImage = 2130771975;
+			
+			// aapt resource value: 0x7F010005
+			public const int loadingProgressBar = 2130771973;
+			
+			// aapt resource value: 0x7F010008
+			public const int loadingProgressWheel = 2130771976;
 			
 			// aapt resource value: 0x7F0C0042
 			public const int masked = 2131492930;
@@ -3514,14 +3609,14 @@ namespace TicketingApp.Droid
 			// aapt resource value: 0x7F0C006A
 			public const int shortcut = 2131492970;
 			
-			// aapt resource value: 0x7F010006
-			public const int signature_canvas = 2130771974;
+			// aapt resource value: 0x7F010010
+			public const int signature_canvas = 2130771984;
 			
-			// aapt resource value: 0x7F010008
-			public const int signature_line = 2130771976;
+			// aapt resource value: 0x7F010012
+			public const int signature_line = 2130771986;
 			
-			// aapt resource value: 0x7F010009
-			public const int signature_prompt = 2130771977;
+			// aapt resource value: 0x7F010013
+			public const int signature_prompt = 2130771987;
 			
 			// aapt resource value: 0x7F010003
 			public const int sliding_tabs = 2130771971;
@@ -3585,6 +3680,9 @@ namespace TicketingApp.Droid
 			
 			// aapt resource value: 0x7F0C007C
 			public const int textSpacerNoTitle = 2131492988;
+			
+			// aapt resource value: 0x7F010006
+			public const int textViewStatus = 2130771974;
 			
 			// aapt resource value: 0x7F0C007D
 			public const int text_input_password_toggle = 2131492989;
@@ -3850,6 +3948,15 @@ namespace TicketingApp.Droid
 			// aapt resource value: 0x7F0F0028
 			public const int design_text_input_password_icon = 2131689512;
 			
+			// aapt resource value: 0x7F020005
+			public const int loading = 2130837509;
+			
+			// aapt resource value: 0x7F020006
+			public const int loadingimage = 2130837510;
+			
+			// aapt resource value: 0x7F020007
+			public const int loadingprogress = 2130837511;
+			
 			// aapt resource value: 0x7F020002
 			public const int Main = 2130837506;
 			
@@ -3925,8 +4032,8 @@ namespace TicketingApp.Droid
 			// aapt resource value: 0x7F0F003A
 			public const int select_dialog_singlechoice_material = 2131689530;
 			
-			// aapt resource value: 0x7F020005
-			public const int signature_pad_layout = 2130837509;
+			// aapt resource value: 0x7F020008
+			public const int signature_pad_layout = 2130837512;
 			
 			// aapt resource value: 0x7F0F003B
 			public const int support_simple_spinner_dropdown_item = 2131689531;
@@ -4071,6 +4178,9 @@ namespace TicketingApp.Droid
 			// aapt resource value: 0x7F040002
 			public const int hello = 2130968578;
 			
+			// aapt resource value: 0x7F040004
+			public const int library_name = 2130968580;
+			
 			// aapt resource value: 0x7F15001E
 			public const int mr_button_content_description = 2132082718;
 			
@@ -4152,14 +4262,14 @@ namespace TicketingApp.Droid
 			// aapt resource value: 0x7F150026
 			public const int search_menu_title = 2132082726;
 			
-			// aapt resource value: 0x7F040006
-			public const int signature_pad_caption_text = 2130968582;
-			
-			// aapt resource value: 0x7F040004
-			public const int signature_pad_clear_label_text = 2130968580;
+			// aapt resource value: 0x7F040007
+			public const int signature_pad_caption_text = 2130968583;
 			
 			// aapt resource value: 0x7F040005
-			public const int signature_pad_prompt_text = 2130968581;
+			public const int signature_pad_clear_label_text = 2130968581;
+			
+			// aapt resource value: 0x7F040006
+			public const int signature_pad_prompt_text = 2130968582;
 			
 			// aapt resource value: 0x7F150001
 			public const int status_bar_notification_info_overflow = 2132082689;
@@ -5430,11 +5540,11 @@ namespace TicketingApp.Droid
 			public static int[] ActionBarLayout = new int[] {
 					16842931};
 			
-			// aapt resource value: 0x7F070062
-			public const int ActionBarLayout_android_layout_gravity = 2131165282;
+			// aapt resource value: 0x7F070075
+			public const int ActionBarLayout_android_layout_gravity = 2131165301;
 			
-			// aapt resource value: 0x7F070032
-			public const int ActionBar_background = 2131165234;
+			// aapt resource value: 0x7F070045
+			public const int ActionBar_background = 2131165253;
 			
 			// aapt resource value: 0x1
 			public const int ActionBar_backgroundSplit = 1;
@@ -5523,8 +5633,8 @@ namespace TicketingApp.Droid
 			public static int[] ActionMenuItemView = new int[] {
 					16843071};
 			
-			// aapt resource value: 0x7F070064
-			public const int ActionMenuItemView_android_minWidth = 2131165284;
+			// aapt resource value: 0x7F070077
+			public const int ActionMenuItemView_android_minWidth = 2131165303;
 			
 			public static int[] ActionMode = new int[] {
 					2130968626,
@@ -5534,8 +5644,8 @@ namespace TicketingApp.Droid
 					2130968847,
 					2130968901};
 			
-			// aapt resource value: 0x7F070066
-			public const int ActionMode_background = 2131165286;
+			// aapt resource value: 0x7F070079
+			public const int ActionMode_background = 2131165305;
 			
 			// aapt resource value: 0x1
 			public const int ActionMode_backgroundSplit = 1;
@@ -5556,8 +5666,8 @@ namespace TicketingApp.Droid
 					2130968704,
 					2130968746};
 			
-			// aapt resource value: 0x7F070073
-			public const int ActivityChooserView_expandActivityOverflowButtonDrawable = 2131165299;
+			// aapt resource value: 0x7F070086
+			public const int ActivityChooserView_expandActivityOverflowButtonDrawable = 2131165318;
 			
 			// aapt resource value: 0x1
 			public const int ActivityChooserView_initialActivityCount = 1;
@@ -5571,8 +5681,8 @@ namespace TicketingApp.Droid
 					2130968828,
 					2130968829};
 			
-			// aapt resource value: 0x7F070076
-			public const int AlertDialog_android_layout = 2131165302;
+			// aapt resource value: 0x7F070089
+			public const int AlertDialog_android_layout = 2131165321;
 			
 			// aapt resource value: 0x1
 			public const int AlertDialog_buttonPanelSideLayout = 1;
@@ -5603,14 +5713,14 @@ namespace TicketingApp.Droid
 					2130968838,
 					2130968839};
 			
-			// aapt resource value: 0x7F070090
-			public const int AppBarLayoutStates_state_collapsed = 2131165328;
+			// aapt resource value: 0x7F070103
+			public const int AppBarLayoutStates_state_collapsed = 2131165443;
 			
 			// aapt resource value: 0x1
 			public const int AppBarLayoutStates_state_collapsible = 1;
 			
-			// aapt resource value: 0x7F070084
-			public const int AppBarLayout_android_background = 2131165316;
+			// aapt resource value: 0x7F070097
+			public const int AppBarLayout_android_background = 2131165335;
 			
 			// aapt resource value: 0x1
 			public const int AppBarLayout_android_keyboardNavigationCluster = 1;
@@ -5628,8 +5738,8 @@ namespace TicketingApp.Droid
 					2130968765,
 					2130968766};
 			
-			// aapt resource value: 0x7F070093
-			public const int AppBarLayout_Layout_layout_scrollFlags = 2131165331;
+			// aapt resource value: 0x7F070106
+			public const int AppBarLayout_Layout_layout_scrollFlags = 2131165446;
 			
 			// aapt resource value: 0x1
 			public const int AppBarLayout_Layout_layout_scrollInterpolator = 1;
@@ -5640,8 +5750,8 @@ namespace TicketingApp.Droid
 					2130968889,
 					2130968890};
 			
-			// aapt resource value: 0x7F070096
-			public const int AppCompatImageView_android_src = 2131165334;
+			// aapt resource value: 0x7F070109
+			public const int AppCompatImageView_android_src = 2131165449;
 			
 			// aapt resource value: 0x1
 			public const int AppCompatImageView_srcCompat = 1;
@@ -5658,8 +5768,8 @@ namespace TicketingApp.Droid
 					2130968887,
 					2130968888};
 			
-			// aapt resource value: 0x7F070101
-			public const int AppCompatSeekBar_android_thumb = 2131165441;
+			// aapt resource value: 0x7F070114
+			public const int AppCompatSeekBar_android_thumb = 2131165460;
 			
 			// aapt resource value: 0x1
 			public const int AppCompatSeekBar_tickMark = 1;
@@ -5679,8 +5789,8 @@ namespace TicketingApp.Droid
 					16843117,
 					16842804};
 			
-			// aapt resource value: 0x7F070106
-			public const int AppCompatTextHelper_android_drawableBottom = 2131165446;
+			// aapt resource value: 0x7F070119
+			public const int AppCompatTextHelper_android_drawableBottom = 2131165465;
 			
 			// aapt resource value: 0x1
 			public const int AppCompatTextHelper_android_drawableEnd = 1;
@@ -5710,8 +5820,8 @@ namespace TicketingApp.Droid
 					2130968720,
 					2130968869};
 			
-			// aapt resource value: 0x7F070114
-			public const int AppCompatTextView_android_textAppearance = 2131165460;
+			// aapt resource value: 0x7F070127
+			public const int AppCompatTextView_android_textAppearance = 2131165479;
 			
 			// aapt resource value: 0x1
 			public const int AppCompatTextView_autoSizeMaxTextSize = 1;
@@ -5855,8 +5965,8 @@ namespace TicketingApp.Droid
 					2130968921,
 					2130968922};
 			
-			// aapt resource value: 0x7F070123
-			public const int AppCompatTheme_actionBarDivider = 2131165475;
+			// aapt resource value: 0x7F070136
+			public const int AppCompatTheme_actionBarDivider = 2131165494;
 			
 			// aapt resource value: 0x1
 			public const int AppCompatTheme_actionBarItemBackground = 1;
@@ -6219,8 +6329,8 @@ namespace TicketingApp.Droid
 					2130968753,
 					2130968783};
 			
-			// aapt resource value: 0x7F070243
-			public const int BottomNavigationView_elevation = 2131165763;
+			// aapt resource value: 0x7F070256
+			public const int BottomNavigationView_elevation = 2131165782;
 			
 			// aapt resource value: 0x1
 			public const int BottomNavigationView_itemBackground = 1;
@@ -6239,8 +6349,8 @@ namespace TicketingApp.Droid
 					2130968635,
 					2130968636};
 			
-			// aapt resource value: 0x7F070249
-			public const int BottomSheetBehavior_Layout_behavior_hideable = 2131165769;
+			// aapt resource value: 0x7F070262
+			public const int BottomSheetBehavior_Layout_behavior_hideable = 2131165794;
 			
 			// aapt resource value: 0x1
 			public const int BottomSheetBehavior_Layout_behavior_peekHeight = 1;
@@ -6251,8 +6361,8 @@ namespace TicketingApp.Droid
 			public static int[] ButtonBarLayout = new int[] {
 					2130968615};
 			
-			// aapt resource value: 0x7F070253
-			public const int ButtonBarLayout_allowStacking = 2131165779;
+			// aapt resource value: 0x7F070266
+			public const int ButtonBarLayout_allowStacking = 2131165798;
 			
 			public static int[] CardView = new int[] {
 					16843072,
@@ -6269,8 +6379,8 @@ namespace TicketingApp.Droid
 					2130968586,
 					2130968587};
 			
-			// aapt resource value: 0x7F070556
-			public const int CardView_android_minHeight = 2131166550;
+			// aapt resource value: 0x7F070569
+			public const int CardView_android_minHeight = 2131166569;
 			
 			// aapt resource value: 0x1
 			public const int CardView_android_minWidth = 1;
@@ -6326,8 +6436,8 @@ namespace TicketingApp.Droid
 					2130968892,
 					2130968902};
 			
-			// aapt resource value: 0x7F070255
-			public const int CollapsingToolbarLayout_collapsedTitleGravity = 2131165781;
+			// aapt resource value: 0x7F070268
+			public const int CollapsingToolbarLayout_collapsedTitleGravity = 2131165800;
 			
 			// aapt resource value: 0x1
 			public const int CollapsingToolbarLayout_collapsedTitleTextAppearance = 1;
@@ -6360,8 +6470,8 @@ namespace TicketingApp.Droid
 					2130968760,
 					2130968761};
 			
-			// aapt resource value: 0x7F070272
-			public const int CollapsingToolbarLayout_Layout_layout_collapseMode = 2131165810;
+			// aapt resource value: 0x7F070285
+			public const int CollapsingToolbarLayout_Layout_layout_collapseMode = 2131165829;
 			
 			// aapt resource value: 0x1
 			public const int CollapsingToolbarLayout_Layout_layout_collapseParallaxMultiplier = 1;
@@ -6389,8 +6499,8 @@ namespace TicketingApp.Droid
 					16843551,
 					16843173};
 			
-			// aapt resource value: 0x7F070275
-			public const int ColorStateListItem_alpha = 2131165813;
+			// aapt resource value: 0x7F070288
+			public const int ColorStateListItem_alpha = 2131165832;
 			
 			// aapt resource value: 0x1
 			public const int ColorStateListItem_android_alpha = 1;
@@ -6403,8 +6513,8 @@ namespace TicketingApp.Droid
 					2130968650,
 					2130968651};
 			
-			// aapt resource value: 0x7F070279
-			public const int CompoundButton_android_button = 2131165817;
+			// aapt resource value: 0x7F070292
+			public const int CompoundButton_android_button = 2131165842;
 			
 			// aapt resource value: 0x1
 			public const int CompoundButton_buttonTint = 1;
@@ -6416,8 +6526,8 @@ namespace TicketingApp.Droid
 					2130968754,
 					2130968840};
 			
-			// aapt resource value: 0x7F070283
-			public const int CoordinatorLayout_keylines = 2131165827;
+			// aapt resource value: 0x7F070296
+			public const int CoordinatorLayout_keylines = 2131165846;
 			
 			public static int[] CoordinatorLayout_Layout = new int[] {
 					16842931,
@@ -6428,8 +6538,8 @@ namespace TicketingApp.Droid
 					2130968763,
 					2130968764};
 			
-			// aapt resource value: 0x7F070286
-			public const int CoordinatorLayout_Layout_android_layout_gravity = 2131165830;
+			// aapt resource value: 0x7F070299
+			public const int CoordinatorLayout_Layout_android_layout_gravity = 2131165849;
 			
 			// aapt resource value: 0x1
 			public const int CoordinatorLayout_Layout_layout_anchor = 1;
@@ -6457,8 +6567,8 @@ namespace TicketingApp.Droid
 					2130968640,
 					2130968879};
 			
-			// aapt resource value: 0x7F070294
-			public const int DesignTheme_bottomSheetDialogTheme = 2131165844;
+			// aapt resource value: 0x7F070307
+			public const int DesignTheme_bottomSheetDialogTheme = 2131165959;
 			
 			// aapt resource value: 0x1
 			public const int DesignTheme_bottomSheetStyle = 1;
@@ -6476,8 +6586,8 @@ namespace TicketingApp.Droid
 					2130968831,
 					2130968882};
 			
-			// aapt resource value: 0x7F070298
-			public const int DrawerArrowToggle_arrowHeadLength = 2131165848;
+			// aapt resource value: 0x7F070311
+			public const int DrawerArrowToggle_arrowHeadLength = 2131165969;
 			
 			// aapt resource value: 0x1
 			public const int DrawerArrowToggle_arrowShaftLength = 1;
@@ -6510,8 +6620,8 @@ namespace TicketingApp.Droid
 					2130968816,
 					2130968911};
 			
-			// aapt resource value: 0x7F070307
-			public const int FloatingActionButton_backgroundTint = 2131165959;
+			// aapt resource value: 0x7F070320
+			public const int FloatingActionButton_backgroundTint = 2131165984;
 			
 			// aapt resource value: 0x1
 			public const int FloatingActionButton_backgroundTintMode = 1;
@@ -6519,8 +6629,8 @@ namespace TicketingApp.Droid
 			public static int[] FloatingActionButton_Behavior_Layout = new int[] {
 					2130968632};
 			
-			// aapt resource value: 0x7F070316
-			public const int FloatingActionButton_Behavior_Layout_behavior_autoHide = 2131165974;
+			// aapt resource value: 0x7F070329
+			public const int FloatingActionButton_Behavior_Layout_behavior_autoHide = 2131165993;
 			
 			// aapt resource value: 0x2
 			public const int FloatingActionButton_borderWidth = 2;
@@ -6556,8 +6666,8 @@ namespace TicketingApp.Droid
 					2130968584,
 					2130968585};
 			
-			// aapt resource value: 0x7F070025
-			public const int FontFamilyFont_android_font = 2131165221;
+			// aapt resource value: 0x7F070038
+			public const int FontFamilyFont_android_font = 2131165240;
 			
 			// aapt resource value: 0x1
 			public const int FontFamilyFont_android_fontStyle = 1;
@@ -6574,8 +6684,8 @@ namespace TicketingApp.Droid
 			// aapt resource value: 0x5
 			public const int FontFamilyFont_fontWeight = 5;
 			
-			// aapt resource value: 0x7F070018
-			public const int FontFamily_fontProviderAuthority = 2131165208;
+			// aapt resource value: 0x7F070031
+			public const int FontFamily_fontProviderAuthority = 2131165233;
 			
 			// aapt resource value: 0x1
 			public const int FontFamily_fontProviderCerts = 1;
@@ -6597,8 +6707,8 @@ namespace TicketingApp.Droid
 					16843264,
 					2130968729};
 			
-			// aapt resource value: 0x7F070318
-			public const int ForegroundLinearLayout_android_foreground = 2131165976;
+			// aapt resource value: 0x7F070331
+			public const int ForegroundLinearLayout_android_foreground = 2131166001;
 			
 			// aapt resource value: 0x1
 			public const int ForegroundLinearLayout_android_foregroundGravity = 1;
@@ -6617,8 +6727,8 @@ namespace TicketingApp.Droid
 					2130968782,
 					2130968826};
 			
-			// aapt resource value: 0x7F070322
-			public const int LinearLayoutCompat_android_baselineAligned = 2131165986;
+			// aapt resource value: 0x7F070335
+			public const int LinearLayoutCompat_android_baselineAligned = 2131166005;
 			
 			// aapt resource value: 0x1
 			public const int LinearLayoutCompat_android_baselineAlignedChildIndex = 1;
@@ -6644,8 +6754,8 @@ namespace TicketingApp.Droid
 					16843137,
 					16842996};
 			
-			// aapt resource value: 0x7F070332
-			public const int LinearLayoutCompat_Layout_android_layout_gravity = 2131166002;
+			// aapt resource value: 0x7F070345
+			public const int LinearLayoutCompat_Layout_android_layout_gravity = 2131166021;
 			
 			// aapt resource value: 0x1
 			public const int LinearLayoutCompat_Layout_android_layout_height = 1;
@@ -6666,8 +6776,8 @@ namespace TicketingApp.Droid
 					16843436,
 					16843437};
 			
-			// aapt resource value: 0x7F070337
-			public const int ListPopupWindow_android_dropDownHorizontalOffset = 2131166007;
+			// aapt resource value: 0x7F070350
+			public const int ListPopupWindow_android_dropDownHorizontalOffset = 2131166032;
 			
 			// aapt resource value: 0x1
 			public const int ListPopupWindow_android_dropDownVerticalOffset = 1;
@@ -6678,8 +6788,8 @@ namespace TicketingApp.Droid
 					2130968688,
 					2130968732};
 			
-			// aapt resource value: 0x7F070570
-			public const int MediaRouteButton_android_minHeight = 2131166576;
+			// aapt resource value: 0x7F070583
+			public const int MediaRouteButton_android_minHeight = 2131166595;
 			
 			// aapt resource value: 0x1
 			public const int MediaRouteButton_android_minWidth = 1;
@@ -6698,8 +6808,8 @@ namespace TicketingApp.Droid
 					16843231,
 					16843156};
 			
-			// aapt resource value: 0x7F070340
-			public const int MenuGroup_android_checkableBehavior = 2131166016;
+			// aapt resource value: 0x7F070353
+			public const int MenuGroup_android_checkableBehavior = 2131166035;
 			
 			// aapt resource value: 0x1
 			public const int MenuGroup_android_enabled = 1;
@@ -6741,8 +6851,8 @@ namespace TicketingApp.Droid
 					2130968825,
 					2130968907};
 			
-			// aapt resource value: 0x7F070347
-			public const int MenuItem_actionLayout = 2131166023;
+			// aapt resource value: 0x7F070360
+			public const int MenuItem_actionLayout = 2131166048;
 			
 			// aapt resource value: 0x1
 			public const int MenuItem_actionProviderClass = 1;
@@ -6821,8 +6931,8 @@ namespace TicketingApp.Droid
 					2130968805,
 					2130968842};
 			
-			// aapt resource value: 0x7F070371
-			public const int MenuView_android_headerBackground = 2131166065;
+			// aapt resource value: 0x7F070384
+			public const int MenuView_android_headerBackground = 2131166084;
 			
 			// aapt resource value: 0x1
 			public const int MenuView_android_horizontalDivider = 1;
@@ -6860,8 +6970,8 @@ namespace TicketingApp.Droid
 					2130968753,
 					2130968783};
 			
-			// aapt resource value: 0x7F070381
-			public const int NavigationView_android_background = 2131166081;
+			// aapt resource value: 0x7F070394
+			public const int NavigationView_android_background = 2131166100;
 			
 			// aapt resource value: 0x1
 			public const int NavigationView_android_fitsSystemWindows = 1;
@@ -6898,11 +7008,11 @@ namespace TicketingApp.Droid
 			public static int[] PopupWindowBackgroundState = new int[] {
 					2130968837};
 			
-			// aapt resource value: 0x7F070396
-			public const int PopupWindowBackgroundState_state_above_anchor = 2131166102;
+			// aapt resource value: 0x7F070409
+			public const int PopupWindowBackgroundState_state_above_anchor = 2131166217;
 			
-			// aapt resource value: 0x7F070392
-			public const int PopupWindow_android_popupAnimationStyle = 2131166098;
+			// aapt resource value: 0x7F070405
+			public const int PopupWindow_android_popupAnimationStyle = 2131166213;
 			
 			// aapt resource value: 0x1
 			public const int PopupWindow_android_popupBackground = 1;
@@ -6910,12 +7020,62 @@ namespace TicketingApp.Droid
 			// aapt resource value: 0x2
 			public const int PopupWindow_overlapAnchor = 2;
 			
+			public static int[] ProgressWheel = new int[] {
+					0,
+					0,
+					0,
+					0,
+					0,
+					0,
+					0,
+					0,
+					0,
+					0,
+					0,
+					0};
+			
+			// aapt resource value: 0x7F070005
+			public const int ProgressWheel_ahBarColor = 2131165189;
+			
+			// aapt resource value: 0x7F070013
+			public const int ProgressWheel_ahBarLength = 2131165203;
+			
+			// aapt resource value: 0x7F070012
+			public const int ProgressWheel_ahBarWidth = 2131165202;
+			
+			// aapt resource value: 0x7F070010
+			public const int ProgressWheel_ahCircleColor = 2131165200;
+			
+			// aapt resource value: 0x7F070009
+			public const int ProgressWheel_ahDelayMillis = 2131165193;
+			
+			// aapt resource value: 0x7F070011
+			public const int ProgressWheel_ahRadius = 2131165201;
+			
+			// aapt resource value: 0x7F070006
+			public const int ProgressWheel_ahRimColor = 2131165190;
+			
+			// aapt resource value: 0x7F070007
+			public const int ProgressWheel_ahRimWidth = 2131165191;
+			
+			// aapt resource value: 0x7F070008
+			public const int ProgressWheel_ahSpinSpeed = 2131165192;
+			
+			// aapt resource value: 0x7F070002
+			public const int ProgressWheel_ahText = 2131165186;
+			
+			// aapt resource value: 0x7F070003
+			public const int ProgressWheel_ahTextColor = 2131165187;
+			
+			// aapt resource value: 0x7F070004
+			public const int ProgressWheel_ahTextSize = 2131165188;
+			
 			public static int[] RecycleListView = new int[] {
 					2130968790,
 					2130968793};
 			
-			// aapt resource value: 0x7F070398
-			public const int RecycleListView_paddingBottomNoButtons = 2131166104;
+			// aapt resource value: 0x7F070411
+			public const int RecycleListView_paddingBottomNoButtons = 2131166225;
 			
 			// aapt resource value: 0x1
 			public const int RecycleListView_paddingTopNoTitle = 1;
@@ -6933,8 +7093,8 @@ namespace TicketingApp.Droid
 					2130968830,
 					2130968836};
 			
-			// aapt resource value: 0x7F070401
-			public const int RecyclerView_android_descendantFocusability = 2131166209;
+			// aapt resource value: 0x7F070414
+			public const int RecyclerView_android_descendantFocusability = 2131166228;
 			
 			// aapt resource value: 0x1
 			public const int RecyclerView_android_orientation = 1;
@@ -6969,14 +7129,14 @@ namespace TicketingApp.Droid
 			public static int[] ScrimInsetsFrameLayout = new int[] {
 					2130968747};
 			
-			// aapt resource value: 0x7F070413
-			public const int ScrimInsetsFrameLayout_insetForeground = 2131166227;
+			// aapt resource value: 0x7F070426
+			public const int ScrimInsetsFrameLayout_insetForeground = 2131166246;
 			
 			public static int[] ScrollingViewBehavior_Layout = new int[] {
 					2130968634};
 			
-			// aapt resource value: 0x7F070415
-			public const int ScrollingViewBehavior_Layout_behavior_overlapTop = 2131166229;
+			// aapt resource value: 0x7F070428
+			public const int ScrollingViewBehavior_Layout_behavior_overlapTop = 2131166248;
 			
 			public static int[] SearchView = new int[] {
 					16842970,
@@ -6997,8 +7157,8 @@ namespace TicketingApp.Droid
 					2130968848,
 					2130968912};
 			
-			// aapt resource value: 0x7F070417
-			public const int SearchView_android_focusable = 2131166231;
+			// aapt resource value: 0x7F070430
+			public const int SearchView_android_focusable = 2131166256;
 			
 			// aapt resource value: 0x1
 			public const int SearchView_android_imeOptions = 1;
@@ -7064,55 +7224,55 @@ namespace TicketingApp.Droid
 					0,
 					0};
 			
-			// aapt resource value: 0x7F070007
-			public const int SignaturePadView_captionText = 2131165191;
+			// aapt resource value: 0x7F070020
+			public const int SignaturePadView_captionText = 2131165216;
 			
-			// aapt resource value: 0x7F070009
-			public const int SignaturePadView_captionTextColor = 2131165193;
+			// aapt resource value: 0x7F070022
+			public const int SignaturePadView_captionTextColor = 2131165218;
 			
-			// aapt resource value: 0x7F070008
-			public const int SignaturePadView_captionTextSize = 2131165192;
+			// aapt resource value: 0x7F070021
+			public const int SignaturePadView_captionTextSize = 2131165217;
 			
-			// aapt resource value: 0x7F070013
-			public const int SignaturePadView_clearLabelText = 2131165203;
+			// aapt resource value: 0x7F070026
+			public const int SignaturePadView_clearLabelText = 2131165222;
+			
+			// aapt resource value: 0x7F070028
+			public const int SignaturePadView_clearLabelTextColor = 2131165224;
+			
+			// aapt resource value: 0x7F070027
+			public const int SignaturePadView_clearLabelTextSize = 2131165223;
+			
+			// aapt resource value: 0x7F070017
+			public const int SignaturePadView_signatureLineColor = 2131165207;
+			
+			// aapt resource value: 0x7F070019
+			public const int SignaturePadView_signatureLineSpacing = 2131165209;
+			
+			// aapt resource value: 0x7F070018
+			public const int SignaturePadView_signatureLineWidth = 2131165208;
+			
+			// aapt resource value: 0x7F070023
+			public const int SignaturePadView_signaturePromptText = 2131165219;
+			
+			// aapt resource value: 0x7F070025
+			public const int SignaturePadView_signaturePromptTextColor = 2131165221;
+			
+			// aapt resource value: 0x7F070024
+			public const int SignaturePadView_signaturePromptTextSize = 2131165220;
 			
 			// aapt resource value: 0x7F070015
-			public const int SignaturePadView_clearLabelTextColor = 2131165205;
+			public const int SignaturePadView_strokeColor = 2131165205;
 			
-			// aapt resource value: 0x7F070014
-			public const int SignaturePadView_clearLabelTextSize = 2131165204;
-			
-			// aapt resource value: 0x7F070004
-			public const int SignaturePadView_signatureLineColor = 2131165188;
-			
-			// aapt resource value: 0x7F070006
-			public const int SignaturePadView_signatureLineSpacing = 2131165190;
-			
-			// aapt resource value: 0x7F070005
-			public const int SignaturePadView_signatureLineWidth = 2131165189;
-			
-			// aapt resource value: 0x7F070010
-			public const int SignaturePadView_signaturePromptText = 2131165200;
-			
-			// aapt resource value: 0x7F070012
-			public const int SignaturePadView_signaturePromptTextColor = 2131165202;
-			
-			// aapt resource value: 0x7F070011
-			public const int SignaturePadView_signaturePromptTextSize = 2131165201;
-			
-			// aapt resource value: 0x7F070002
-			public const int SignaturePadView_strokeColor = 2131165186;
-			
-			// aapt resource value: 0x7F070003
-			public const int SignaturePadView_strokeWidth = 2131165187;
+			// aapt resource value: 0x7F070016
+			public const int SignaturePadView_strokeWidth = 2131165206;
 			
 			public static int[] SnackbarLayout = new int[] {
 					16843039,
 					2130968701,
 					2130968780};
 			
-			// aapt resource value: 0x7F070435
-			public const int SnackbarLayout_android_maxWidth = 2131166261;
+			// aapt resource value: 0x7F070448
+			public const int SnackbarLayout_android_maxWidth = 2131166280;
 			
 			// aapt resource value: 0x1
 			public const int SnackbarLayout_elevation = 1;
@@ -7127,8 +7287,8 @@ namespace TicketingApp.Droid
 					16843131,
 					2130968803};
 			
-			// aapt resource value: 0x7F070439
-			public const int Spinner_android_dropDownWidth = 2131166265;
+			// aapt resource value: 0x7F070452
+			public const int Spinner_android_dropDownWidth = 2131166290;
 			
 			// aapt resource value: 0x1
 			public const int Spinner_android_entries = 1;
@@ -7158,8 +7318,8 @@ namespace TicketingApp.Droid
 					2130968909,
 					2130968910};
 			
-			// aapt resource value: 0x7F070445
-			public const int SwitchCompat_android_textOff = 2131166277;
+			// aapt resource value: 0x7F070458
+			public const int SwitchCompat_android_textOff = 2131166296;
 			
 			// aapt resource value: 0x1
 			public const int SwitchCompat_android_textOn = 1;
@@ -7205,8 +7365,8 @@ namespace TicketingApp.Droid
 					16842994,
 					16843087};
 			
-			// aapt resource value: 0x7F070460
-			public const int TabItem_android_icon = 2131166304;
+			// aapt resource value: 0x7F070473
+			public const int TabItem_android_icon = 2131166323;
 			
 			// aapt resource value: 0x1
 			public const int TabItem_android_layout = 1;
@@ -7232,8 +7392,8 @@ namespace TicketingApp.Droid
 					2130968867,
 					2130968868};
 			
-			// aapt resource value: 0x7F070464
-			public const int TabLayout_tabBackground = 2131166308;
+			// aapt resource value: 0x7F070477
+			public const int TabLayout_tabBackground = 2131166327;
 			
 			// aapt resource value: 0x1
 			public const int TabLayout_tabContentStart = 1;
@@ -7295,8 +7455,8 @@ namespace TicketingApp.Droid
 					2130968720,
 					2130968869};
 			
-			// aapt resource value: 0x7F070481
-			public const int TextAppearance_android_fontFamily = 2131166337;
+			// aapt resource value: 0x7F070494
+			public const int TextAppearance_android_fontFamily = 2131166356;
 			
 			// aapt resource value: 0x1
 			public const int TextAppearance_android_shadowColor = 1;
@@ -7352,8 +7512,8 @@ namespace TicketingApp.Droid
 					2130968800,
 					2130968801};
 			
-			// aapt resource value: 0x7F070495
-			public const int TextInputLayout_android_hint = 2131166357;
+			// aapt resource value: 0x7F070508
+			public const int TextInputLayout_android_hint = 2131166472;
 			
 			// aapt resource value: 0x1
 			public const int TextInputLayout_android_textColorHint = 1;
@@ -7431,8 +7591,8 @@ namespace TicketingApp.Droid
 					2130968899,
 					2130968900};
 			
-			// aapt resource value: 0x7F070512
-			public const int Toolbar_android_gravity = 2131166482;
+			// aapt resource value: 0x7F070525
+			public const int Toolbar_android_gravity = 2131166501;
 			
 			// aapt resource value: 0x1
 			public const int Toolbar_android_minHeight = 1;
@@ -7530,8 +7690,8 @@ namespace TicketingApp.Droid
 					2130968629,
 					2130968630};
 			
-			// aapt resource value: 0x7F070548
-			public const int ViewBackgroundHelper_android_background = 2131166536;
+			// aapt resource value: 0x7F070561
+			public const int ViewBackgroundHelper_android_background = 2131166561;
 			
 			// aapt resource value: 0x1
 			public const int ViewBackgroundHelper_backgroundTint = 1;
@@ -7544,8 +7704,8 @@ namespace TicketingApp.Droid
 					16842995,
 					16842994};
 			
-			// aapt resource value: 0x7F070552
-			public const int ViewStubCompat_android_id = 2131166546;
+			// aapt resource value: 0x7F070565
+			public const int ViewStubCompat_android_id = 2131166565;
 			
 			// aapt resource value: 0x1
 			public const int ViewStubCompat_android_inflatedId = 1;
@@ -7553,8 +7713,8 @@ namespace TicketingApp.Droid
 			// aapt resource value: 0x2
 			public const int ViewStubCompat_android_layout = 2;
 			
-			// aapt resource value: 0x7F070542
-			public const int View_android_focusable = 2131166530;
+			// aapt resource value: 0x7F070555
+			public const int View_android_focusable = 2131166549;
 			
 			// aapt resource value: 0x1
 			public const int View_android_theme = 1;

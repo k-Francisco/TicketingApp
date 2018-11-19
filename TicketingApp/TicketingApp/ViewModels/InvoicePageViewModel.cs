@@ -1,9 +1,10 @@
-﻿using Newtonsoft.Json;
+﻿using Fusillade;
+using Newtonsoft.Json;
 using Prism.Commands;
 using Prism.Events;
 using Prism.Navigation;
-using Prism.Services;
-using SpevoCore.Services.Sharepoint_API;
+using SpevoCore.Models.FormDigest;
+using SpevoCore.Services.API_Service;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -11,12 +12,10 @@ using System.Linq;
 using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
-using TicketingApp.Models.EquipmentUnit;
 using TicketingApp.Models.EquipmentUsed;
 using TicketingApp.Models.InvoicedTickets;
 using TicketingApp.Models.Jobs;
 using TicketingApp.Models.LaborUsed;
-using TicketingApp.Models.Material;
 using TicketingApp.Models.MaterialUsed;
 using TicketingApp.Models.SavedRequests;
 using TicketingApp.Models.ThirdPartyUsed;
@@ -125,9 +124,8 @@ namespace TicketingApp.ViewModels
             set { SetProperty(ref _thirdPTUsedTotal, value); }
         }
 
-        public InvoicePageViewModel(INavigationService navigationService, ISharepointAPI sharepointAPI,
-                                    IPageDialogService pageDialogService, IEventAggregator eventAggregator)
-            : base(navigationService, sharepointAPI, pageDialogService, eventAggregator)
+        public InvoicePageViewModel(INavigationService navigationService,  IEventAggregator eventAggregator, IApiManager apiManager)
+            : base(navigationService, eventAggregator, apiManager)
         {
             Title = "Invoice";
         }
@@ -196,122 +194,126 @@ namespace TicketingApp.ViewModels
             {
                 if (_saveCommand == null)
                 {
-                    _saveCommand = new DelegateCommand(async () =>
-                    {
-                        try
-                        {
-                            var user = realm.All<User>().FirstOrDefault();
-
-                            string signature = "";
-                            var signatureBytes = await SignatureFromStream();
-                            if (signatureBytes != null)
-                                signature = "data:image/png;base64," + Convert.ToBase64String(signatureBytes);
-
-                            var laborUsed = new List<LaborUsed>(LaborUsed);
-                            var equipmentUsed = new List<EquipmentUsed>(EquipmentUsed);
-                            var materialUsed = new List<MaterialUsed>(MaterialUsed);
-                            var thirdPartyUsed = new List<ThirdPartyUsed>(ThirdPartyUsed);
-                            var totals = new List<double>() { LaborUsedTotal, EquipmentUsedTotal, MaterialUsedTotal, ThirdPTUsedTotal };
-
-                            var request = new SavedRequests()
-                            {
-                                CostCode = this.CostCode,
-                                TicketNumber = this.Ticket.Title,
-                                SavedTicket = this.Ticket,
-                                LaborUsedCollection = JsonConvert.SerializeObject(laborUsed),
-                                EquipmentUsedCollection = JsonConvert.SerializeObject(equipmentUsed),
-                                MaterialUsedCollection = JsonConvert.SerializeObject(materialUsed),
-                                ThirdPartyUsedCollection = JsonConvert.SerializeObject(thirdPartyUsed),
-                                TotalCollection = JsonConvert.SerializeObject(totals),
-                                Signature = signature,
-                                UserId = user.UserId.ToString(),
-                            };
-
-                            if (connected)
-                            {
-                                var invoices = await SharepointAPI.GetListItemsByListTitle("Invoiced Tickets");
-
-                                if (invoices.IsSuccessStatusCode)
-                                {
-                                    var invoicesString = await invoices.Content.ReadAsStringAsync();
-                                    var invoicedTicketsResults = JsonConvert.DeserializeObject<Models.InvoicedTickets.RootObject>(invoicesString,
-                                        new JsonSerializerSettings
-                                        {
-                                            NullValueHandling = NullValueHandling.Ignore
-                                        });
-
-                                    var tixNumber = Ticket.Title;
-                                    var invoicedTickets = invoicedTicketsResults.D.Results
-                                                          .Where(i => i.TicketNumber.Equals(tixNumber))
-                                                          .ToList();
-
-                                    int invoiceCount = 0;
-                                    if (invoicedTickets != null && invoicedTickets.Count != 0)
-                                    {
-                                        invoiceCount = invoicedTickets.Count + 1;
-                                    }
-                                    request.InvoiceCount = invoiceCount.ToString();
-
-                                    var builder = new StringBuilder();
-                                    var invoiceBody = GetInvoiceBody(request);
-                                    foreach (var metadata in invoiceBody)
-                                    {
-                                        builder.Append(metadata);
-                                    }
-
-                                    var item = new StringContent(builder.ToString());
-                                    item.Headers.ContentType = System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json;odata=verbose");
-
-                                    var formDigest = await SharepointAPI.GetFormDigest();
-
-                                    var addInvoice = await SharepointAPI.AddListItemByListTitle(formDigest.D.GetContextWebInformation.FormDigestValue,
-                                                           "Invoiced Tickets", item);
-
-                                    var ensure = addInvoice.EnsureSuccessStatusCode();
-
-                                    if (ensure.IsSuccessStatusCode)
-                                    {
-                                        //TODO: prompt for successful request
-                                        System.Diagnostics.Debug.WriteLine("Success!");
-
-                                        var response = JsonConvert.DeserializeObject<RootObject2>(await addInvoice.Content.ReadAsStringAsync());
-                                        var invoice = response.invoice;
-                                        realm.Write(() =>
-                                        {
-                                            realm.Add(invoice);
-                                        });
-
-                                        UpdateTicket(formDigest.D.GetContextWebInformation.FormDigestValue, signature, Ticket.ID.ToString());
-                                    }
-                                    else
-                                    {
-                                        //TODO: prompt for unsuccessful request
-                                        System.Diagnostics.Debug.WriteLine("not success!");
-                                    }
-                                }
-                                else
-                                {
-                                    //TODO: prompt for failure 
-                                }
-                            }
-                            else
-                            {
-                                //TODO: prompt the user nga na ma upload ang request the next time online ang gago
-                                realm.Write(() =>
-                                {
-                                    realm.Add<SavedRequests>(request);
-                                });
-                            }
-                           
-                        }
-                        catch (Exception e)
-                        {
-                            System.Diagnostics.Debug.WriteLine("saveerror", e.Message);
-                        }
-                    });
+                    _saveCommand = new DelegateCommand(async () => await SendInvoiceItem());
                 }
 
                 return _saveCommand;
+            }
+        }
+
+        private async Task SendInvoiceItem()
+        {
+            try
+            {
+                var user = realm.All<User>().FirstOrDefault();
+
+                string signature = "";
+                var signatureBytes = await SignatureFromStream();
+                if (signatureBytes != null)
+                    signature = "data:image/png;base64," + Convert.ToBase64String(signatureBytes);
+
+                var laborUsed = new List<LaborUsed>(LaborUsed);
+                var equipmentUsed = new List<EquipmentUsed>(EquipmentUsed);
+                var materialUsed = new List<MaterialUsed>(MaterialUsed);
+                var thirdPartyUsed = new List<ThirdPartyUsed>(ThirdPartyUsed);
+                var totals = new List<double>() { LaborUsedTotal, EquipmentUsedTotal, MaterialUsedTotal, ThirdPTUsedTotal };
+
+                var request = new SavedRequests()
+                {
+                    CostCode = this.CostCode,
+                    TicketNumber = this.Ticket.Title,
+                    SavedTicket = this.Ticket,
+                    LaborUsedCollection = JsonConvert.SerializeObject(laborUsed),
+                    EquipmentUsedCollection = JsonConvert.SerializeObject(equipmentUsed),
+                    MaterialUsedCollection = JsonConvert.SerializeObject(materialUsed),
+                    ThirdPartyUsedCollection = JsonConvert.SerializeObject(thirdPartyUsed),
+                    TotalCollection = JsonConvert.SerializeObject(totals),
+                    Signature = signature,
+                    UserId = user.UserId.ToString(),
+                };
+
+                if (connected)
+                {
+                    var invoices = await ApiManager.AddTask(SharepointApi.GetApi(Priority.UserInitiated).GetListItemsByListTitle("Invoiced Tickets"));
+
+                    if (invoices.IsSuccessStatusCode)
+                    {
+                        var invoicesString = await invoices.Content.ReadAsStringAsync();
+                        var invoicedTicketsResults = JsonConvert.DeserializeObject<Models.InvoicedTickets.RootObject>(invoicesString,
+                            new JsonSerializerSettings
+                            {
+                                NullValueHandling = NullValueHandling.Ignore
+                            });
+
+                        var tixNumber = Ticket.Title;
+                        var invoicedTickets = invoicedTicketsResults.D.Results
+                                              .Where(i => i.TicketNumber.Equals(tixNumber))
+                                              .ToList();
+
+                        int invoiceCount = 0;
+                        if (invoicedTickets != null && invoicedTickets.Count != 0)
+                        {
+                            invoiceCount = invoicedTickets.Count + 1;
+                        }
+                        request.InvoiceCount = invoiceCount.ToString();
+
+                        var builder = new StringBuilder();
+                        var invoiceBody = GetInvoiceBody(request);
+                        foreach (var metadata in invoiceBody)
+                        {
+                            builder.Append(metadata);
+                        }
+
+                        var item = new StringContent(builder.ToString());
+                        item.Headers.ContentType = System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json;odata=verbose");
+
+                        var formDigestResponse = await ApiManager.AddTask(SharepointApi.GetApi(Priority.UserInitiated).GetFormDigest());
+                        var formDigestString = await formDigestResponse.Content.ReadAsStringAsync();
+                        var formDigest = JsonConvert.DeserializeObject<FormDigestModel>(formDigestString);
+
+                        var addInvoice = await ApiManager.AddTask(SharepointApi.GetApi(Priority.UserInitiated).AddListItemByListTitle(formDigest.D.GetContextWebInformation.FormDigestValue,
+                                               "Invoiced Tickets", item));
+
+                        var ensure = addInvoice.EnsureSuccessStatusCode();
+
+                        if (ensure.IsSuccessStatusCode)
+                        {
+                            PageDialog.Alert("Success!");
+
+                            var response = JsonConvert.DeserializeObject<RootObject2>(await addInvoice.Content.ReadAsStringAsync());
+                            var invoice = response.invoice;
+                            realm.Write(() =>
+                            {
+                                realm.Add(invoice);
+                            });
+
+                            UpdateTicket(formDigest.D.GetContextWebInformation.FormDigestValue, signature, Ticket.ID.ToString());
+                        }
+                        else
+                        {
+                            PageDialog.Alert("Something went wrong! Please check your internet connection and try again");
+                        }
+                    }
+                    else
+                    {
+                        PageDialog.Alert("Something went wrong! Please check your internet connection and try again");
+                    }
+                }
+                else
+                {
+                    PageDialog.Alert("The request will be sent the next time your device is connected to the internet");
+                    realm.Write(() =>
+                    {
+                        var savedRequests = realm.All<SavedRequests>().ToList();
+                        if(!savedRequests.Contains(request))
+                            realm.Add<SavedRequests>(request);
+                    });
+                }
+
+            }
+            catch (Exception e)
+            {
+                System.Diagnostics.Debug.WriteLine("saveerror", e.Message);
             }
         }
     }

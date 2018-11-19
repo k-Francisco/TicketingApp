@@ -2,11 +2,10 @@
 using Realms;
 using System;
 using System.Collections.Generic;
-using TicketingApp.Services;
 
 namespace TicketingApp.Models.EquipmentUnit
 {
-    public class RootObject : SyncService<EquipmentUnit>
+    public class RootObject
     {
         [JsonProperty("d")]
         public D D { get; set; }

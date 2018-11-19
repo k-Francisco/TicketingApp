@@ -1,9 +1,11 @@
-﻿using Newtonsoft.Json;
+﻿using Acr.UserDialogs;
+using Fusillade;
+using Newtonsoft.Json;
 using Prism.Events;
 using Prism.Mvvm;
 using Prism.Navigation;
-using Prism.Services;
 using Realms;
+using SpevoCore.Services.API_Service;
 using SpevoCore.Services.Sharepoint_API;
 using System;
 using System.Collections.Generic;
@@ -26,9 +28,10 @@ namespace TicketingApp.ViewModels
     public class ViewModelBase : BindableBase, IDestructible, INavigationAware
     {
         protected INavigationService NavigationService { get; private set; }
-        protected ISharepointAPI SharepointAPI { get; private set; }
-        protected IPageDialogService PageDialogService { get; private set; }
+        protected IUserDialogs PageDialog { get; private set; }
         protected IEventAggregator EventAggregator { get; private set; }
+        protected IApiManager ApiManager { get; set; }
+        protected IApiService<ISharepointAPI> SharepointApi = new ApiService<ISharepointAPI>(App.SiteUrl);
         protected Realm realm { get; private set; }
         protected bool connected { get; private set; }
 
@@ -39,18 +42,16 @@ namespace TicketingApp.ViewModels
             set { _title = value; }
         }
 
-
-        public ViewModelBase(INavigationService navigationService, ISharepointAPI sharepointAPI,
-                             IPageDialogService pageDialogService, IEventAggregator eventAggregator)
+        public ViewModelBase(INavigationService navigationService, IEventAggregator eventAggregator, IApiManager apiManager)
         {
             RealmConfiguration.DefaultConfiguration.SchemaVersion = 1;
 
             NavigationService = navigationService;
-            PageDialogService = pageDialogService;
             EventAggregator = eventAggregator;
+            ApiManager = apiManager;
 
-            SharepointAPI = sharepointAPI;
             realm = Realm.GetInstance();
+            PageDialog = UserDialogs.Instance;
 
             if (Connectivity.NetworkAccess == NetworkAccess.Internet)
                 connected = true;
@@ -64,6 +65,31 @@ namespace TicketingApp.ViewModels
             };
         }
 
+        public async Task<bool> SyncData<U>(List<U> oldData, List<U> newData) where U : RealmObject
+        {
+            try
+            {
+                realm.Write(() =>
+                {
+                    realm.RemoveAll<U>();
+                    oldData.Clear();
+
+                    foreach (var item in newData)
+                    {
+                        oldData.Add(item);
+                        realm.Add(item);
+                    }
+                });
+                return true;
+            }
+            catch (Exception e)
+            {
+                System.Diagnostics.Debug.WriteLine("SyncDataError_" + nameof(U), e.Message);
+                return false;
+            }
+        }
+
+        #region invoice region
 
         public async void UpdateTicket(string formDigest, string signature, string ticketId)
         {
@@ -92,7 +118,7 @@ namespace TicketingApp.ViewModels
                     var item = new StringContent(body);
                     item.Headers.ContentType = System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json;odata=verbose");
 
-                    var updateTix = await SharepointAPI.UpdateListItemByListTitle(formDigest, "Tickets", item, ticketId);
+                    var updateTix = await ApiManager.AddTask(SharepointApi.GetApi(Priority.UserInitiated).UpdateListItemByListTitle(formDigest, "Tickets", item, ticketId));
 
                     var ensure = updateTix.EnsureSuccessStatusCode();
 
@@ -115,17 +141,16 @@ namespace TicketingApp.ViewModels
         public List<string> GetInvoiceBody(SavedRequests savedRequests)
         {
             var metadata = new List<string>();
-            string status,invoiceNumber;
+            string status, invoiceNumber;
 
             try
             {
                 invoiceNumber = savedRequests.SavedTicket.Title.Replace("TN", "IN") + savedRequests.InvoiceCount;
 
-                if (savedRequests.Signature != null)
+                if (savedRequests.Signature != null || !string.IsNullOrWhiteSpace(savedRequests.Signature))
                     status = "Approved";
                 else
                     status = "Open";
-
 
                 var invoiceHtml = GetInvoiceHTML(savedRequests, invoiceNumber);
 
@@ -137,7 +162,10 @@ namespace TicketingApp.ViewModels
                 metadata.Add("'InvoiceNumber':'" + invoiceNumber + "',");
                 metadata.Add("'Status':'" + status + "',");
                 metadata.Add("'Trigger':'generatePDF',");
-                metadata.Add("'SignatureCode':'" + savedRequests.Signature + "',");
+
+                if (savedRequests.Signature != null || !string.IsNullOrWhiteSpace(savedRequests.Signature))
+                    metadata.Add("'SignatureCode':'" + savedRequests.Signature + "',");
+
                 metadata.Add("'ResponseById':'" + savedRequests.UserId + "'");
                 metadata.Add("}");
 
@@ -150,7 +178,7 @@ namespace TicketingApp.ViewModels
             }
         }
 
-        public string GetInvoiceHTML(SavedRequests savedRequests, string invoiceNumber)
+        private string GetInvoiceHTML(SavedRequests savedRequests, string invoiceNumber)
         {
             try
             {
@@ -307,7 +335,7 @@ namespace TicketingApp.ViewModels
                         oddOrEven = "even";
 
                     var total = Convert.ToInt32(materialUsed[i].Rate) * materialUsed[i].QuantityUsed;
-                    
+
                     //todo: expand like the labor used
                     var material = realm.All<Material>()
                                     .Where(e => e.ID == materialUsed[i].MaterialId)
@@ -405,7 +433,7 @@ namespace TicketingApp.ViewModels
 
         private string GetSignatureSection(string signature)
         {
-            if(signature != null)
+            if (signature != null)
             {
                 string section = "<div class=\"col - md - 6\" id=\"signatureStamp\">" +
                                         "Customer Signature Stamp" +
@@ -420,15 +448,16 @@ namespace TicketingApp.ViewModels
             return string.Empty;
         }
 
+        #endregion invoice region
 
         #region boilerplates
+
         public virtual void OnNavigatedFrom(INavigationParameters parameters)
         {
         }
 
         public virtual void OnNavigatedTo(INavigationParameters parameters)
         {
-
         }
 
         public virtual void OnNavigatingTo(INavigationParameters parameters)
@@ -437,8 +466,8 @@ namespace TicketingApp.ViewModels
 
         public virtual void Destroy()
         {
+        }
 
-        } 
-        #endregion
+        #endregion boilerplates
     }
 }

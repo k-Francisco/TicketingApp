@@ -5,8 +5,8 @@
   </PropertyGroup>
   <ImportGroup Condition=" '$(ExcludeRestorePackageImports)' != 'true' ">
     <Import Project="$(NuGetPackageRoot)xamarin.forms\3.3.0.912540\build\Xamarin.Forms.targets" Condition="Exists('$(NuGetPackageRoot)xamarin.forms\3.3.0.912540\build\Xamarin.Forms.targets')" />
-    <Import Project="$(NuGetPackageRoot)refit\4.6.48\build\netstandard1.4\refit.targets" Condition="Exists('$(NuGetPackageRoot)refit\4.6.48\build\netstandard1.4\refit.targets')" />
     <Import Project="$(NuGetPackageRoot)netstandard.library\2.0.0\build\netstandard2.0\NETStandard.Library.targets" Condition="Exists('$(NuGetPackageRoot)netstandard.library\2.0.0\build\netstandard2.0\NETStandard.Library.targets')" />
+    <Import Project="$(NuGetPackageRoot)refit\4.6.48\build\netstandard1.4\refit.targets" Condition="Exists('$(NuGetPackageRoot)refit\4.6.48\build\netstandard1.4\refit.targets')" />
     <Import Project="$(NuGetPackageRoot)fody\3.0.3\build\Fody.targets" Condition="Exists('$(NuGetPackageRoot)fody\3.0.3\build\Fody.targets')" />
     <Import Project="$(NuGetPackageRoot)realm.database\3.2.1\build\Realm.Database.targets" Condition="Exists('$(NuGetPackageRoot)realm.database\3.2.1\build\Realm.Database.targets')" />
     <Import Project="$(NuGetPackageRoot)realm\3.2.1\build\Realm.targets" Condition="Exists('$(NuGetPackageRoot)realm\3.2.1\build\Realm.targets')" />

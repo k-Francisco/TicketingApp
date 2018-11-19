@@ -2,11 +2,10 @@
 using Realms;
 using System;
 using System.Collections.Generic;
-using TicketingApp.Services;
 
 namespace TicketingApp.Models.InvoicedTickets
 {
-    public class RootObject : SyncService<InvoicedTickets>
+    public class RootObject
     {
         [JsonProperty("d")]
         public D D { get; set; }
@@ -83,5 +82,4 @@ namespace TicketingApp.Models.InvoicedTickets
         [JsonProperty("d")]
         public InvoicedTickets invoice { get; set; }
     }
-
 }

@@ -2,10 +2,61 @@
   "version": 3,
   "targets": {
     "MonoAndroid,Version=v8.1": {
+      "Acr.UserDialogs/7.0.1": {
+        "type": "package",
+        "dependencies": {
+          "AndHUD": "1.2.0",
+          "Xamarin.Android.Support.Design": "26.1.0.1"
+        },
+        "frameworkAssemblies": [
+          "Java.Interop",
+          "Mono.Android",
+          "System",
+          "System.Collections",
+          "System.Core",
+          "System.IdentityModel",
+          "System.Net.Http",
+          "System.Runtime",
+          "System.Runtime.Serialization",
+          "System.Threading.Tasks",
+          "System.Xml",
+          "System.Xml.Linq"
+        ],
+        "compile": {
+          "lib/monoandroid80/Acr.UserDialogs.dll": {}
+        },
+        "runtime": {
+          "lib/monoandroid80/Acr.UserDialogs.dll": {}
+        }
+      },
+      "AndHUD/1.2.0": {
+        "type": "package",
+        "compile": {
+          "lib/MonoAndroid/AndHUD.dll": {}
+        },
+        "runtime": {
+          "lib/MonoAndroid/AndHUD.dll": {}
+        }
+      },
       "Fody/3.0.3": {
         "type": "package",
         "build": {
           "build/Fody.targets": {}
+        }
+      },
+      "fusillade/1.0.0": {
+        "type": "package",
+        "dependencies": {
+          "NETStandard.Library": "1.6.1",
+          "Splat": "2.0.0",
+          "System.Reactive": "[3.1.1, 4.0.0)",
+          "punchclock": "2.1.0"
+        },
+        "compile": {
+          "lib/netstandard1.4/Fusillade.dll": {}
+        },
+        "runtime": {
+          "lib/netstandard1.4/Fusillade.dll": {}
         }
       },
       "Microsoft.NETCore.Platforms/1.1.0": {
@@ -39,6 +90,15 @@
         },
         "runtime": {
           "lib/netstandard2.0/Newtonsoft.Json.dll": {}
+        }
+      },
+      "Polly/6.1.1": {
+        "type": "package",
+        "compile": {
+          "lib/netstandard2.0/Polly.dll": {}
+        },
+        "runtime": {
+          "lib/netstandard2.0/Polly.dll": {}
         }
       },
       "Prism.Core/7.1.0.431": {
@@ -77,6 +137,19 @@
         },
         "runtime": {
           "lib/monoandroid71/Prism.Unity.Forms.dll": {}
+        }
+      },
+      "Punchclock/2.1.0": {
+        "type": "package",
+        "dependencies": {
+          "NETStandard.Library": "1.6.1",
+          "System.Reactive": "[3.1.1, 4.0.0)"
+        },
+        "compile": {
+          "lib/netstandard1.4/Punchclock.dll": {}
+        },
+        "runtime": {
+          "lib/netstandard1.4/Punchclock.dll": {}
         }
       },
       "Realm/3.2.1": {
@@ -172,6 +245,42 @@
           "lib/portable-net45+win+wpa81+wp80/Remotion.Linq.dll": {}
         }
       },
+      "Splat/2.0.0": {
+        "type": "package",
+        "compile": {
+          "lib/MonoAndroid403/Splat.dll": {}
+        },
+        "runtime": {
+          "lib/MonoAndroid403/Splat.dll": {}
+        }
+      },
+      "System.ComponentModel/4.0.1": {
+        "type": "package",
+        "compile": {
+          "ref/MonoAndroid10/_._": {}
+        },
+        "runtime": {
+          "lib/MonoAndroid10/_._": {}
+        }
+      },
+      "System.Diagnostics.Contracts/4.0.1": {
+        "type": "package",
+        "compile": {
+          "ref/MonoAndroid10/_._": {}
+        },
+        "runtime": {
+          "lib/MonoAndroid10/_._": {}
+        }
+      },
+      "System.Dynamic.Runtime/4.0.11": {
+        "type": "package",
+        "compile": {
+          "ref/MonoAndroid10/_._": {}
+        },
+        "runtime": {
+          "lib/MonoAndroid10/_._": {}
+        }
+      },
       "System.Numerics.Vectors/4.5.0": {
         "type": "package",
         "compile": {
@@ -179,6 +288,64 @@
         },
         "runtime": {
           "lib/MonoAndroid10/_._": {}
+        }
+      },
+      "System.Reactive/3.1.1": {
+        "type": "package",
+        "dependencies": {
+          "System.Reactive.PlatformServices": "3.1.1"
+        }
+      },
+      "System.Reactive.Core/3.1.1": {
+        "type": "package",
+        "dependencies": {
+          "System.ComponentModel": "4.0.1",
+          "System.Diagnostics.Contracts": "4.0.1",
+          "System.Dynamic.Runtime": "4.0.11",
+          "System.Reactive.Interfaces": "3.1.1"
+        },
+        "compile": {
+          "lib/netstandard1.3/System.Reactive.Core.dll": {}
+        },
+        "runtime": {
+          "lib/netstandard1.3/System.Reactive.Core.dll": {}
+        }
+      },
+      "System.Reactive.Interfaces/3.1.1": {
+        "type": "package",
+        "dependencies": {
+          "NETStandard.Library": "1.6.0"
+        },
+        "compile": {
+          "lib/netstandard1.0/System.Reactive.Interfaces.dll": {}
+        },
+        "runtime": {
+          "lib/netstandard1.0/System.Reactive.Interfaces.dll": {}
+        }
+      },
+      "System.Reactive.Linq/3.1.1": {
+        "type": "package",
+        "dependencies": {
+          "System.Reactive.Core": "3.1.1",
+          "System.Runtime.InteropServices.WindowsRuntime": "4.0.1"
+        },
+        "compile": {
+          "lib/netstandard1.3/System.Reactive.Linq.dll": {}
+        },
+        "runtime": {
+          "lib/netstandard1.3/System.Reactive.Linq.dll": {}
+        }
+      },
+      "System.Reactive.PlatformServices/3.1.1": {
+        "type": "package",
+        "dependencies": {
+          "System.Reactive.Linq": "3.1.1"
+        },
+        "compile": {
+          "lib/netstandard1.3/System.Reactive.PlatformServices.dll": {}
+        },
+        "runtime": {
+          "lib/netstandard1.3/System.Reactive.PlatformServices.dll": {}
         }
       },
       "System.Reflection.TypeExtensions/4.3.0": {
@@ -197,6 +364,15 @@
         },
         "runtime": {
           "lib/netstandard2.0/System.Runtime.CompilerServices.Unsafe.dll": {}
+        }
+      },
+      "System.Runtime.InteropServices.WindowsRuntime/4.0.1": {
+        "type": "package",
+        "compile": {
+          "ref/portable-net45+win8+wp8+wpa81/_._": {}
+        },
+        "runtime": {
+          "lib/netstandard1.3/System.Runtime.InteropServices.WindowsRuntime.dll": {}
         }
       },
       "Unity.Abstractions/3.3.1": {
@@ -620,8 +796,10 @@
         "framework": ".NETStandard,Version=v2.0",
         "dependencies": {
           "Newtonsoft.Json": "11.0.2",
+          "Polly": "6.1.1",
           "Refit": "4.6.48",
-          "Xamarin.Essentials": "0.11.0-preview"
+          "Xamarin.Essentials": "0.11.0-preview",
+          "fusillade": "1.0.0"
         },
         "compile": {
           "bin/placeholder/SpevoCore.dll": {}
@@ -634,12 +812,15 @@
         "type": "project",
         "framework": ".NETStandard,Version=v2.0",
         "dependencies": {
+          "Acr.UserDialogs": "7.0.1",
+          "Polly": "6.1.1",
           "Prism.Unity.Forms": "7.1.0.431",
           "Realm": "3.2.1",
           "SpevoCore": "1.0.0",
           "Xamarin.Controls.SignaturePad.Forms": "3.0.0",
           "Xamarin.Essentials": "0.11.0-preview",
-          "Xamarin.Forms": "3.3.0.912540"
+          "Xamarin.Forms": "3.3.0.912540",
+          "fusillade": "1.0.0"
         },
         "compile": {
           "bin/placeholder/TicketingApp.dll": {}
@@ -651,6 +832,39 @@
     }
   },
   "libraries": {
+    "Acr.UserDialogs/7.0.1": {
+      "sha512": "4BB8g4I9YEvaxp6r1aq14TPLJztGTe2IW9BymNunYxigV/AMBeYhUDcerf9OgrPOTKtENVN23W+d0FtIvhiPLw==",
+      "type": "package",
+      "path": "acr.userdialogs/7.0.1",
+      "files": [
+        ".signature.p7s",
+        "acr.userdialogs.7.0.1.nupkg.sha512",
+        "acr.userdialogs.nuspec",
+        "lib/monoandroid70/Acr.UserDialogs.dll",
+        "lib/monoandroid80/Acr.UserDialogs.dll",
+        "lib/netstandard2.0/Acr.UserDialogs.dll",
+        "lib/uap10.0.16299/Acr.UserDialogs.dll",
+        "lib/uap10.0.16299/Acr.UserDialogs.pri",
+        "lib/uap10.0.16299/Acr.UserDialogs/Acr.UserDialogs.xr.xml",
+        "lib/uap10.0.16299/Acr.UserDialogs/Platforms/Uwp/ActionSheetContentDialog.xaml",
+        "lib/uap10.0.16299/Acr.UserDialogs/Platforms/Uwp/DatePickerControl.xaml",
+        "lib/uap10.0.16299/Acr.UserDialogs/Platforms/Uwp/LoginContentDialog.xaml",
+        "lib/uap10.0.16299/Acr.UserDialogs/Platforms/Uwp/ProgressContentDialog.xaml",
+        "lib/uap10.0.16299/Acr.UserDialogs/Platforms/Uwp/TimePickerControl.xaml",
+        "lib/xamarinios10/Acr.UserDialogs.dll"
+      ]
+    },
+    "AndHUD/1.2.0": {
+      "sha512": "BdYzLHh3XNZIfhU7rQYUX5Oi3EfEQnlJV7EAEGZalmqx4/r8wnQFwhZmVZXow8ysdlec71Xsm5n+7VLh+w/o5Q==",
+      "type": "package",
+      "path": "andhud/1.2.0",
+      "files": [
+        ".signature.p7s",
+        "andhud.1.2.0.nupkg.sha512",
+        "andhud.nuspec",
+        "lib/MonoAndroid/AndHUD.dll"
+      ]
+    },
     "Fody/3.0.3": {
       "sha512": "jjc1i8AX9/NIfVgRAZpCw1uKpkaMQrXFYWlMnQ6zjr0l+Or56DaIq0xA+EcQzYrfg6KrF03ybynpotd1UlAHcA==",
       "type": "package",
@@ -691,6 +905,17 @@
         "netstandardtask/Mono.Cecil.Rocks.pdb",
         "netstandardtask/Mono.Cecil.dll",
         "netstandardtask/Mono.Cecil.pdb"
+      ]
+    },
+    "fusillade/1.0.0": {
+      "sha512": "8igNr9Ho5bTEUgwYZ+iYQAkieYjpD/piI0hgBeBt65ULy1AhlL/FkFYsCvE7pWm6SxvY++5Akj0Vi84/3VospQ==",
+      "type": "package",
+      "path": "fusillade/1.0.0",
+      "files": [
+        ".signature.p7s",
+        "fusillade.1.0.0.nupkg.sha512",
+        "fusillade.nuspec",
+        "lib/netstandard1.4/Fusillade.dll"
       ]
     },
     "Microsoft.NETCore.Platforms/1.1.0": {
@@ -862,6 +1087,24 @@
         "newtonsoft.json.nuspec"
       ]
     },
+    "Polly/6.1.1": {
+      "sha512": "7xIvnwB0GyaZsea2nOWDLNQruL17k86lRUE4+D9zkE4BawhLyce7tC7xlFnrfYYrDCDhLAKv8crH8f/VctJaIw==",
+      "type": "package",
+      "path": "polly/6.1.1",
+      "files": [
+        ".signature.p7s",
+        "lib/netstandard1.1/Polly.deps.json",
+        "lib/netstandard1.1/Polly.dll",
+        "lib/netstandard1.1/Polly.pdb",
+        "lib/netstandard1.1/Polly.xml",
+        "lib/netstandard2.0/Polly.deps.json",
+        "lib/netstandard2.0/Polly.dll",
+        "lib/netstandard2.0/Polly.pdb",
+        "lib/netstandard2.0/Polly.xml",
+        "polly.6.1.1.nupkg.sha512",
+        "polly.nuspec"
+      ]
+    },
     "Prism.Core/7.1.0.431": {
       "sha512": "tBkEf4cDYn2oQfW1wPem4jJK/H1Z4mJsnndO04n2oZyIql7Bj3OVlpfQ6vbPgbtlkEN0oyn02XVurZba3DYqmQ==",
       "type": "package",
@@ -922,6 +1165,18 @@
         "lib/netstandard2.0/Prism.Unity.Forms.xml",
         "prism.unity.forms.7.1.0.431.nupkg.sha512",
         "prism.unity.forms.nuspec"
+      ]
+    },
+    "Punchclock/2.1.0": {
+      "sha512": "l5o15/fr7TP9h8d051aSbuAUExpEG4w11RPWq3aTUTD1vKcEAMAW8GuLNKUCYQLzdRL/VKGHAbe8jfqid4A7Ig==",
+      "type": "package",
+      "path": "punchclock/2.1.0",
+      "files": [
+        ".signature.p7s",
+        "lib/netstandard1.4/Punchclock.dll",
+        "lib/netstandard1.4/Punchclock.xml",
+        "punchclock.2.1.0.nupkg.sha512",
+        "punchclock.nuspec"
       ]
     },
     "Realm/3.2.1": {
@@ -1099,6 +1354,220 @@
         "remotion.linq.nuspec"
       ]
     },
+    "Splat/2.0.0": {
+      "sha512": "e6oHvtRpK7Ylyl0MBhNwrJm7OibMEHlWeqan1a5WGRB4mX90y621CdOVqM+Slm5+cx9nBl6CWGc2KY2nSBPoAg==",
+      "type": "package",
+      "path": "splat/2.0.0",
+      "files": [
+        ".signature.p7s",
+        "lib/MonoAndroid403/Splat.dll",
+        "lib/Net45/Splat.dll",
+        "lib/Portable-Win81+Wpa81/Splat.dll",
+        "lib/Xamarin.Mac20/Splat.dll",
+        "lib/Xamarin.iOS10/Splat.dll",
+        "lib/netstandard1.1/Splat.dll",
+        "splat.2.0.0.nupkg.sha512",
+        "splat.nuspec",
+        "src/AssemblyFinder.cs",
+        "src/Bitmaps.cs",
+        "src/Logging.cs",
+        "src/MemoizingMRUCache.cs",
+        "src/ModeDetector.cs",
+        "src/PlatformModeDetector.cs",
+        "src/PointExtensions.cs",
+        "src/RectangleExtensions.cs",
+        "src/ReflectionStubs.cs",
+        "src/ServiceLocation.cs",
+        "src/SizeExtensions.cs",
+        "src/TypeForwardedSystemDrawing.cs"
+      ]
+    },
+    "System.ComponentModel/4.0.1": {
+      "sha512": "oBZFnm7seFiVfugsIyOvQCWobNZs7FzqDV/B7tx20Ep/l3UUFCPDkdTnCNaJZTU27zjeODmy2C/cP60u3D4c9w==",
+      "type": "package",
+      "path": "system.componentmodel/4.0.1",
+      "files": [
+        "ThirdPartyNotices.txt",
+        "dotnet_library_license.txt",
+        "lib/MonoAndroid10/_._",
+        "lib/MonoTouch10/_._",
+        "lib/net45/_._",
+        "lib/netcore50/System.ComponentModel.dll",
+        "lib/netstandard1.3/System.ComponentModel.dll",
+        "lib/portable-net45+win8+wp8+wpa81/_._",
+        "lib/win8/_._",
+        "lib/wp80/_._",
+        "lib/wpa81/_._",
+        "lib/xamarinios10/_._",
+        "lib/xamarinmac20/_._",
+        "lib/xamarintvos10/_._",
+        "lib/xamarinwatchos10/_._",
+        "ref/MonoAndroid10/_._",
+        "ref/MonoTouch10/_._",
+        "ref/net45/_._",
+        "ref/netcore50/System.ComponentModel.dll",
+        "ref/netcore50/System.ComponentModel.xml",
+        "ref/netcore50/de/System.ComponentModel.xml",
+        "ref/netcore50/es/System.ComponentModel.xml",
+        "ref/netcore50/fr/System.ComponentModel.xml",
+        "ref/netcore50/it/System.ComponentModel.xml",
+        "ref/netcore50/ja/System.ComponentModel.xml",
+        "ref/netcore50/ko/System.ComponentModel.xml",
+        "ref/netcore50/ru/System.ComponentModel.xml",
+        "ref/netcore50/zh-hans/System.ComponentModel.xml",
+        "ref/netcore50/zh-hant/System.ComponentModel.xml",
+        "ref/netstandard1.0/System.ComponentModel.dll",
+        "ref/netstandard1.0/System.ComponentModel.xml",
+        "ref/netstandard1.0/de/System.ComponentModel.xml",
+        "ref/netstandard1.0/es/System.ComponentModel.xml",
+        "ref/netstandard1.0/fr/System.ComponentModel.xml",
+        "ref/netstandard1.0/it/System.ComponentModel.xml",
+        "ref/netstandard1.0/ja/System.ComponentModel.xml",
+        "ref/netstandard1.0/ko/System.ComponentModel.xml",
+        "ref/netstandard1.0/ru/System.ComponentModel.xml",
+        "ref/netstandard1.0/zh-hans/System.ComponentModel.xml",
+        "ref/netstandard1.0/zh-hant/System.ComponentModel.xml",
+        "ref/portable-net45+win8+wp8+wpa81/_._",
+        "ref/win8/_._",
+        "ref/wp80/_._",
+        "ref/wpa81/_._",
+        "ref/xamarinios10/_._",
+        "ref/xamarinmac20/_._",
+        "ref/xamarintvos10/_._",
+        "ref/xamarinwatchos10/_._",
+        "system.componentmodel.4.0.1.nupkg.sha512",
+        "system.componentmodel.nuspec"
+      ]
+    },
+    "System.Diagnostics.Contracts/4.0.1": {
+      "sha512": "HrYHFDztlCdrOnDZ4ti7ZOIO34mpOtLo1ETVJH9uxt0zqfpP7x6w0jOe1CwwF+NMzFJfudWoSqi+sgTHX/WQVw==",
+      "type": "package",
+      "path": "system.diagnostics.contracts/4.0.1",
+      "files": [
+        ".signature.p7s",
+        "ThirdPartyNotices.txt",
+        "dotnet_library_license.txt",
+        "lib/MonoAndroid10/_._",
+        "lib/MonoTouch10/_._",
+        "lib/net45/_._",
+        "lib/netcore50/System.Diagnostics.Contracts.dll",
+        "lib/netstandard1.0/System.Diagnostics.Contracts.dll",
+        "lib/portable-net45+win8+wp8+wpa81/_._",
+        "lib/win8/_._",
+        "lib/wp80/_._",
+        "lib/wpa81/_._",
+        "lib/xamarinios10/_._",
+        "lib/xamarinmac20/_._",
+        "lib/xamarintvos10/_._",
+        "lib/xamarinwatchos10/_._",
+        "ref/MonoAndroid10/_._",
+        "ref/MonoTouch10/_._",
+        "ref/net45/_._",
+        "ref/netcore50/System.Diagnostics.Contracts.dll",
+        "ref/netcore50/System.Diagnostics.Contracts.xml",
+        "ref/netcore50/de/System.Diagnostics.Contracts.xml",
+        "ref/netcore50/es/System.Diagnostics.Contracts.xml",
+        "ref/netcore50/fr/System.Diagnostics.Contracts.xml",
+        "ref/netcore50/it/System.Diagnostics.Contracts.xml",
+        "ref/netcore50/ja/System.Diagnostics.Contracts.xml",
+        "ref/netcore50/ko/System.Diagnostics.Contracts.xml",
+        "ref/netcore50/ru/System.Diagnostics.Contracts.xml",
+        "ref/netcore50/zh-hans/System.Diagnostics.Contracts.xml",
+        "ref/netcore50/zh-hant/System.Diagnostics.Contracts.xml",
+        "ref/netstandard1.0/System.Diagnostics.Contracts.dll",
+        "ref/netstandard1.0/System.Diagnostics.Contracts.xml",
+        "ref/netstandard1.0/de/System.Diagnostics.Contracts.xml",
+        "ref/netstandard1.0/es/System.Diagnostics.Contracts.xml",
+        "ref/netstandard1.0/fr/System.Diagnostics.Contracts.xml",
+        "ref/netstandard1.0/it/System.Diagnostics.Contracts.xml",
+        "ref/netstandard1.0/ja/System.Diagnostics.Contracts.xml",
+        "ref/netstandard1.0/ko/System.Diagnostics.Contracts.xml",
+        "ref/netstandard1.0/ru/System.Diagnostics.Contracts.xml",
+        "ref/netstandard1.0/zh-hans/System.Diagnostics.Contracts.xml",
+        "ref/netstandard1.0/zh-hant/System.Diagnostics.Contracts.xml",
+        "ref/portable-net45+win8+wp8+wpa81/_._",
+        "ref/win8/_._",
+        "ref/wp80/_._",
+        "ref/wpa81/_._",
+        "ref/xamarinios10/_._",
+        "ref/xamarinmac20/_._",
+        "ref/xamarintvos10/_._",
+        "ref/xamarinwatchos10/_._",
+        "runtimes/aot/lib/netcore50/System.Diagnostics.Contracts.dll",
+        "system.diagnostics.contracts.4.0.1.nupkg.sha512",
+        "system.diagnostics.contracts.nuspec"
+      ]
+    },
+    "System.Dynamic.Runtime/4.0.11": {
+      "sha512": "QqCP+dPZdg6M21Zm4+beCoJHLNR3tJ82uvgd/9cQBeXZTFJVLyI/hosKuuFfdEyBwcadHdBOXbpaAn+XEo3skQ==",
+      "type": "package",
+      "path": "system.dynamic.runtime/4.0.11",
+      "files": [
+        ".signature.p7s",
+        "ThirdPartyNotices.txt",
+        "dotnet_library_license.txt",
+        "lib/MonoAndroid10/_._",
+        "lib/MonoTouch10/_._",
+        "lib/net45/_._",
+        "lib/netcore50/System.Dynamic.Runtime.dll",
+        "lib/netstandard1.3/System.Dynamic.Runtime.dll",
+        "lib/portable-net45+win8+wp8+wpa81/_._",
+        "lib/win8/_._",
+        "lib/wp80/_._",
+        "lib/wpa81/_._",
+        "lib/xamarinios10/_._",
+        "lib/xamarinmac20/_._",
+        "lib/xamarintvos10/_._",
+        "lib/xamarinwatchos10/_._",
+        "ref/MonoAndroid10/_._",
+        "ref/MonoTouch10/_._",
+        "ref/net45/_._",
+        "ref/netcore50/System.Dynamic.Runtime.dll",
+        "ref/netcore50/System.Dynamic.Runtime.xml",
+        "ref/netcore50/de/System.Dynamic.Runtime.xml",
+        "ref/netcore50/es/System.Dynamic.Runtime.xml",
+        "ref/netcore50/fr/System.Dynamic.Runtime.xml",
+        "ref/netcore50/it/System.Dynamic.Runtime.xml",
+        "ref/netcore50/ja/System.Dynamic.Runtime.xml",
+        "ref/netcore50/ko/System.Dynamic.Runtime.xml",
+        "ref/netcore50/ru/System.Dynamic.Runtime.xml",
+        "ref/netcore50/zh-hans/System.Dynamic.Runtime.xml",
+        "ref/netcore50/zh-hant/System.Dynamic.Runtime.xml",
+        "ref/netstandard1.0/System.Dynamic.Runtime.dll",
+        "ref/netstandard1.0/System.Dynamic.Runtime.xml",
+        "ref/netstandard1.0/de/System.Dynamic.Runtime.xml",
+        "ref/netstandard1.0/es/System.Dynamic.Runtime.xml",
+        "ref/netstandard1.0/fr/System.Dynamic.Runtime.xml",
+        "ref/netstandard1.0/it/System.Dynamic.Runtime.xml",
+        "ref/netstandard1.0/ja/System.Dynamic.Runtime.xml",
+        "ref/netstandard1.0/ko/System.Dynamic.Runtime.xml",
+        "ref/netstandard1.0/ru/System.Dynamic.Runtime.xml",
+        "ref/netstandard1.0/zh-hans/System.Dynamic.Runtime.xml",
+        "ref/netstandard1.0/zh-hant/System.Dynamic.Runtime.xml",
+        "ref/netstandard1.3/System.Dynamic.Runtime.dll",
+        "ref/netstandard1.3/System.Dynamic.Runtime.xml",
+        "ref/netstandard1.3/de/System.Dynamic.Runtime.xml",
+        "ref/netstandard1.3/es/System.Dynamic.Runtime.xml",
+        "ref/netstandard1.3/fr/System.Dynamic.Runtime.xml",
+        "ref/netstandard1.3/it/System.Dynamic.Runtime.xml",
+        "ref/netstandard1.3/ja/System.Dynamic.Runtime.xml",
+        "ref/netstandard1.3/ko/System.Dynamic.Runtime.xml",
+        "ref/netstandard1.3/ru/System.Dynamic.Runtime.xml",
+        "ref/netstandard1.3/zh-hans/System.Dynamic.Runtime.xml",
+        "ref/netstandard1.3/zh-hant/System.Dynamic.Runtime.xml",
+        "ref/portable-net45+win8+wp8+wpa81/_._",
+        "ref/win8/_._",
+        "ref/wp80/_._",
+        "ref/wpa81/_._",
+        "ref/xamarinios10/_._",
+        "ref/xamarinmac20/_._",
+        "ref/xamarintvos10/_._",
+        "ref/xamarinwatchos10/_._",
+        "runtimes/aot/lib/netcore50/System.Dynamic.Runtime.dll",
+        "system.dynamic.runtime.4.0.11.nupkg.sha512",
+        "system.dynamic.runtime.nuspec"
+      ]
+    },
     "System.Numerics.Vectors/4.5.0": {
       "sha512": "AK4wVgiJqQQCALZ+2ZFY3UqEyIunVlNSBLAHNyI8bJfLT5c9kHZH3nVF2KUWYd1/2POvaz3xx9K6nSKo6m78Ew==",
       "type": "package",
@@ -1143,6 +1612,104 @@
         "system.numerics.vectors.nuspec",
         "useSharedDesignerContext.txt",
         "version.txt"
+      ]
+    },
+    "System.Reactive/3.1.1": {
+      "sha512": "jdLBDt+bTs26kUA7R0P3JPYnYt2NKvyUIBW4aZb7JUQLGTfdBebdzKtY9pMTXrjj/QwRZSyKBqfGXzO4Mh7Q0Q==",
+      "type": "package",
+      "path": "system.reactive/3.1.1",
+      "files": [
+        ".signature.p7s",
+        "system.reactive.3.1.1.nupkg.sha512",
+        "system.reactive.nuspec"
+      ]
+    },
+    "System.Reactive.Core/3.1.1": {
+      "sha512": "s6kQTsHXXloJeT0Jo3MPThoRlc9LVGrHZ6rQo8Dvx3klnaIknQBy0/NjsUSAnGZHdCsJzQEnH08X2BG06ib1ZA==",
+      "type": "package",
+      "path": "system.reactive.core/3.1.1",
+      "files": [
+        ".signature.p7s",
+        "lib/net45/System.Reactive.Core.dll",
+        "lib/net45/System.Reactive.Core.xml",
+        "lib/net46/System.Reactive.Core.dll",
+        "lib/net46/System.Reactive.Core.xml",
+        "lib/netcore451/System.Reactive.Core.dll",
+        "lib/netcore451/System.Reactive.Core.xml",
+        "lib/netcoreapp1.0/System.Reactive.Core.dll",
+        "lib/netcoreapp1.0/System.Reactive.Core.xml",
+        "lib/netstandard1.0/System.Reactive.Core.dll",
+        "lib/netstandard1.0/System.Reactive.Core.xml",
+        "lib/netstandard1.1/System.Reactive.Core.dll",
+        "lib/netstandard1.1/System.Reactive.Core.xml",
+        "lib/netstandard1.3/System.Reactive.Core.dll",
+        "lib/netstandard1.3/System.Reactive.Core.xml",
+        "lib/uap10.0/System.Reactive.Core.dll",
+        "lib/uap10.0/System.Reactive.Core.xml",
+        "lib/wpa81/System.Reactive.Core.dll",
+        "lib/wpa81/System.Reactive.Core.xml",
+        "system.reactive.core.3.1.1.nupkg.sha512",
+        "system.reactive.core.nuspec"
+      ]
+    },
+    "System.Reactive.Interfaces/3.1.1": {
+      "sha512": "KSnc+j8WQLS2elGyxdqonTxpdtreANwhfD5kBw/m9bV0YcjL2DjgQg46F0HIOTEN45qGU1MN1MFX5fHbYnVEtA==",
+      "type": "package",
+      "path": "system.reactive.interfaces/3.1.1",
+      "files": [
+        ".signature.p7s",
+        "lib/net45/System.Reactive.Interfaces.dll",
+        "lib/net45/System.Reactive.Interfaces.xml",
+        "lib/netstandard1.0/System.Reactive.Interfaces.dll",
+        "lib/netstandard1.0/System.Reactive.Interfaces.xml",
+        "system.reactive.interfaces.3.1.1.nupkg.sha512",
+        "system.reactive.interfaces.nuspec"
+      ]
+    },
+    "System.Reactive.Linq/3.1.1": {
+      "sha512": "Hc3HKFiNWLoo2Qa+8daQIsQQYRxWfhsWhI9CW9NejTwVX9w72+1DDK2J/t1ezk7a45GRIvcPo1bMrZtpMEHO1Q==",
+      "type": "package",
+      "path": "system.reactive.linq/3.1.1",
+      "files": [
+        ".signature.p7s",
+        "lib/net45/System.Reactive.Linq.dll",
+        "lib/net45/System.Reactive.Linq.xml",
+        "lib/net46/System.Reactive.Linq.dll",
+        "lib/net46/System.Reactive.Linq.xml",
+        "lib/netstandard1.0/System.Reactive.Linq.dll",
+        "lib/netstandard1.0/System.Reactive.Linq.xml",
+        "lib/netstandard1.1/System.Reactive.Linq.dll",
+        "lib/netstandard1.1/System.Reactive.Linq.xml",
+        "lib/netstandard1.3/System.Reactive.Linq.dll",
+        "lib/netstandard1.3/System.Reactive.Linq.xml",
+        "system.reactive.linq.3.1.1.nupkg.sha512",
+        "system.reactive.linq.nuspec"
+      ]
+    },
+    "System.Reactive.PlatformServices/3.1.1": {
+      "sha512": "nWouPlttrYpZ0TALhhUqfxOIzs3ZA1ZwfHTlnP0SbuGaszKp+5kopaqyZ1sRmdlo8QXkfb+sRrDOA2hhxOpaGw==",
+      "type": "package",
+      "path": "system.reactive.platformservices/3.1.1",
+      "files": [
+        ".signature.p7s",
+        "lib/net45/System.Reactive.PlatformServices.dll",
+        "lib/net45/System.Reactive.PlatformServices.xml",
+        "lib/net46/System.Reactive.PlatformServices.dll",
+        "lib/net46/System.Reactive.PlatformServices.xml",
+        "lib/netcore451/System.Reactive.PlatformServices.dll",
+        "lib/netcore451/System.Reactive.PlatformServices.xml",
+        "lib/netcoreapp1.0/System.Reactive.PlatformServices.dll",
+        "lib/netcoreapp1.0/System.Reactive.PlatformServices.xml",
+        "lib/netstandard1.0/System.Reactive.PlatformServices.dll",
+        "lib/netstandard1.0/System.Reactive.PlatformServices.xml",
+        "lib/netstandard1.3/System.Reactive.PlatformServices.dll",
+        "lib/netstandard1.3/System.Reactive.PlatformServices.xml",
+        "lib/uap10.0/System.Reactive.PlatformServices.dll",
+        "lib/uap10.0/System.Reactive.PlatformServices.xml",
+        "lib/wpa81/System.Reactive.PlatformServices.dll",
+        "lib/wpa81/System.Reactive.PlatformServices.xml",
+        "system.reactive.platformservices.3.1.1.nupkg.sha512",
+        "system.reactive.platformservices.nuspec"
       ]
     },
     "System.Reflection.TypeExtensions/4.3.0": {
@@ -1216,6 +1783,54 @@
         "system.runtime.compilerservices.unsafe.nuspec",
         "useSharedDesignerContext.txt",
         "version.txt"
+      ]
+    },
+    "System.Runtime.InteropServices.WindowsRuntime/4.0.1": {
+      "sha512": "DfTIr/mWBABiRQ4ROzrViCgxLF7nkAtUBL9KeMAqxph55pqMjhjCqas/SYqor2UEljWKr7wrShG0F7xNfkNveQ==",
+      "type": "package",
+      "path": "system.runtime.interopservices.windowsruntime/4.0.1",
+      "files": [
+        ".signature.p7s",
+        "ThirdPartyNotices.txt",
+        "dotnet_library_license.txt",
+        "lib/net45/_._",
+        "lib/netcore50/System.Runtime.InteropServices.WindowsRuntime.dll",
+        "lib/netstandard1.3/System.Runtime.InteropServices.WindowsRuntime.dll",
+        "lib/portable-net45+win8+wp8+wpa81/_._",
+        "lib/win8/_._",
+        "lib/wp80/_._",
+        "lib/wpa81/_._",
+        "lib/xamarinios1/_._",
+        "ref/net45/_._",
+        "ref/netcore50/System.Runtime.InteropServices.WindowsRuntime.dll",
+        "ref/netcore50/System.Runtime.InteropServices.WindowsRuntime.xml",
+        "ref/netcore50/de/System.Runtime.InteropServices.WindowsRuntime.xml",
+        "ref/netcore50/es/System.Runtime.InteropServices.WindowsRuntime.xml",
+        "ref/netcore50/fr/System.Runtime.InteropServices.WindowsRuntime.xml",
+        "ref/netcore50/it/System.Runtime.InteropServices.WindowsRuntime.xml",
+        "ref/netcore50/ja/System.Runtime.InteropServices.WindowsRuntime.xml",
+        "ref/netcore50/ko/System.Runtime.InteropServices.WindowsRuntime.xml",
+        "ref/netcore50/ru/System.Runtime.InteropServices.WindowsRuntime.xml",
+        "ref/netcore50/zh-hans/System.Runtime.InteropServices.WindowsRuntime.xml",
+        "ref/netcore50/zh-hant/System.Runtime.InteropServices.WindowsRuntime.xml",
+        "ref/netstandard1.0/System.Runtime.InteropServices.WindowsRuntime.dll",
+        "ref/netstandard1.0/System.Runtime.InteropServices.WindowsRuntime.xml",
+        "ref/netstandard1.0/de/System.Runtime.InteropServices.WindowsRuntime.xml",
+        "ref/netstandard1.0/es/System.Runtime.InteropServices.WindowsRuntime.xml",
+        "ref/netstandard1.0/fr/System.Runtime.InteropServices.WindowsRuntime.xml",
+        "ref/netstandard1.0/it/System.Runtime.InteropServices.WindowsRuntime.xml",
+        "ref/netstandard1.0/ja/System.Runtime.InteropServices.WindowsRuntime.xml",
+        "ref/netstandard1.0/ko/System.Runtime.InteropServices.WindowsRuntime.xml",
+        "ref/netstandard1.0/ru/System.Runtime.InteropServices.WindowsRuntime.xml",
+        "ref/netstandard1.0/zh-hans/System.Runtime.InteropServices.WindowsRuntime.xml",
+        "ref/netstandard1.0/zh-hant/System.Runtime.InteropServices.WindowsRuntime.xml",
+        "ref/portable-net45+win8+wp8+wpa81/_._",
+        "ref/win8/_._",
+        "ref/wp80/_._",
+        "ref/wpa81/_._",
+        "runtimes/aot/lib/netcore50/System.Runtime.InteropServices.WindowsRuntime.dll",
+        "system.runtime.interopservices.windowsruntime.4.0.1.nupkg.sha512",
+        "system.runtime.interopservices.windowsruntime.nuspec"
       ]
     },
     "Unity.Abstractions/3.3.1": {
@@ -1751,6 +2366,8 @@
   },
   "projectFileDependencyGroups": {
     "MonoAndroid,Version=v8.1": [
+      "Acr.UserDialogs >= 7.0.1",
+      "Polly >= 6.1.1",
       "Prism.Unity.Forms >= 7.1.0.431",
       "Realm >= 3.2.1",
       "Refit >= 4.6.48",
@@ -1763,7 +2380,8 @@
       "Xamarin.Android.Support.v7.MediaRouter >= 27.0.2.1",
       "Xamarin.Controls.SignaturePad.Forms >= 3.0.0",
       "Xamarin.Essentials >= 0.11.0-preview",
-      "Xamarin.Forms >= 3.3.0.912540"
+      "Xamarin.Forms >= 3.3.0.912540",
+      "fusillade >= 1.0.0"
     ]
   },
   "packageFolders": {
@@ -1806,6 +2424,14 @@
     "frameworks": {
       "monoandroid81": {
         "dependencies": {
+          "Acr.UserDialogs": {
+            "target": "Package",
+            "version": "[7.0.1, )"
+          },
+          "Polly": {
+            "target": "Package",
+            "version": "[6.1.1, )"
+          },
           "Prism.Unity.Forms": {
             "target": "Package",
             "version": "[7.1.0.431, )"
@@ -1849,6 +2475,10 @@
           "Xamarin.Forms": {
             "target": "Package",
             "version": "[3.3.0.912540, )"
+          },
+          "fusillade": {
+            "target": "Package",
+            "version": "[1.0.0, )"
           }
         }
       }

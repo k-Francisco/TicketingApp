@@ -1,7 +1,7 @@
 {
   "runtimeTarget": {
     "name": ".NETStandard,Version=v2.0/",
-    "signature": "4e469cf445fcb27452c64758d4865ff2bb842026"
+    "signature": "aed64ad7fa55f8f5f97f435de9d01bf0c2cb68d3"
   },
   "compilationOptions": {},
   "targets": {
@@ -9,19 +9,44 @@
     ".NETStandard,Version=v2.0/": {
       "TicketingApp/1.0.0": {
         "dependencies": {
+          "Acr.UserDialogs": "7.0.1",
           "NETStandard.Library": "2.0.3",
+          "Polly": "6.1.1",
           "Prism.Unity.Forms": "7.1.0.431",
           "Realm": "3.2.1",
           "SpevoCore": "1.0.0",
           "Xamarin.Controls.SignaturePad.Forms": "3.0.0",
           "Xamarin.Essentials": "0.11.0-preview",
-          "Xamarin.Forms": "3.3.0.912540"
+          "Xamarin.Forms": "3.3.0.912540",
+          "fusillade": "1.0.0"
         },
         "runtime": {
           "TicketingApp.dll": {}
         }
       },
+      "Acr.UserDialogs/7.0.1": {
+        "runtime": {
+          "lib/netstandard2.0/Acr.UserDialogs.dll": {
+            "assemblyVersion": "0.0.0.0",
+            "fileVersion": "0.0.0.0"
+          }
+        }
+      },
       "Fody/3.0.3": {},
+      "fusillade/1.0.0": {
+        "dependencies": {
+          "NETStandard.Library": "2.0.3",
+          "Splat": "2.0.0",
+          "System.Reactive": "3.1.1",
+          "Punchclock": "2.1.0"
+        },
+        "runtime": {
+          "lib/netstandard1.4/Fusillade.dll": {
+            "assemblyVersion": "1.0.0.0",
+            "fileVersion": "1.0.0.0"
+          }
+        }
+      },
       "Microsoft.NETCore.Platforms/1.1.0": {},
       "Microsoft.NETCore.Targets/1.1.0": {},
       "NETStandard.Library/2.0.3": {
@@ -34,6 +59,14 @@
           "lib/netstandard2.0/Newtonsoft.Json.dll": {
             "assemblyVersion": "11.0.0.0",
             "fileVersion": "11.0.2.21924"
+          }
+        }
+      },
+      "Polly/6.1.1": {
+        "runtime": {
+          "lib/netstandard2.0/Polly.dll": {
+            "assemblyVersion": "6.0.0.0",
+            "fileVersion": "6.1.1.0"
           }
         }
       },
@@ -66,6 +99,18 @@
           "lib/netstandard2.0/Prism.Unity.Forms.dll": {
             "assemblyVersion": "7.1.0.431",
             "fileVersion": "7.1.0.431"
+          }
+        }
+      },
+      "Punchclock/2.1.0": {
+        "dependencies": {
+          "NETStandard.Library": "2.0.3",
+          "System.Reactive": "3.1.1"
+        },
+        "runtime": {
+          "lib/netstandard1.4/Punchclock.dll": {
+            "assemblyVersion": "2.1.0.0",
+            "fileVersion": "2.1.0.0"
           }
         }
       },
@@ -137,6 +182,14 @@
           }
         }
       },
+      "Splat/2.0.0": {
+        "runtime": {
+          "lib/netstandard1.1/Splat.dll": {
+            "assemblyVersion": "2.0.0.0",
+            "fileVersion": "2.0.0.0"
+          }
+        }
+      },
       "System.Collections/4.0.11": {
         "dependencies": {
           "Microsoft.NETCore.Platforms": "1.1.0",
@@ -144,11 +197,58 @@
           "System.Runtime": "4.3.0"
         }
       },
+      "System.ComponentModel/4.0.1": {
+        "dependencies": {
+          "System.Runtime": "4.3.0"
+        },
+        "runtime": {
+          "lib/netstandard1.3/System.ComponentModel.dll": {
+            "assemblyVersion": "4.0.1.0",
+            "fileVersion": "1.0.24212.1"
+          }
+        }
+      },
+      "System.Diagnostics.Contracts/4.0.1": {
+        "dependencies": {
+          "System.Runtime": "4.3.0"
+        },
+        "runtime": {
+          "lib/netstandard1.0/System.Diagnostics.Contracts.dll": {
+            "assemblyVersion": "4.0.1.0",
+            "fileVersion": "1.0.24212.1"
+          }
+        }
+      },
       "System.Diagnostics.Debug/4.0.11": {
         "dependencies": {
           "Microsoft.NETCore.Platforms": "1.1.0",
           "Microsoft.NETCore.Targets": "1.1.0",
           "System.Runtime": "4.3.0"
+        }
+      },
+      "System.Dynamic.Runtime/4.0.11": {
+        "dependencies": {
+          "System.Collections": "4.0.11",
+          "System.Diagnostics.Debug": "4.0.11",
+          "System.Globalization": "4.0.11",
+          "System.Linq": "4.1.0",
+          "System.Linq.Expressions": "4.1.0",
+          "System.ObjectModel": "4.0.12",
+          "System.Reflection": "4.3.0",
+          "System.Reflection.Emit": "4.0.1",
+          "System.Reflection.Emit.ILGeneration": "4.0.1",
+          "System.Reflection.Primitives": "4.3.0",
+          "System.Reflection.TypeExtensions": "4.3.0",
+          "System.Resources.ResourceManager": "4.0.1",
+          "System.Runtime": "4.3.0",
+          "System.Runtime.Extensions": "4.1.0",
+          "System.Threading": "4.0.11"
+        },
+        "runtime": {
+          "lib/netstandard1.3/System.Dynamic.Runtime.dll": {
+            "assemblyVersion": "4.0.11.0",
+            "fileVersion": "1.0.24212.1"
+          }
         }
       },
       "System.Globalization/4.0.11": {
@@ -247,6 +347,59 @@
           "lib/netstandard1.3/System.ObjectModel.dll": {
             "assemblyVersion": "4.0.12.0",
             "fileVersion": "1.0.24212.1"
+          }
+        }
+      },
+      "System.Reactive/3.1.1": {
+        "dependencies": {
+          "System.Reactive.PlatformServices": "3.1.1"
+        }
+      },
+      "System.Reactive.Core/3.1.1": {
+        "dependencies": {
+          "System.ComponentModel": "4.0.1",
+          "System.Diagnostics.Contracts": "4.0.1",
+          "System.Dynamic.Runtime": "4.0.11",
+          "System.Reactive.Interfaces": "3.1.1"
+        },
+        "runtime": {
+          "lib/netstandard1.3/System.Reactive.Core.dll": {
+            "assemblyVersion": "3.0.3000.0",
+            "fileVersion": "3.1.1.0"
+          }
+        }
+      },
+      "System.Reactive.Interfaces/3.1.1": {
+        "dependencies": {
+          "NETStandard.Library": "2.0.3"
+        },
+        "runtime": {
+          "lib/netstandard1.0/System.Reactive.Interfaces.dll": {
+            "assemblyVersion": "3.0.0.0",
+            "fileVersion": "3.1.1.0"
+          }
+        }
+      },
+      "System.Reactive.Linq/3.1.1": {
+        "dependencies": {
+          "System.Reactive.Core": "3.1.1",
+          "System.Runtime.InteropServices.WindowsRuntime": "4.0.1"
+        },
+        "runtime": {
+          "lib/netstandard1.3/System.Reactive.Linq.dll": {
+            "assemblyVersion": "3.0.3000.0",
+            "fileVersion": "3.1.1.0"
+          }
+        }
+      },
+      "System.Reactive.PlatformServices/3.1.1": {
+        "dependencies": {
+          "System.Reactive.Linq": "3.1.1"
+        },
+        "runtime": {
+          "lib/netstandard1.3/System.Reactive.PlatformServices.dll": {
+            "assemblyVersion": "3.0.3000.0",
+            "fileVersion": "3.1.1.0"
           }
         }
       },
@@ -358,6 +511,17 @@
           "System.Runtime": "4.3.0"
         }
       },
+      "System.Runtime.InteropServices.WindowsRuntime/4.0.1": {
+        "dependencies": {
+          "System.Runtime": "4.3.0"
+        },
+        "runtime": {
+          "lib/netstandard1.3/System.Runtime.InteropServices.WindowsRuntime.dll": {
+            "assemblyVersion": "4.0.1.0",
+            "fileVersion": "1.0.24212.1"
+          }
+        }
+      },
       "System.Text.Encoding/4.3.0": {
         "dependencies": {
           "Microsoft.NETCore.Platforms": "1.1.0",
@@ -444,8 +608,10 @@
       "SpevoCore/1.0.0": {
         "dependencies": {
           "Newtonsoft.Json": "11.0.2",
+          "Polly": "6.1.1",
           "Refit": "4.6.48",
-          "Xamarin.Essentials": "0.11.0-preview"
+          "Xamarin.Essentials": "0.11.0-preview",
+          "fusillade": "1.0.0"
         },
         "runtime": {
           "SpevoCore.dll": {}
@@ -459,12 +625,26 @@
       "serviceable": false,
       "sha512": ""
     },
+    "Acr.UserDialogs/7.0.1": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-4BB8g4I9YEvaxp6r1aq14TPLJztGTe2IW9BymNunYxigV/AMBeYhUDcerf9OgrPOTKtENVN23W+d0FtIvhiPLw==",
+      "path": "acr.userdialogs/7.0.1",
+      "hashPath": "acr.userdialogs.7.0.1.nupkg.sha512"
+    },
     "Fody/3.0.3": {
       "type": "package",
       "serviceable": true,
       "sha512": "sha512-jjc1i8AX9/NIfVgRAZpCw1uKpkaMQrXFYWlMnQ6zjr0l+Or56DaIq0xA+EcQzYrfg6KrF03ybynpotd1UlAHcA==",
       "path": "fody/3.0.3",
       "hashPath": "fody.3.0.3.nupkg.sha512"
+    },
+    "fusillade/1.0.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-8igNr9Ho5bTEUgwYZ+iYQAkieYjpD/piI0hgBeBt65ULy1AhlL/FkFYsCvE7pWm6SxvY++5Akj0Vi84/3VospQ==",
+      "path": "fusillade/1.0.0",
+      "hashPath": "fusillade.1.0.0.nupkg.sha512"
     },
     "Microsoft.NETCore.Platforms/1.1.0": {
       "type": "package",
@@ -494,6 +674,13 @@
       "path": "newtonsoft.json/11.0.2",
       "hashPath": "newtonsoft.json.11.0.2.nupkg.sha512"
     },
+    "Polly/6.1.1": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-7xIvnwB0GyaZsea2nOWDLNQruL17k86lRUE4+D9zkE4BawhLyce7tC7xlFnrfYYrDCDhLAKv8crH8f/VctJaIw==",
+      "path": "polly/6.1.1",
+      "hashPath": "polly.6.1.1.nupkg.sha512"
+    },
     "Prism.Core/7.1.0.431": {
       "type": "package",
       "serviceable": true,
@@ -514,6 +701,13 @@
       "sha512": "sha512-o2qR/dF/CsTO7HyJuQ7Yfc9T1ve/OufWZmZv6N40TfCQXrCIg3g0DMd8yFCaoYOt8yA0T51N8PfBZyVjJimhGQ==",
       "path": "prism.unity.forms/7.1.0.431",
       "hashPath": "prism.unity.forms.7.1.0.431.nupkg.sha512"
+    },
+    "Punchclock/2.1.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-l5o15/fr7TP9h8d051aSbuAUExpEG4w11RPWq3aTUTD1vKcEAMAW8GuLNKUCYQLzdRL/VKGHAbe8jfqid4A7Ig==",
+      "path": "punchclock/2.1.0",
+      "hashPath": "punchclock.2.1.0.nupkg.sha512"
     },
     "Realm/3.2.1": {
       "type": "package",
@@ -550,6 +744,13 @@
       "path": "remotion.linq/2.1.2",
       "hashPath": "remotion.linq.2.1.2.nupkg.sha512"
     },
+    "Splat/2.0.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-e6oHvtRpK7Ylyl0MBhNwrJm7OibMEHlWeqan1a5WGRB4mX90y621CdOVqM+Slm5+cx9nBl6CWGc2KY2nSBPoAg==",
+      "path": "splat/2.0.0",
+      "hashPath": "splat.2.0.0.nupkg.sha512"
+    },
     "System.Collections/4.0.11": {
       "type": "package",
       "serviceable": true,
@@ -557,12 +758,33 @@
       "path": "system.collections/4.0.11",
       "hashPath": "system.collections.4.0.11.nupkg.sha512"
     },
+    "System.ComponentModel/4.0.1": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-oBZFnm7seFiVfugsIyOvQCWobNZs7FzqDV/B7tx20Ep/l3UUFCPDkdTnCNaJZTU27zjeODmy2C/cP60u3D4c9w==",
+      "path": "system.componentmodel/4.0.1",
+      "hashPath": "system.componentmodel.4.0.1.nupkg.sha512"
+    },
+    "System.Diagnostics.Contracts/4.0.1": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-HrYHFDztlCdrOnDZ4ti7ZOIO34mpOtLo1ETVJH9uxt0zqfpP7x6w0jOe1CwwF+NMzFJfudWoSqi+sgTHX/WQVw==",
+      "path": "system.diagnostics.contracts/4.0.1",
+      "hashPath": "system.diagnostics.contracts.4.0.1.nupkg.sha512"
+    },
     "System.Diagnostics.Debug/4.0.11": {
       "type": "package",
       "serviceable": true,
       "sha512": "sha512-w5U95fVKHY4G8ASs/K5iK3J5LY+/dLFd4vKejsnI/ZhBsWS9hQakfx3Zr7lRWKg4tAw9r4iktyvsTagWkqYCiw==",
       "path": "system.diagnostics.debug/4.0.11",
       "hashPath": "system.diagnostics.debug.4.0.11.nupkg.sha512"
+    },
+    "System.Dynamic.Runtime/4.0.11": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-QqCP+dPZdg6M21Zm4+beCoJHLNR3tJ82uvgd/9cQBeXZTFJVLyI/hosKuuFfdEyBwcadHdBOXbpaAn+XEo3skQ==",
+      "path": "system.dynamic.runtime/4.0.11",
+      "hashPath": "system.dynamic.runtime.4.0.11.nupkg.sha512"
     },
     "System.Globalization/4.0.11": {
       "type": "package",
@@ -612,6 +834,41 @@
       "sha512": "sha512-tAgJM1xt3ytyMoW4qn4wIqgJYm7L7TShRZG4+Q4Qsi2PCcj96pXN7nRywS9KkB3p/xDUjc2HSwP9SROyPYDYKQ==",
       "path": "system.objectmodel/4.0.12",
       "hashPath": "system.objectmodel.4.0.12.nupkg.sha512"
+    },
+    "System.Reactive/3.1.1": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-jdLBDt+bTs26kUA7R0P3JPYnYt2NKvyUIBW4aZb7JUQLGTfdBebdzKtY9pMTXrjj/QwRZSyKBqfGXzO4Mh7Q0Q==",
+      "path": "system.reactive/3.1.1",
+      "hashPath": "system.reactive.3.1.1.nupkg.sha512"
+    },
+    "System.Reactive.Core/3.1.1": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-s6kQTsHXXloJeT0Jo3MPThoRlc9LVGrHZ6rQo8Dvx3klnaIknQBy0/NjsUSAnGZHdCsJzQEnH08X2BG06ib1ZA==",
+      "path": "system.reactive.core/3.1.1",
+      "hashPath": "system.reactive.core.3.1.1.nupkg.sha512"
+    },
+    "System.Reactive.Interfaces/3.1.1": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-KSnc+j8WQLS2elGyxdqonTxpdtreANwhfD5kBw/m9bV0YcjL2DjgQg46F0HIOTEN45qGU1MN1MFX5fHbYnVEtA==",
+      "path": "system.reactive.interfaces/3.1.1",
+      "hashPath": "system.reactive.interfaces.3.1.1.nupkg.sha512"
+    },
+    "System.Reactive.Linq/3.1.1": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-Hc3HKFiNWLoo2Qa+8daQIsQQYRxWfhsWhI9CW9NejTwVX9w72+1DDK2J/t1ezk7a45GRIvcPo1bMrZtpMEHO1Q==",
+      "path": "system.reactive.linq/3.1.1",
+      "hashPath": "system.reactive.linq.3.1.1.nupkg.sha512"
+    },
+    "System.Reactive.PlatformServices/3.1.1": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-nWouPlttrYpZ0TALhhUqfxOIzs3ZA1ZwfHTlnP0SbuGaszKp+5kopaqyZ1sRmdlo8QXkfb+sRrDOA2hhxOpaGw==",
+      "path": "system.reactive.platformservices/3.1.1",
+      "hashPath": "system.reactive.platformservices.3.1.1.nupkg.sha512"
     },
     "System.Reflection/4.3.0": {
       "type": "package",
@@ -689,6 +946,13 @@
       "sha512": "sha512-CUOHjTT/vgP0qGW22U4/hDlOqXmcPq5YicBaXdUR2UiUoLwBT+olO6we4DVbq57jeX5uXH2uerVZhf0qGj+sVQ==",
       "path": "system.runtime.extensions/4.1.0",
       "hashPath": "system.runtime.extensions.4.1.0.nupkg.sha512"
+    },
+    "System.Runtime.InteropServices.WindowsRuntime/4.0.1": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-DfTIr/mWBABiRQ4ROzrViCgxLF7nkAtUBL9KeMAqxph55pqMjhjCqas/SYqor2UEljWKr7wrShG0F7xNfkNveQ==",
+      "path": "system.runtime.interopservices.windowsruntime/4.0.1",
+      "hashPath": "system.runtime.interopservices.windowsruntime.4.0.1.nupkg.sha512"
     },
     "System.Text.Encoding/4.3.0": {
       "type": "package",

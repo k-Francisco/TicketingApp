@@ -1,6 +1,7 @@
 ﻿using Prism;
 using Prism.Ioc;
 using SpevoCore.Services;
+using SpevoCore.Services.API_Service;
 using SpevoCore.Services.Sharepoint_API;
 using SpevoCore.Services.Token_Service;
 using TicketingApp.ViewModels;
@@ -28,7 +29,7 @@ namespace TicketingApp
         {
             InitializeComponent();
 
-            if (TokenService.GetInstance().IsAlreadyLoggedIn())
+            if (TokenService.GetInstance.IsAlreadyLoggedIn())
                 await NavigationService.NavigateAsync("NavigationPage/TicketsPage");
             else
                 await NavigationService.NavigateAsync("LoginPage");
@@ -44,8 +45,8 @@ namespace TicketingApp
             containerRegistry.RegisterForNavigation<TicketDetailsPage, TicketDetailsPageViewModel>();
 
             //instances
-            containerRegistry.RegisterInstance<ITokenService>(TokenService.GetInstance());
-            containerRegistry.RegisterInstance<ISharepointAPI>(SharepointApiWrapper.GetInstance());
+            containerRegistry.RegisterInstance<ITokenService>(TokenService.GetInstance);
+            containerRegistry.RegisterInstance<IApiManager>(ApiManager.GetInstance);
         }
     }
 }

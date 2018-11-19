@@ -1,17 +1,17 @@
-﻿using System;
+﻿using Fusillade;
+using Newtonsoft.Json;
+using Prism.Commands;
+using Prism.Events;
+using Prism.Navigation;
+using SpevoCore.Services;
+using SpevoCore.Services.API_Service;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
-using Newtonsoft.Json;
-using Prism.Commands;
-using Prism.Events;
-using Prism.Navigation;
-using Prism.Services;
-using SpevoCore.Services;
-using SpevoCore.Services.Sharepoint_API;
 using TicketingApp.Models.Customers;
 using TicketingApp.Models.EquipmentUnit;
 using TicketingApp.Models.EquipmentUsed;
@@ -31,12 +31,14 @@ namespace TicketingApp.ViewModels
     public class TicketsPageViewModel : ViewModelBase
     {
         private ObservableCollection<Ticket> _ticketCollection = new ObservableCollection<Ticket>();
+
         public ObservableCollection<Ticket> TicketCollection
         {
             get { return _ticketCollection; }
         }
 
         private bool _refreshing;
+
         public bool Refreshing
         {
             get { return _refreshing; }
@@ -44,28 +46,26 @@ namespace TicketingApp.ViewModels
         }
 
         private string _syncStage;
+
         public string SyncStage
         {
             get { return _syncStage; }
             set { SetProperty(ref _syncStage, value); }
         }
 
-        public TicketsPageViewModel(INavigationService navigationService, ISharepointAPI sharepointAPI,
-                                    IPageDialogService pageDialogService, IEventAggregator eventAggregator) 
-            : base(navigationService, sharepointAPI, pageDialogService, eventAggregator)
+        public TicketsPageViewModel(INavigationService navigationService, IEventAggregator eventAggregator, IApiManager apiManager)
+            : base(navigationService, eventAggregator, apiManager)
         {
             Title = "Tickets";
-            SharepointAPI.Init(App.SiteUrl);
 
             Connectivity.ConnectivityChanged += (s, e) =>
             {
                 if (Connectivity.NetworkAccess == NetworkAccess.Internet)
                 {
                     System.Diagnostics.Debug.WriteLine("connect", "yeah");
-                    //CheckSavedRequests();
+                    CheckSavedRequests();
                 }
             };
-
             SaveUser();
             SyncData();
         }
@@ -77,10 +77,13 @@ namespace TicketingApp.ViewModels
                 if (connected)
                 {
                     var savedUser = realm.All<User>().FirstOrDefault();
-                    if(savedUser == null)
+                    if (savedUser == null)
                     {
-                        var user = await SharepointAPI.GetCurrentUser();
-                        realm.Write(()=> {
+                        var userResponse = await ApiManager.AddTask(SharepointApi.GetApi(Priority.UserInitiated).GetCurrentUser());
+                        var userString = await userResponse.Content.ReadAsStringAsync();
+                        var user = JsonConvert.DeserializeObject<SpevoCore.Models.User.UserModel>(userString);
+                        realm.Write(() =>
+                        {
                             realm.Add(new User()
                             {
                                 IsSiteAdmin = user.D.IsSiteAdmin,
@@ -92,7 +95,7 @@ namespace TicketingApp.ViewModels
                     }
                 }
             }
-            catch(Exception e)
+            catch (Exception e)
             {
                 System.Diagnostics.Debug.WriteLine("SaveUser", e.Message);
             }
@@ -104,30 +107,31 @@ namespace TicketingApp.ViewModels
             {
                 if (connected)
                 {
-
-                    System.Diagnostics.Debug.WriteLine("rtFa", TokenService.GetInstance().ExtractRtFa());
+                    System.Diagnostics.Debug.WriteLine("rtFa", TokenService.GetInstance.ExtractRtFa());
 
                     Refreshing = true;
+
+                    SyncStage = "Sending pending requests...";
 
                     //to upload all the items that were saved during offline situations
                     CheckSavedRequests();
 
-                    var laborUsedQuery = "$select=ID,Title,WorkType,STHours,OTHours,PerDiem,Billable,TicketId,Created,Modified,GUID" +
-                                         ",Employee/Title&$expand=Employee";
-                    var thirdPartUsedQuery = "$select=ID,RequestDate,Description,Amount,MarkUp,Billable,ChargeType,TicketId,Created," +
-                                             "Modified,Vendor/Title&$expand=Vendor";
+                    var laborUsedSelect = "ID,Title,WorkType,STHours,OTHours,PerDiem,Billable,TicketId,Created,Modified,GUID,Employee/Title";
+                    var laborUsedExpand = "Employee";
+                    var thirdPartyUsedSelect = "ID,RequestDate,Description,Amount,MarkUp,Billable,ChargeType,TicketId,Created,Modified,Vendor/Title";
+                    var thirdPartyUsedExpand = "Vendor";
 
                     var batchRequests = new List<Task<HttpResponseMessage>>() {
-                        SharepointAPI.GetListItemsByListTitle("Tickets"),
-                        SharepointAPI.GetListItemsByListTitle("Customers"),
-                        SharepointAPI.GetListItemsByListTitle("Equipment Unit"),
-                        SharepointAPI.GetListItemsByListTitle("EquipmentUsed"),
-                        SharepointAPI.GetListItemsByListTitle("Invoiced Tickets"),
-                        SharepointAPI.GetListItemsByListTitle("Jobs"),
-                        SharepointAPI.GetListItemsByListTitle("Labor Used",laborUsedQuery),
-                        SharepointAPI.GetListItemsByListTitle("Material"),
-                        SharepointAPI.GetListItemsByListTitle("Material Used"),
-                        SharepointAPI.GetListItemsByListTitle("Third Party Used", thirdPartUsedQuery),
+                        ApiManager.AddTask(SharepointApi.GetApi(Priority.UserInitiated).GetListItemsByListTitle("Tickets")),
+                        ApiManager.AddTask(SharepointApi.GetApi(Priority.UserInitiated).GetListItemsByListTitle("Customers")),
+                        ApiManager.AddTask(SharepointApi.GetApi(Priority.UserInitiated).GetListItemsByListTitle("Equipment Unit")),
+                        ApiManager.AddTask(SharepointApi.GetApi(Priority.UserInitiated).GetListItemsByListTitle("EquipmentUsed")),
+                        ApiManager.AddTask(SharepointApi.GetApi(Priority.UserInitiated).GetListItemsByListTitle("Invoiced Tickets")),
+                        ApiManager.AddTask(SharepointApi.GetApi(Priority.UserInitiated).GetListItemsByListTitle("Jobs")),
+                        ApiManager.AddTask(SharepointApi.GetApi(Priority.UserInitiated).GetListItemsByListTitle("Labor Used", laborUsedSelect, laborUsedExpand)),
+                        ApiManager.AddTask(SharepointApi.GetApi(Priority.UserInitiated).GetListItemsByListTitle("Material")),
+                        ApiManager.AddTask(SharepointApi.GetApi(Priority.UserInitiated).GetListItemsByListTitle("Material Used")),
+                        ApiManager.AddTask(SharepointApi.GetApi(Priority.UserInitiated).GetListItemsByListTitle("Third Party Used", thirdPartyUsedSelect, thirdPartyUsedExpand)),
                     };
 
                     SyncStage = "Getting data from server...";
@@ -148,11 +152,10 @@ namespace TicketingApp.ViewModels
                         responses[9].Content.ReadAsStringAsync(),
                     };
 
-                    //SyncStage = "Converting data...";
-
                     var batchConversionResults = await Task.WhenAll(batchConversion.ToArray());
 
                     #region saved data
+
                     var savedTickets = realm.All<Ticket>().ToList();
                     var savedCustomers = realm.All<Customer>().ToList();
                     var savedEquipmentUnit = realm.All<EquipmentUnit>().ToList();
@@ -163,11 +166,11 @@ namespace TicketingApp.ViewModels
                     var savedMaterial = realm.All<Material>().ToList();
                     var savedMaterialUsed = realm.All<MaterialUsed>().ToList();
                     var savedThirdPartyUsed = realm.All<ThirdPartyUsed>().ToList();
-                    #endregion
 
-                    SyncStage = "Serializing data...";
+                    #endregion saved data
 
                     #region response conversion
+
                     var tickets = JsonConvert.DeserializeObject<Models.Tickets.RootObject>(batchConversionResults[0],
                         new JsonSerializerSettings
                         {
@@ -228,19 +231,20 @@ namespace TicketingApp.ViewModels
                             NullValueHandling = NullValueHandling.Ignore
                         });
                     System.Diagnostics.Debug.WriteLine("tix", "Done converting tpu");
-                    #endregion
+
+                    #endregion response conversion
 
                     var batchSync = new List<Task<bool>>() {
-                        tickets.SyncData(savedTickets,tickets.D.Results),
-                        customers.SyncData(savedCustomers, customers.D.Results),
-                        equipmentUnit.SyncData(savedEquipmentUnit, equipmentUnit.D.Results),
-                        equipmentUsed.SyncData(savedEquipmentUsed, equipmentUsed.D.Results),
-                        invoicedTickets.SyncData(savedInvoicedTickets, invoicedTickets.D.Results),
-                        jobs.SyncData(savedJobs, jobs.D.Results),
-                        laborUsed.SyncData(savedLaborUsed, laborUsed.D.Results),
-                        material.SyncData(savedMaterial, material.D.Results),
-                        materialUsed.SyncData(savedMaterialUsed, materialUsed.D.Results),
-                        thirdPartyUsed.SyncData(savedThirdPartyUsed, thirdPartyUsed.D.Results),
+                        SyncData(savedTickets,tickets.D.Results),
+                        SyncData(savedCustomers, customers.D.Results),
+                        SyncData(savedEquipmentUnit, equipmentUnit.D.Results),
+                        SyncData(savedEquipmentUsed, equipmentUsed.D.Results),
+                        SyncData(savedInvoicedTickets, invoicedTickets.D.Results),
+                        SyncData(savedJobs, jobs.D.Results),
+                        SyncData(savedLaborUsed, laborUsed.D.Results),
+                        SyncData(savedMaterial, material.D.Results),
+                        SyncData(savedMaterialUsed, materialUsed.D.Results),
+                        SyncData(savedThirdPartyUsed, thirdPartyUsed.D.Results),
                     };
 
                     SyncStage = "Syncing...";
@@ -274,7 +278,7 @@ namespace TicketingApp.ViewModels
         }
 
         public async void CheckSavedRequests()
-        {   
+        {
             try
             {
                 var savedRequests = realm.All<SavedRequests>()
@@ -286,7 +290,7 @@ namespace TicketingApp.ViewModels
                 {
                     if (connected)
                     {
-                        var invoices = await SharepointAPI.GetListItemsByListTitle("Invoiced Tickets");
+                        var invoices = await ApiManager.AddTask(SharepointApi.GetApi(Priority.UserInitiated).GetListItemsByListTitle("Invoiced Tickets"));
 
                         if (invoices.IsSuccessStatusCode)
                         {
@@ -318,47 +322,58 @@ namespace TicketingApp.ViewModels
                             }
                         }
 
-                        foreach (var item in invoiceCounts)
+                        //foreach (var item in invoiceCounts)
+                        //{
+                        //    //realm.Write(()=> {
+                        //    //    var request = savedRequests.Where(s => s.TicketNumber.Equals(item.Key)).FirstOrDefault();
+                        //    //    request.InvoiceCount = Convert.ToString(item.Value + 1);
+                        //    //});
+                        //    System.Diagnostics.Debug.WriteLine("Dictionary", "ticketnumber: " + item.Key + " | value: " + item.Value);
+                        //}
+
+                        var formDigestResponse = await ApiManager.AddTask(SharepointApi.GetApi(Priority.UserInitiated).GetFormDigest());
+                        var formDigestString = await formDigestResponse.Content.ReadAsStringAsync();
+                        var formDigest = JsonConvert.DeserializeObject<SpevoCore.Models.FormDigest.FormDigestModel>(formDigestString);
+
+                        var batch = new List<Task<HttpResponseMessage>>();
+
+                        foreach (var request in savedRequests)
                         {
-                            //realm.Write(()=> {
-                            //    var request = savedRequests.Where(s => s.TicketNumber.Equals(item.Key)).FirstOrDefault();
-                            //    request.InvoiceCount = Convert.ToString(item.Value + 1);
-                            //});
-                            System.Diagnostics.Debug.WriteLine("Dictionary", "ticketnumber: " + item.Key + " | value: " + item.Value);
+                            realm.Write(() =>
+                            {
+                                var count = invoiceCounts.Where(s => s.Key.Equals(request.TicketNumber)).FirstOrDefault();
+                                request.InvoiceCount = Convert.ToString(count.Value + 1);
+                                invoiceCounts[count.Key] = Convert.ToInt32(request.InvoiceCount);
+                            });
+
+                            var builder = new StringBuilder();
+                            var invoiceBody = GetInvoiceBody(request);
+                            foreach (var metadata in invoiceBody)
+                            {
+                                builder.Append(metadata);
+                            }
+
+                            var item = new StringContent(builder.ToString());
+                            item.Headers.ContentType = System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json;odata=verbose");
+
+                            batch.Add(ApiManager.AddTask(SharepointApi.GetApi(Priority.UserInitiated)
+                                .AddListItemByListTitle(formDigest.D.GetContextWebInformation.FormDigestValue,"Invoiced Tickets", item)));
                         }
 
-                    //    var formDigest = await SharepointAPI.GetFormDigest();
+                        var results = await Task.WhenAll(batch);
 
-                    //    var batch = new List<Task<HttpResponseMessage>>();
-
-                    //    foreach (var request in savedRequests)
-                    //    {
-                    //        var builder = new StringBuilder();
-                    //        var invoiceBody = GetInvoiceBody(request);
-                    //        foreach (var metadata in invoiceBody)
-                    //        {
-                    //            builder.Append(metadata);
-                    //        }
-
-                    //        var item = new StringContent(builder.ToString());
-                    //        item.Headers.ContentType = System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json;odata=verbose");
-
-                    //        batch.Add(SharepointAPI.AddListItemByListTitle(formDigest.D.GetContextWebInformation.FormDigestValue,
-                    //                    "Invoiced Tickets",item));
-                    //    }
-
-                    //    var results = await Task.WhenAll(batch);
-
-                    //    realm.Write(() => {
-                    //        for (int i = 0; i < results.Length; i++)
-                    //        {
-                    //            if (results[i].IsSuccessStatusCode)
-                    //            {
-                    //                //TODO: update ticket
-                    //                realm.Remove(savedRequests[i]);
-                    //            }
-                    //        }
-                    //    });
+                        realm.Write(()=> {
+                            for (int i = 0; i < results.Length; i++)
+                            {
+                                if (results[i].IsSuccessStatusCode)
+                                {
+                                    UpdateTicket(formDigest.D.GetContextWebInformation.FormDigestValue,
+                                        savedRequests[i].Signature,
+                                        savedRequests[i].SavedTicket.ID.ToString());
+                                    realm.Remove(savedRequests[i]);
+                                }
+                            }
+                        });
                     }
                 }
             }
@@ -369,17 +384,17 @@ namespace TicketingApp.ViewModels
         }
 
         private DelegateCommand _refreshCommand;
+
         public DelegateCommand RefreshCommand
         {
             get
             {
-                if(_refreshCommand == null)
+                if (_refreshCommand == null)
                 {
-                    _refreshCommand = new DelegateCommand(()=> {
-
+                    _refreshCommand = new DelegateCommand(() =>
+                    {
                         TicketCollection.Clear();
                         SyncData();
-
                     });
                 }
 
@@ -388,6 +403,7 @@ namespace TicketingApp.ViewModels
         }
 
         private DelegateCommand<Ticket> _itemTappepdCommand;
+
         public DelegateCommand<Ticket> ItemTappedCommand
         {
             get
@@ -418,6 +434,5 @@ namespace TicketingApp.ViewModels
                 return _itemTappepdCommand;
             }
         }
-
     }
 }

@@ -1,5 +1,4 @@
 ﻿using Realms;
-using System.Collections.Generic;
 using TicketingApp.Models.Tickets;
 
 namespace TicketingApp.Models.SavedRequests
@@ -17,6 +16,5 @@ namespace TicketingApp.Models.SavedRequests
         public string Signature { get; set; }
         public string UserId { get; set; }
         public string InvoiceCount { get; set; }
-        
     }
 }
