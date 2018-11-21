@@ -1,0 +1,21 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="Services\API Service\Project Online API\**" />
+    <EmbeddedResource Remove="Services\API Service\Project Online API\**" />
+    <None Remove="Services\API Service\Project Online API\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="fusillade" Version="1.0.0" />
+    <PackageReference Include="Newtonsoft.Json" Version="11.0.2" />
+    <PackageReference Include="Polly" Version="6.1.1" />
+    <PackageReference Include="Refit" Version="4.6.48" />
+    <PackageReference Include="Xamarin.Essentials" Version="0.11.0-preview" />
+  </ItemGroup>
+
+</Project>
