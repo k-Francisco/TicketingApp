@@ -12,7 +12,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
 using System.Text;
-using System.Threading.Tasks;
 using TicketingApp.Models.EquipmentUnit;
 using TicketingApp.Models.EquipmentUsed;
 using TicketingApp.Models.LaborUsed;
@@ -65,7 +64,7 @@ namespace TicketingApp.ViewModels
             };
         }
 
-        public async Task<bool> SyncData<U>(List<U> oldData, List<U> newData) where U : RealmObject
+        public void SyncData<U>(List<U> oldData, List<U> newData) where U : RealmObject
         {
             try
             {
@@ -80,12 +79,10 @@ namespace TicketingApp.ViewModels
                         realm.Add(item);
                     }
                 });
-                return true;
             }
             catch (Exception e)
             {
                 System.Diagnostics.Debug.WriteLine("SyncDataError_" + nameof(U), e.Message);
-                return false;
             }
         }
 
@@ -100,7 +97,7 @@ namespace TicketingApp.ViewModels
                     bool approvalStatus = false;
                     string status = "Open";
 
-                    if (signature != null)
+                    if (signature != null && !string.IsNullOrEmpty(signature))
                     {
                         status = "Approved";
                         approvalStatus = true;

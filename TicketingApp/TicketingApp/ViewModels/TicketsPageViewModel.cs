@@ -5,6 +5,7 @@ using Prism.Events;
 using Prism.Navigation;
 using SpevoCore.Services;
 using SpevoCore.Services.API_Service;
+using SpevoCore.Services.Token_Service;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -24,7 +25,9 @@ using TicketingApp.Models.SavedRequests;
 using TicketingApp.Models.ThirdPartyUsed;
 using TicketingApp.Models.Tickets;
 using TicketingApp.Models.Users;
+using TicketingApp.Services;
 using Xamarin.Essentials;
+using Xamarin.Forms;
 
 namespace TicketingApp.ViewModels
 {
@@ -53,10 +56,16 @@ namespace TicketingApp.ViewModels
             set { SetProperty(ref _syncStage, value); }
         }
 
-        public TicketsPageViewModel(INavigationService navigationService, IEventAggregator eventAggregator, IApiManager apiManager)
+        private readonly IClearCookies _clearCookieService;
+        private readonly ITokenService _tokenService;
+
+        public TicketsPageViewModel(INavigationService navigationService, IEventAggregator eventAggregator, IApiManager apiManager,
+            IClearCookies clearCookieService, ITokenService tokenService)
             : base(navigationService, eventAggregator, apiManager)
         {
             Title = "Tickets";
+            _clearCookieService = clearCookieService;
+            _tokenService = tokenService;
 
             Connectivity.ConnectivityChanged += (s, e) =>
             {
@@ -234,22 +243,18 @@ namespace TicketingApp.ViewModels
 
                     #endregion response conversion
 
-                    var batchSync = new List<Task<bool>>() {
-                        SyncData(savedTickets,tickets.D.Results),
-                        SyncData(savedCustomers, customers.D.Results),
-                        SyncData(savedEquipmentUnit, equipmentUnit.D.Results),
-                        SyncData(savedEquipmentUsed, equipmentUsed.D.Results),
-                        SyncData(savedInvoicedTickets, invoicedTickets.D.Results),
-                        SyncData(savedJobs, jobs.D.Results),
-                        SyncData(savedLaborUsed, laborUsed.D.Results),
-                        SyncData(savedMaterial, material.D.Results),
-                        SyncData(savedMaterialUsed, materialUsed.D.Results),
-                        SyncData(savedThirdPartyUsed, thirdPartyUsed.D.Results),
-                    };
-
                     SyncStage = "Syncing...";
 
-                    var doneSync = await Task.WhenAll(batchSync.ToArray());
+                    SyncData(savedTickets, tickets.D.Results);
+                    SyncData(savedCustomers, customers.D.Results);
+                    SyncData(savedEquipmentUnit, equipmentUnit.D.Results);
+                    SyncData(savedEquipmentUsed, equipmentUsed.D.Results);
+                    SyncData(savedInvoicedTickets, invoicedTickets.D.Results);
+                    SyncData(savedJobs, jobs.D.Results);
+                    SyncData(savedLaborUsed, laborUsed.D.Results);
+                    SyncData(savedMaterial, material.D.Results);
+                    SyncData(savedMaterialUsed, materialUsed.D.Results);
+                    SyncData(savedThirdPartyUsed, thirdPartyUsed.D.Results);
                 }
 
                 SyncStage = "";
@@ -321,15 +326,6 @@ namespace TicketingApp.ViewModels
                                 invoiceCounts.Add(item, count);
                             }
                         }
-
-                        //foreach (var item in invoiceCounts)
-                        //{
-                        //    //realm.Write(()=> {
-                        //    //    var request = savedRequests.Where(s => s.TicketNumber.Equals(item.Key)).FirstOrDefault();
-                        //    //    request.InvoiceCount = Convert.ToString(item.Value + 1);
-                        //    //});
-                        //    System.Diagnostics.Debug.WriteLine("Dictionary", "ticketnumber: " + item.Key + " | value: " + item.Value);
-                        //}
 
                         var formDigestResponse = await ApiManager.AddTask(SharepointApi.GetApi(Priority.UserInitiated).GetFormDigest());
                         var formDigestString = await formDigestResponse.Content.ReadAsStringAsync();
@@ -432,6 +428,43 @@ namespace TicketingApp.ViewModels
                 }
 
                 return _itemTappepdCommand;
+            }
+        }
+
+        private DelegateCommand _accountCommand;
+        public DelegateCommand AccountCommand
+        {
+            get
+            {
+                if(_accountCommand == null)
+                {
+                    _accountCommand = new DelegateCommand(() => {
+                        var user = realm.All<User>().FirstOrDefault();
+
+                        PageDialog.ActionSheet(new Acr.UserDialogs.ActionSheetConfig()
+                                    .SetTitle(user.UserName)
+                                    .SetMessage(user.UserEmail)
+                                    .SetCancel()
+                                    .SetDestructive("Logout", () => {
+                                        PageDialog.ActionSheet(new Acr.UserDialogs.ActionSheetConfig()
+                                            .SetTitle("Warning")
+                                            .SetMessage("All of the requests that were saved would be deleted. Continue logging out?")
+                                            .SetCancel()
+                                            .SetDestructive("Logout",async ()=> {
+                                                _clearCookieService.ClearAllCookies();
+                                                _tokenService.Clear();
+                                                realm.Write(() => {
+                                                    realm.RemoveAll();
+                                                });
+                                                System.Diagnostics.Debug.WriteLine("Logout");
+
+                                                await NavigationService.NavigateAsync(new Uri("app:///LoginPage", UriKind.Absolute));
+                                            }));
+                                    }));
+                    });
+                }
+
+                return _accountCommand;
             }
         }
     }

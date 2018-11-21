@@ -1,4 +1,5 @@
-﻿using Fusillade;
+﻿using Acr.UserDialogs;
+using Fusillade;
 using Newtonsoft.Json;
 using Prism.Commands;
 using Prism.Events;
@@ -205,6 +206,7 @@ namespace TicketingApp.ViewModels
         {
             try
             {
+                PageDialog.Loading("Sending request...");
                 var user = realm.All<User>().FirstOrDefault();
 
                 string signature = "";
@@ -276,6 +278,8 @@ namespace TicketingApp.ViewModels
 
                         var ensure = addInvoice.EnsureSuccessStatusCode();
 
+                        UserDialogs.Instance.HideLoading();
+
                         if (ensure.IsSuccessStatusCode)
                         {
                             PageDialog.Alert("Success!");
@@ -291,16 +295,19 @@ namespace TicketingApp.ViewModels
                         }
                         else
                         {
+                            PageDialog.HideLoading();
                             PageDialog.Alert("Something went wrong! Please check your internet connection and try again");
                         }
                     }
                     else
                     {
+                        PageDialog.HideLoading();
                         PageDialog.Alert("Something went wrong! Please check your internet connection and try again");
                     }
                 }
                 else
                 {
+                    PageDialog.HideLoading();
                     PageDialog.Alert("The request will be sent the next time your device is connected to the internet");
                     realm.Write(() =>
                     {

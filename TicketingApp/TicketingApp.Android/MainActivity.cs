@@ -37,10 +37,12 @@ namespace TicketingApp.Droid
     public class AndroidInitializer : IPlatformInitializer
     {
         static GrabCookie grabCookieService = new GrabCookie();
+        static ClearCookies clearCookieService = new ClearCookies();
         public void RegisterTypes(IContainerRegistry containerRegistry)
         {
             // Register any platform specific implementations
             containerRegistry.RegisterInstance<ICookieGrab>(grabCookieService);
+            containerRegistry.RegisterInstance<IClearCookies>(clearCookieService);
         }
     }
 }

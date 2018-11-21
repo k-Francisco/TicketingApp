@@ -1,4 +1,7 @@
-﻿using Prism;
+﻿using Microsoft.AppCenter;
+using Microsoft.AppCenter.Analytics;
+using Microsoft.AppCenter.Crashes;
+using Prism;
 using Prism.Ioc;
 using SpevoCore.Services;
 using SpevoCore.Services.API_Service;
@@ -28,6 +31,10 @@ namespace TicketingApp
         protected override async void OnInitialized()
         {
             InitializeComponent();
+
+            AppCenter.Start("ios=be14eb7c-34ba-4cbd-a0a4-0dbd4f828f05;" +
+                            "android=4f87b43a-ea72-4c5a-bf46-684310ec919a;", 
+                            typeof(Analytics), typeof(Crashes));
 
             if (TokenService.GetInstance.IsAlreadyLoggedIn())
                 await NavigationService.NavigateAsync("NavigationPage/TicketsPage");
