@@ -130,7 +130,6 @@ class MonoPackageManager_Resources {
 		"Remotion.Linq.dll",
 		"SignaturePad.dll",
 		"SignaturePad.Forms.dll",
-		"SpevoCore.dll",
 		"Splat.dll",
 		"System.Reactive.Core.dll",
 		"System.Reactive.Interfaces.dll",
@@ -165,6 +164,7 @@ class MonoPackageManager_Resources {
 		"Xamarin.Forms.Platform.Android.dll",
 		"Xamarin.Forms.Platform.dll",
 		"Xamarin.Forms.Xaml.dll",
+		"SpevoCore.dll",
 	};
 	public static final String[] Dependencies = new String[]{
 	};

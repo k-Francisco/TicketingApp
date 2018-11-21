@@ -18,10 +18,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\..\Timesheet-Tracker\SpevoCore\SpevoCore.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
     <EmbeddedResource Update="Views\InvoicePage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
@@ -38,6 +34,10 @@
 
   <ItemGroup>
     <Folder Include="Events\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\SpevoCore\SpevoCore.csproj" />
   </ItemGroup>
 
 </Project>

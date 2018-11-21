@@ -3359,8 +3359,8 @@
     },
     "SpevoCore/1.0.0": {
       "type": "project",
-      "path": "../../../Timesheet-Tracker/SpevoCore/SpevoCore.csproj",
-      "msbuildProject": "../../../Timesheet-Tracker/SpevoCore/SpevoCore.csproj"
+      "path": "../SpevoCore/SpevoCore.csproj",
+      "msbuildProject": "../SpevoCore/SpevoCore.csproj"
     }
   },
   "projectFileDependencyGroups": {
@@ -3409,8 +3409,8 @@
       "frameworks": {
         "netstandard2.0": {
           "projectReferences": {
-            "D:\\Xamarin Projects\\Timesheet-Tracker\\SpevoCore\\SpevoCore.csproj": {
-              "projectPath": "D:\\Xamarin Projects\\Timesheet-Tracker\\SpevoCore\\SpevoCore.csproj"
+            "D:\\Xamarin Projects\\TicketingApp\\TicketingApp\\SpevoCore\\SpevoCore.csproj": {
+              "projectPath": "D:\\Xamarin Projects\\TicketingApp\\TicketingApp\\SpevoCore\\SpevoCore.csproj"
             }
           }
         }

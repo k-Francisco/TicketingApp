@@ -21,7 +21,6 @@ Refit
 Remotion.Linq
 SignaturePad
 SignaturePad.Forms
-SpevoCore
 Splat
 System.Collections
 System.Reactive.Core
@@ -60,6 +59,7 @@ Xamarin.Forms.Platform.Android
 Xamarin.Forms.Platform
 Xamarin.Forms.Xaml
 netstandard
+SpevoCore
 System.Diagnostics.Debug
 System.Threading
 System.Globalization

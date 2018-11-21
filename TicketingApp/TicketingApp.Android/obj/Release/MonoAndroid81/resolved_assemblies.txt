@@ -25,7 +25,6 @@ D:\Xamarin Projects\TicketingApp\TicketingApp\TicketingApp.Android\obj\Release\M
 D:\Xamarin Projects\TicketingApp\TicketingApp\TicketingApp.Android\obj\Release\MonoAndroid81\android\assets\Remotion.Linq.dll
 D:\Xamarin Projects\TicketingApp\TicketingApp\TicketingApp.Android\obj\Release\MonoAndroid81\android\assets\SignaturePad.dll
 D:\Xamarin Projects\TicketingApp\TicketingApp\TicketingApp.Android\obj\Release\MonoAndroid81\android\assets\SignaturePad.Forms.dll
-D:\Xamarin Projects\TicketingApp\TicketingApp\TicketingApp.Android\obj\Release\MonoAndroid81\android\assets\SpevoCore.dll
 D:\Xamarin Projects\TicketingApp\TicketingApp\TicketingApp.Android\obj\Release\MonoAndroid81\android\assets\Splat.dll
 D:\Xamarin Projects\TicketingApp\TicketingApp\TicketingApp.Android\obj\Release\MonoAndroid81\android\assets\System.Core.dll
 D:\Xamarin Projects\TicketingApp\TicketingApp\TicketingApp.Android\obj\Release\MonoAndroid81\android\assets\System.dll
@@ -72,3 +71,4 @@ D:\Xamarin Projects\TicketingApp\TicketingApp\TicketingApp.Android\obj\Release\M
 D:\Xamarin Projects\TicketingApp\TicketingApp\TicketingApp.Android\obj\Release\MonoAndroid81\android\assets\System.Reflection.TypeExtensions.dll
 D:\Xamarin Projects\TicketingApp\TicketingApp\TicketingApp.Android\obj\Release\MonoAndroid81\android\assets\Mono.Security.dll
 D:\Xamarin Projects\TicketingApp\TicketingApp\TicketingApp.Android\obj\Release\MonoAndroid81\android\assets\System.ServiceModel.Internals.dll
+D:\Xamarin Projects\TicketingApp\TicketingApp\TicketingApp.Android\obj\Release\MonoAndroid81\android\assets\SpevoCore.dll

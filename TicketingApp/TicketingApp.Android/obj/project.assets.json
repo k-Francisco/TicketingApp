@@ -2471,8 +2471,8 @@
     },
     "SpevoCore/1.0.0": {
       "type": "project",
-      "path": "../../../Timesheet-Tracker/SpevoCore/SpevoCore.csproj",
-      "msbuildProject": "../../../Timesheet-Tracker/SpevoCore/SpevoCore.csproj"
+      "path": "../SpevoCore/SpevoCore.csproj",
+      "msbuildProject": "../SpevoCore/SpevoCore.csproj"
     },
     "TicketingApp/1.0.0": {
       "type": "project",
@@ -2489,7 +2489,6 @@
       "Prism.Unity.Forms >= 7.1.0.431",
       "Realm >= 3.2.1",
       "Refit >= 4.6.48",
-      "SpevoCore >= 1.0.0",
       "TicketingApp >= 1.0.0",
       "Xamarin.Android.Support.Design >= 27.0.2.1",
       "Xamarin.Android.Support.v4 >= 27.0.2.1",
@@ -2531,9 +2530,6 @@
           "projectReferences": {
             "D:\\Xamarin Projects\\TicketingApp\\TicketingApp\\TicketingApp\\TicketingApp.csproj": {
               "projectPath": "D:\\Xamarin Projects\\TicketingApp\\TicketingApp\\TicketingApp\\TicketingApp.csproj"
-            },
-            "D:\\Xamarin Projects\\Timesheet-Tracker\\SpevoCore\\SpevoCore.csproj": {
-              "projectPath": "D:\\Xamarin Projects\\Timesheet-Tracker\\SpevoCore\\SpevoCore.csproj"
             }
           }
         }

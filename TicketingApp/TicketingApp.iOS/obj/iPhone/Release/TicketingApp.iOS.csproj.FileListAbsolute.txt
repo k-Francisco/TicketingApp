@@ -79,10 +79,10 @@ D:\Xamarin Projects\TicketingApp\TicketingApp\TicketingApp.iOS\bin\iPhone\Releas
 D:\Xamarin Projects\TicketingApp\TicketingApp\TicketingApp.iOS\bin\iPhone\Release\zh-HK\Xamarin.Forms.Platform.iOS.resources.dll
 D:\Xamarin Projects\TicketingApp\TicketingApp\TicketingApp.iOS\bin\iPhone\Release\zh-Hans\Xamarin.Forms.Platform.iOS.resources.dll
 D:\Xamarin Projects\TicketingApp\TicketingApp\TicketingApp.iOS\bin\iPhone\Release\zh-Hant\Xamarin.Forms.Platform.iOS.resources.dll
-D:\Xamarin Projects\TicketingApp\TicketingApp\TicketingApp.iOS\bin\iPhone\Release\SpevoCore.dll
 D:\Xamarin Projects\TicketingApp\TicketingApp\TicketingApp.iOS\bin\iPhone\Release\TicketingApp.dll
-D:\Xamarin Projects\TicketingApp\TicketingApp\TicketingApp.iOS\bin\iPhone\Release\SpevoCore.pdb
+D:\Xamarin Projects\TicketingApp\TicketingApp\TicketingApp.iOS\bin\iPhone\Release\SpevoCore.dll
 D:\Xamarin Projects\TicketingApp\TicketingApp\TicketingApp.iOS\bin\iPhone\Release\TicketingApp.pdb
+D:\Xamarin Projects\TicketingApp\TicketingApp\TicketingApp.iOS\bin\iPhone\Release\SpevoCore.pdb
 D:\Xamarin Projects\TicketingApp\TicketingApp\TicketingApp.iOS\obj\iPhone\Release\ibtool\_BundleResourceWithLogicalName.items
 D:\Xamarin Projects\TicketingApp\TicketingApp\TicketingApp.iOS\obj\iPhone\Release\actool\_PartialAppManifest.items
 D:\Xamarin Projects\TicketingApp\TicketingApp\TicketingApp.iOS\obj\iPhone\Release\actool\_BundleResourceWithLogicalName.items
