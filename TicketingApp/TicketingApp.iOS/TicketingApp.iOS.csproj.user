@@ -25,5 +25,6 @@
     <DevelopmentTeamId>
     </DevelopmentTeamId>
     <ProjectView>ProjectFiles</ProjectView>
+    <DefaultDevice>iPhone 6 Plus iOS 12.1</DefaultDevice>
   </PropertyGroup>
 </Project>

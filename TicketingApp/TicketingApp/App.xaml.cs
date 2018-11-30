@@ -32,9 +32,9 @@ namespace TicketingApp
         {
             InitializeComponent();
 
-            AppCenter.Start("ios=be14eb7c-34ba-4cbd-a0a4-0dbd4f828f05;" +
-                            "android=4f87b43a-ea72-4c5a-bf46-684310ec919a;", 
-                            typeof(Analytics), typeof(Crashes));
+            //AppCenter.Start("ios=be14eb7c-34ba-4cbd-a0a4-0dbd4f828f05;" +
+            //                "android=4f87b43a-ea72-4c5a-bf46-684310ec919a;", 
+            //                typeof(Analytics), typeof(Crashes));
 
             if (TokenService.GetInstance.IsAlreadyLoggedIn())
                 await NavigationService.NavigateAsync("NavigationPage/TicketsPage");

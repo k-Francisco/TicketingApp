@@ -27,6 +27,7 @@ namespace TicketingApp.ViewModels
 {
     public class InvoicePageViewModel : ViewModelBase
     {
+        #region variables
         private ObservableCollection<LaborUsed> _laborUsed = new ObservableCollection<LaborUsed>();
         public ObservableCollection<LaborUsed> LaborUsed
         {
@@ -125,6 +126,9 @@ namespace TicketingApp.ViewModels
             set { SetProperty(ref _thirdPTUsedTotal, value); }
         }
 
+        public Func<Task<byte[]>> SignatureFromStream { get; set; } 
+        #endregion
+
         public InvoicePageViewModel(INavigationService navigationService,  IEventAggregator eventAggregator, IApiManager apiManager)
             : base(navigationService, eventAggregator, apiManager)
         {
@@ -185,10 +189,7 @@ namespace TicketingApp.ViewModels
             }
         }
 
-        public Func<Task<byte[]>> SignatureFromStream { get; set; }
-
         private DelegateCommand _saveCommand;
-
         public DelegateCommand Save
         {
             get
@@ -234,7 +235,7 @@ namespace TicketingApp.ViewModels
                     UserId = user.UserId.ToString(),
                 };
 
-                if (connected)
+                if (IsConnected)
                 {
                     var invoices = await ApiManager.AddTask(SharepointApi.GetApi(Priority.UserInitiated).GetListItemsByListTitle("Invoiced Tickets"));
 

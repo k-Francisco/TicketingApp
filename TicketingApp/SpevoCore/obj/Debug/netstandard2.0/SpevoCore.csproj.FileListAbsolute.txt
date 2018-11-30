@@ -15,3 +15,12 @@ D:\Xamarin Projects\Timesheet-Tracker\SpevoCore\obj\Debug\netstandard2.0\SpevoCo
 D:\Xamarin Projects\Timesheet-Tracker\SpevoCore\obj\Debug\netstandard2.0\SpevoCore.AssemblyInfo.cs
 D:\Xamarin Projects\Timesheet-Tracker\SpevoCore\obj\Debug\netstandard2.0\SpevoCore.dll
 D:\Xamarin Projects\Timesheet-Tracker\SpevoCore\obj\Debug\netstandard2.0\SpevoCore.pdb
+D:\Xamarin Projects\TicketingApp\TicketingApp\SpevoCore\bin\Debug\netstandard2.0\SpevoCore.deps.json
+D:\Xamarin Projects\TicketingApp\TicketingApp\SpevoCore\bin\Debug\netstandard2.0\SpevoCore.dll
+D:\Xamarin Projects\TicketingApp\TicketingApp\SpevoCore\bin\Debug\netstandard2.0\SpevoCore.pdb
+D:\Xamarin Projects\TicketingApp\TicketingApp\SpevoCore\obj\Debug\netstandard2.0\SpevoCore.csprojAssemblyReference.cache
+D:\Xamarin Projects\TicketingApp\TicketingApp\SpevoCore\obj\Debug\netstandard2.0\SpevoCore.csproj.CoreCompileInputs.cache
+D:\Xamarin Projects\TicketingApp\TicketingApp\SpevoCore\obj\Debug\netstandard2.0\SpevoCore.AssemblyInfoInputs.cache
+D:\Xamarin Projects\TicketingApp\TicketingApp\SpevoCore\obj\Debug\netstandard2.0\SpevoCore.AssemblyInfo.cs
+D:\Xamarin Projects\TicketingApp\TicketingApp\SpevoCore\obj\Debug\netstandard2.0\SpevoCore.dll
+D:\Xamarin Projects\TicketingApp\TicketingApp\SpevoCore\obj\Debug\netstandard2.0\SpevoCore.pdb

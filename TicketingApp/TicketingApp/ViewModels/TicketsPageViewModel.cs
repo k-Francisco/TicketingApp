@@ -3,6 +3,7 @@ using Newtonsoft.Json;
 using Prism.Commands;
 using Prism.Events;
 using Prism.Navigation;
+using Realms;
 using SpevoCore.Services;
 using SpevoCore.Services.API_Service;
 using SpevoCore.Services.Token_Service;
@@ -27,21 +28,18 @@ using TicketingApp.Models.Tickets;
 using TicketingApp.Models.Users;
 using TicketingApp.Services;
 using Xamarin.Essentials;
-using Xamarin.Forms;
 
 namespace TicketingApp.ViewModels
 {
     public class TicketsPageViewModel : ViewModelBase
     {
         private ObservableCollection<Ticket> _ticketCollection = new ObservableCollection<Ticket>();
-
         public ObservableCollection<Ticket> TicketCollection
         {
             get { return _ticketCollection; }
         }
 
         private bool _refreshing;
-
         public bool Refreshing
         {
             get { return _refreshing; }
@@ -49,7 +47,6 @@ namespace TicketingApp.ViewModels
         }
 
         private string _syncStage;
-
         public string SyncStage
         {
             get { return _syncStage; }
@@ -83,7 +80,7 @@ namespace TicketingApp.ViewModels
         {
             try
             {
-                if (connected)
+                if (IsConnected)
                 {
                     var savedUser = realm.All<User>().FirstOrDefault();
                     if (savedUser == null)
@@ -114,7 +111,7 @@ namespace TicketingApp.ViewModels
         {
             try
             {
-                if (connected)
+                if (IsConnected)
                 {
                     System.Diagnostics.Debug.WriteLine("rtFa", TokenService.GetInstance.ExtractRtFa());
 
@@ -293,7 +290,7 @@ namespace TicketingApp.ViewModels
 
                 if (savedRequests != null || savedRequests.Any())
                 {
-                    if (connected)
+                    if (IsConnected)
                     {
                         var invoices = await ApiManager.AddTask(SharepointApi.GetApi(Priority.UserInitiated).GetListItemsByListTitle("Invoiced Tickets"));
 
@@ -380,7 +377,6 @@ namespace TicketingApp.ViewModels
         }
 
         private DelegateCommand _refreshCommand;
-
         public DelegateCommand RefreshCommand
         {
             get
@@ -399,7 +395,6 @@ namespace TicketingApp.ViewModels
         }
 
         private DelegateCommand<Ticket> _itemTappepdCommand;
-
         public DelegateCommand<Ticket> ItemTappedCommand
         {
             get

@@ -442,7 +442,7 @@
     "fusillade/1.0.0": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-8igNr9Ho5bTEUgwYZ+iYQAkieYjpD/piI0hgBeBt65ULy1AhlL/FkFYsCvE7pWm6SxvY++5Akj0Vi84/3VospQ==",
+      "sha512": "sha512-D4prKuPs4za6T74AnIySQJFqZiz0ErkWYSMESAEHxgTDQDVBIBOrsoh3z311h68qZPPqY2tkTSlJUZuADkBIfw==",
       "path": "fusillade/1.0.0",
       "hashPath": "fusillade.1.0.0.nupkg.sha512"
     },
@@ -477,28 +477,28 @@
     "Polly/6.1.1": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-7xIvnwB0GyaZsea2nOWDLNQruL17k86lRUE4+D9zkE4BawhLyce7tC7xlFnrfYYrDCDhLAKv8crH8f/VctJaIw==",
+      "sha512": "sha512-IYT58Wg1vpggH1fcr0ERAIVRDCwjbR/tTQ6QreqZ9GXo+4LzIoi02R2ilGJ631k8duUmr3kPY4zLTeyuAkdWNA==",
       "path": "polly/6.1.1",
       "hashPath": "polly.6.1.1.nupkg.sha512"
     },
     "Punchclock/2.1.0": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-l5o15/fr7TP9h8d051aSbuAUExpEG4w11RPWq3aTUTD1vKcEAMAW8GuLNKUCYQLzdRL/VKGHAbe8jfqid4A7Ig==",
+      "sha512": "sha512-y/B9tUzqm+ecPBfsvuM+ZomYuyDkQ0eKFvnLoVBMik9WEAzHxpL7hKF+w6JAquApEf0aRMXXegqwUGb28Ewy+A==",
       "path": "punchclock/2.1.0",
       "hashPath": "punchclock.2.1.0.nupkg.sha512"
     },
     "Refit/4.6.48": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-xUgRePzuWaiWXhpAFZ0d5m3gU7jSZ8wg8Vn+GWGQ9C3az+e/DfLqlNir28LcszMZUfbhfWHA42M2WJoJSpYmfA==",
+      "sha512": "sha512-DIw1aILgS+dMHC5opc1534hGpHnQK5K/yQB8Y+MCdIsIc8ex7rLo6YO65oJYVSSk/ZheERhfk+Aq1LK0o6JWMg==",
       "path": "refit/4.6.48",
       "hashPath": "refit.4.6.48.nupkg.sha512"
     },
     "Splat/2.0.0": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-e6oHvtRpK7Ylyl0MBhNwrJm7OibMEHlWeqan1a5WGRB4mX90y621CdOVqM+Slm5+cx9nBl6CWGc2KY2nSBPoAg==",
+      "sha512": "sha512-nu/hT3AaKHJvMlCTrbR2EG1n6nzOejbJsvx/LWiy7kM4PK7R/GdrtP5KN8VcXfi1x+mbPA3Mqcbe992D7DppyA==",
       "path": "splat/2.0.0",
       "hashPath": "splat.2.0.0.nupkg.sha512"
     },
@@ -519,7 +519,7 @@
     "System.Diagnostics.Contracts/4.0.1": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-HrYHFDztlCdrOnDZ4ti7ZOIO34mpOtLo1ETVJH9uxt0zqfpP7x6w0jOe1CwwF+NMzFJfudWoSqi+sgTHX/WQVw==",
+      "sha512": "sha512-HvQQjy712vnlpPxaloZYkuE78Gn353L0SJLJVeLcNASeg9c4qla2a1Xq8I7B3jZoDzKPtHTkyVO7AZ5tpeQGuA==",
       "path": "system.diagnostics.contracts/4.0.1",
       "hashPath": "system.diagnostics.contracts.4.0.1.nupkg.sha512"
     },
@@ -533,7 +533,7 @@
     "System.Dynamic.Runtime/4.0.11": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-QqCP+dPZdg6M21Zm4+beCoJHLNR3tJ82uvgd/9cQBeXZTFJVLyI/hosKuuFfdEyBwcadHdBOXbpaAn+XEo3skQ==",
+      "sha512": "sha512-db34f6LHYM0U0JpE+sOmjar27BnqTVkbLJhgfwMpTdgTigG/Hna3m2MYVwnFzGGKnEJk2UXFuoVTr8WUbU91/A==",
       "path": "system.dynamic.runtime/4.0.11",
       "hashPath": "system.dynamic.runtime.4.0.11.nupkg.sha512"
     },
@@ -568,7 +568,7 @@
     "System.Numerics.Vectors/4.5.0": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-AK4wVgiJqQQCALZ+2ZFY3UqEyIunVlNSBLAHNyI8bJfLT5c9kHZH3nVF2KUWYd1/2POvaz3xx9K6nSKo6m78Ew==",
+      "sha512": "sha512-QQTlPTl06J/iiDbJCiepZ4H//BVraReU4O4EoRw1U02H5TLUIT7xn3GnDp9AXPSlJUDyFs4uWjWafNX6WrAojQ==",
       "path": "system.numerics.vectors/4.5.0",
       "hashPath": "system.numerics.vectors.4.5.0.nupkg.sha512"
     },
@@ -582,35 +582,35 @@
     "System.Reactive/3.1.1": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-jdLBDt+bTs26kUA7R0P3JPYnYt2NKvyUIBW4aZb7JUQLGTfdBebdzKtY9pMTXrjj/QwRZSyKBqfGXzO4Mh7Q0Q==",
+      "sha512": "sha512-elkQdVQoBVX39BHrYHMc3Rnbb7a9qBJIwNCvhq1psPMOEPo62/VHB0lJu671x3fOrGL4V/85n6p2Az1tw7Kvmg==",
       "path": "system.reactive/3.1.1",
       "hashPath": "system.reactive.3.1.1.nupkg.sha512"
     },
     "System.Reactive.Core/3.1.1": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-s6kQTsHXXloJeT0Jo3MPThoRlc9LVGrHZ6rQo8Dvx3klnaIknQBy0/NjsUSAnGZHdCsJzQEnH08X2BG06ib1ZA==",
+      "sha512": "sha512-CKWC+UP1aM75taNX+sTBn2P97uHIUjKxq+z45iy7P91QGFqNFleR2tsqIC76HMVvYl7o8oWyMiycdsc9rC1Z/g==",
       "path": "system.reactive.core/3.1.1",
       "hashPath": "system.reactive.core.3.1.1.nupkg.sha512"
     },
     "System.Reactive.Interfaces/3.1.1": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-KSnc+j8WQLS2elGyxdqonTxpdtreANwhfD5kBw/m9bV0YcjL2DjgQg46F0HIOTEN45qGU1MN1MFX5fHbYnVEtA==",
+      "sha512": "sha512-aNVY3QoRznGFeQ+w+bMqhD8ElNWoyYq+7XTQIoxKKjBOyTOjUqIMEf1wvSdtwC4y92zg2W9q38b4Sr6cYNHVLg==",
       "path": "system.reactive.interfaces/3.1.1",
       "hashPath": "system.reactive.interfaces.3.1.1.nupkg.sha512"
     },
     "System.Reactive.Linq/3.1.1": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-Hc3HKFiNWLoo2Qa+8daQIsQQYRxWfhsWhI9CW9NejTwVX9w72+1DDK2J/t1ezk7a45GRIvcPo1bMrZtpMEHO1Q==",
+      "sha512": "sha512-HwsZsoYRg51cLGBOEa0uoZ5+d4CMcHEg/KrbqePhLxoz/SLA+ULISphBtn3woABPATOQ6j5YgGZWh4jxnJ3KYQ==",
       "path": "system.reactive.linq/3.1.1",
       "hashPath": "system.reactive.linq.3.1.1.nupkg.sha512"
     },
     "System.Reactive.PlatformServices/3.1.1": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-nWouPlttrYpZ0TALhhUqfxOIzs3ZA1ZwfHTlnP0SbuGaszKp+5kopaqyZ1sRmdlo8QXkfb+sRrDOA2hhxOpaGw==",
+      "sha512": "sha512-jCJ3iGDLb4duOxZ/Uo3O7PssWE48uRp0fw92AlIwrMNaZRUmZNkZyqbl0nUT+joFARBYun8XiVIDQreMJKBedA==",
       "path": "system.reactive.platformservices/3.1.1",
       "hashPath": "system.reactive.platformservices.3.1.1.nupkg.sha512"
     },
@@ -687,7 +687,7 @@
     "System.Runtime.InteropServices.WindowsRuntime/4.0.1": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-DfTIr/mWBABiRQ4ROzrViCgxLF7nkAtUBL9KeMAqxph55pqMjhjCqas/SYqor2UEljWKr7wrShG0F7xNfkNveQ==",
+      "sha512": "sha512-oIIXM4w2y3MiEZEXA+RTtfPV+SZ1ymbFdWppHlUciNdNIL0/Uo3HW9q9iN2O7T7KUmRdvjA7C2Gv4exAyW4zEQ==",
       "path": "system.runtime.interopservices.windowsruntime/4.0.1",
       "hashPath": "system.runtime.interopservices.windowsruntime.4.0.1.nupkg.sha512"
     },
@@ -715,7 +715,7 @@
     "Xamarin.Essentials/0.11.0-preview": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-12YM3Na6inAHj5imaYFVVq2qeLXJ7ZUzrje2AvOu2nDTj0cZYlOAfaP2N7otqpiIF8SV9TQOa8GafgGd4fYOyw==",
+      "sha512": "sha512-39EteOCVLATsOKolPlEO/ZSolV1SszcDODLi01R0cLX9imWWSEap3bcNKTW0NOOxObi2lwO8oH9SNr70CCwnqw==",
       "path": "xamarin.essentials/0.11.0-preview",
       "hashPath": "xamarin.essentials.0.11.0-preview.nupkg.sha512"
     }

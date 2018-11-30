@@ -9,6 +9,7 @@ using SpevoCore.Services.API_Service;
 using SpevoCore.Services.Sharepoint_API;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Net.Http;
 using System.Text;
@@ -31,8 +32,15 @@ namespace TicketingApp.ViewModels
         protected IEventAggregator EventAggregator { get; private set; }
         protected IApiManager ApiManager { get; set; }
         protected IApiService<ISharepointAPI> SharepointApi = new ApiService<ISharepointAPI>(App.SiteUrl);
+
         protected Realm realm { get; private set; }
-        protected bool connected { get; private set; }
+
+        private bool _isConnected;
+        public bool IsConnected
+        {
+            get { return _isConnected; }
+            set { SetProperty(ref _isConnected, value); }
+        }
 
         private string _title;
         public string Title
@@ -53,14 +61,14 @@ namespace TicketingApp.ViewModels
             PageDialog = UserDialogs.Instance;
 
             if (Connectivity.NetworkAccess == NetworkAccess.Internet)
-                connected = true;
+                IsConnected = true;
 
             Connectivity.ConnectivityChanged += (s, e) =>
             {
                 if (Connectivity.NetworkAccess == NetworkAccess.Internet)
-                    connected = true;
+                    IsConnected = true;
                 else
-                    connected = false;
+                    IsConnected = false;
             };
         }
 
@@ -86,13 +94,53 @@ namespace TicketingApp.ViewModels
             }
         }
 
+        public void SyncData<U>(Dictionary<int, U> oldData,
+                                Dictionary<int, U> newData,
+                                List<U> savedData)
+        {
+            realm.Write(()=> {
+
+                var oldDataClone = new Dictionary<int, U>(oldData);
+                foreach (var item in oldDataClone)
+                {
+                    var data = newData.Where(d => d.Key == item.Key)
+                               .Select(d => new { Key = d.Key, Value = d.Value })
+                               .FirstOrDefault();
+
+                    if (data == null)
+                    {
+                        savedData.Remove(item.Value);
+                    }
+                }
+
+                var newDataClone = new Dictionary<int, U>(newData);
+                foreach (var item in newDataClone)
+                {
+                    var data = oldData.Where(p => p.Key.Equals(item.Key))
+                               .Select(d => new { Key = d.Key, Value = d.Value })
+                               .FirstOrDefault();
+
+                    if (data != null)
+                    {
+                        oldData[data.Key] = item.Value;
+                    }
+                    else
+                    {
+                        savedData.Add(item.Value);
+                    }
+                }
+
+                realm.Refresh();
+            });
+        }
+
         #region invoice region
 
         public async void UpdateTicket(string formDigest, string signature, string ticketId)
         {
             try
             {
-                if (connected)
+                if (IsConnected)
                 {
                     bool approvalStatus = false;
                     string status = "Open";

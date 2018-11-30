@@ -16,6 +16,7 @@
 
     <controls:CustomWebView x:Name="webView"
                             Source="{Binding LoginSiteUrl}"
+                            IsVisible="{Binding IsConnected}"
                             HorizontalOptions="FillAndExpand"
                             VerticalOptions="FillAndExpand">
         <controls:CustomWebView.Behaviors>

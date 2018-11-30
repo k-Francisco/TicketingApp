@@ -519,10 +519,11 @@
   },
   "libraries": {
     "fusillade/1.0.0": {
-      "sha512": "8igNr9Ho5bTEUgwYZ+iYQAkieYjpD/piI0hgBeBt65ULy1AhlL/FkFYsCvE7pWm6SxvY++5Akj0Vi84/3VospQ==",
+      "sha512": "D4prKuPs4za6T74AnIySQJFqZiz0ErkWYSMESAEHxgTDQDVBIBOrsoh3z311h68qZPPqY2tkTSlJUZuADkBIfw==",
       "type": "package",
       "path": "fusillade/1.0.0",
       "files": [
+        ".nupkg.metadata",
         ".signature.p7s",
         "fusillade.1.0.0.nupkg.sha512",
         "fusillade.nuspec",
@@ -711,10 +712,11 @@
       ]
     },
     "Polly/6.1.1": {
-      "sha512": "7xIvnwB0GyaZsea2nOWDLNQruL17k86lRUE4+D9zkE4BawhLyce7tC7xlFnrfYYrDCDhLAKv8crH8f/VctJaIw==",
+      "sha512": "IYT58Wg1vpggH1fcr0ERAIVRDCwjbR/tTQ6QreqZ9GXo+4LzIoi02R2ilGJ631k8duUmr3kPY4zLTeyuAkdWNA==",
       "type": "package",
       "path": "polly/6.1.1",
       "files": [
+        ".nupkg.metadata",
         ".signature.p7s",
         "lib/netstandard1.1/Polly.deps.json",
         "lib/netstandard1.1/Polly.dll",
@@ -722,6 +724,7 @@
         "lib/netstandard1.1/Polly.xml",
         "lib/netstandard2.0/Polly.deps.json",
         "lib/netstandard2.0/Polly.dll",
+        "lib/netstandard2.0/Polly.dll.mdb",
         "lib/netstandard2.0/Polly.pdb",
         "lib/netstandard2.0/Polly.xml",
         "polly.6.1.1.nupkg.sha512",
@@ -729,10 +732,11 @@
       ]
     },
     "Punchclock/2.1.0": {
-      "sha512": "l5o15/fr7TP9h8d051aSbuAUExpEG4w11RPWq3aTUTD1vKcEAMAW8GuLNKUCYQLzdRL/VKGHAbe8jfqid4A7Ig==",
+      "sha512": "y/B9tUzqm+ecPBfsvuM+ZomYuyDkQ0eKFvnLoVBMik9WEAzHxpL7hKF+w6JAquApEf0aRMXXegqwUGb28Ewy+A==",
       "type": "package",
       "path": "punchclock/2.1.0",
       "files": [
+        ".nupkg.metadata",
         ".signature.p7s",
         "lib/netstandard1.4/Punchclock.dll",
         "lib/netstandard1.4/Punchclock.xml",
@@ -741,10 +745,11 @@
       ]
     },
     "Refit/4.6.48": {
-      "sha512": "xUgRePzuWaiWXhpAFZ0d5m3gU7jSZ8wg8Vn+GWGQ9C3az+e/DfLqlNir28LcszMZUfbhfWHA42M2WJoJSpYmfA==",
+      "sha512": "DIw1aILgS+dMHC5opc1534hGpHnQK5K/yQB8Y+MCdIsIc8ex7rLo6YO65oJYVSSk/ZheERhfk+Aq1LK0o6JWMg==",
       "type": "package",
       "path": "refit/4.6.48",
       "files": [
+        ".nupkg.metadata",
         ".signature.p7s",
         "build/MSBuildCore20/GeneratedInterfaceStubTemplate.mustache",
         "build/MSBuildCore20/InterfaceStubGenerator.BuildTasks.deps.json",
@@ -815,10 +820,11 @@
       ]
     },
     "Splat/2.0.0": {
-      "sha512": "e6oHvtRpK7Ylyl0MBhNwrJm7OibMEHlWeqan1a5WGRB4mX90y621CdOVqM+Slm5+cx9nBl6CWGc2KY2nSBPoAg==",
+      "sha512": "nu/hT3AaKHJvMlCTrbR2EG1n6nzOejbJsvx/LWiy7kM4PK7R/GdrtP5KN8VcXfi1x+mbPA3Mqcbe992D7DppyA==",
       "type": "package",
       "path": "splat/2.0.0",
       "files": [
+        ".nupkg.metadata",
         ".signature.p7s",
         "lib/MonoAndroid403/Splat.dll",
         "lib/Net45/Splat.dll",
@@ -966,10 +972,11 @@
       ]
     },
     "System.Diagnostics.Contracts/4.0.1": {
-      "sha512": "HrYHFDztlCdrOnDZ4ti7ZOIO34mpOtLo1ETVJH9uxt0zqfpP7x6w0jOe1CwwF+NMzFJfudWoSqi+sgTHX/WQVw==",
+      "sha512": "HvQQjy712vnlpPxaloZYkuE78Gn353L0SJLJVeLcNASeg9c4qla2a1Xq8I7B3jZoDzKPtHTkyVO7AZ5tpeQGuA==",
       "type": "package",
       "path": "system.diagnostics.contracts/4.0.1",
       "files": [
+        ".nupkg.metadata",
         ".signature.p7s",
         "ThirdPartyNotices.txt",
         "dotnet_library_license.txt",
@@ -1091,10 +1098,11 @@
       ]
     },
     "System.Dynamic.Runtime/4.0.11": {
-      "sha512": "QqCP+dPZdg6M21Zm4+beCoJHLNR3tJ82uvgd/9cQBeXZTFJVLyI/hosKuuFfdEyBwcadHdBOXbpaAn+XEo3skQ==",
+      "sha512": "db34f6LHYM0U0JpE+sOmjar27BnqTVkbLJhgfwMpTdgTigG/Hna3m2MYVwnFzGGKnEJk2UXFuoVTr8WUbU91/A==",
       "type": "package",
       "path": "system.dynamic.runtime/4.0.11",
       "files": [
+        ".nupkg.metadata",
         ".signature.p7s",
         "ThirdPartyNotices.txt",
         "dotnet_library_license.txt",
@@ -1458,10 +1466,11 @@
       ]
     },
     "System.Numerics.Vectors/4.5.0": {
-      "sha512": "AK4wVgiJqQQCALZ+2ZFY3UqEyIunVlNSBLAHNyI8bJfLT5c9kHZH3nVF2KUWYd1/2POvaz3xx9K6nSKo6m78Ew==",
+      "sha512": "QQTlPTl06J/iiDbJCiepZ4H//BVraReU4O4EoRw1U02H5TLUIT7xn3GnDp9AXPSlJUDyFs4uWjWafNX6WrAojQ==",
       "type": "package",
       "path": "system.numerics.vectors/4.5.0",
       "files": [
+        ".nupkg.metadata",
         ".signature.p7s",
         "LICENSE.TXT",
         "THIRD-PARTY-NOTICES.TXT",
@@ -1572,20 +1581,22 @@
       ]
     },
     "System.Reactive/3.1.1": {
-      "sha512": "jdLBDt+bTs26kUA7R0P3JPYnYt2NKvyUIBW4aZb7JUQLGTfdBebdzKtY9pMTXrjj/QwRZSyKBqfGXzO4Mh7Q0Q==",
+      "sha512": "elkQdVQoBVX39BHrYHMc3Rnbb7a9qBJIwNCvhq1psPMOEPo62/VHB0lJu671x3fOrGL4V/85n6p2Az1tw7Kvmg==",
       "type": "package",
       "path": "system.reactive/3.1.1",
       "files": [
+        ".nupkg.metadata",
         ".signature.p7s",
         "system.reactive.3.1.1.nupkg.sha512",
         "system.reactive.nuspec"
       ]
     },
     "System.Reactive.Core/3.1.1": {
-      "sha512": "s6kQTsHXXloJeT0Jo3MPThoRlc9LVGrHZ6rQo8Dvx3klnaIknQBy0/NjsUSAnGZHdCsJzQEnH08X2BG06ib1ZA==",
+      "sha512": "CKWC+UP1aM75taNX+sTBn2P97uHIUjKxq+z45iy7P91QGFqNFleR2tsqIC76HMVvYl7o8oWyMiycdsc9rC1Z/g==",
       "type": "package",
       "path": "system.reactive.core/3.1.1",
       "files": [
+        ".nupkg.metadata",
         ".signature.p7s",
         "lib/net45/System.Reactive.Core.dll",
         "lib/net45/System.Reactive.Core.xml",
@@ -1610,10 +1621,11 @@
       ]
     },
     "System.Reactive.Interfaces/3.1.1": {
-      "sha512": "KSnc+j8WQLS2elGyxdqonTxpdtreANwhfD5kBw/m9bV0YcjL2DjgQg46F0HIOTEN45qGU1MN1MFX5fHbYnVEtA==",
+      "sha512": "aNVY3QoRznGFeQ+w+bMqhD8ElNWoyYq+7XTQIoxKKjBOyTOjUqIMEf1wvSdtwC4y92zg2W9q38b4Sr6cYNHVLg==",
       "type": "package",
       "path": "system.reactive.interfaces/3.1.1",
       "files": [
+        ".nupkg.metadata",
         ".signature.p7s",
         "lib/net45/System.Reactive.Interfaces.dll",
         "lib/net45/System.Reactive.Interfaces.xml",
@@ -1624,10 +1636,11 @@
       ]
     },
     "System.Reactive.Linq/3.1.1": {
-      "sha512": "Hc3HKFiNWLoo2Qa+8daQIsQQYRxWfhsWhI9CW9NejTwVX9w72+1DDK2J/t1ezk7a45GRIvcPo1bMrZtpMEHO1Q==",
+      "sha512": "HwsZsoYRg51cLGBOEa0uoZ5+d4CMcHEg/KrbqePhLxoz/SLA+ULISphBtn3woABPATOQ6j5YgGZWh4jxnJ3KYQ==",
       "type": "package",
       "path": "system.reactive.linq/3.1.1",
       "files": [
+        ".nupkg.metadata",
         ".signature.p7s",
         "lib/net45/System.Reactive.Linq.dll",
         "lib/net45/System.Reactive.Linq.xml",
@@ -1644,10 +1657,11 @@
       ]
     },
     "System.Reactive.PlatformServices/3.1.1": {
-      "sha512": "nWouPlttrYpZ0TALhhUqfxOIzs3ZA1ZwfHTlnP0SbuGaszKp+5kopaqyZ1sRmdlo8QXkfb+sRrDOA2hhxOpaGw==",
+      "sha512": "jCJ3iGDLb4duOxZ/Uo3O7PssWE48uRp0fw92AlIwrMNaZRUmZNkZyqbl0nUT+joFARBYun8XiVIDQreMJKBedA==",
       "type": "package",
       "path": "system.reactive.platformservices/3.1.1",
       "files": [
+        ".nupkg.metadata",
         ".signature.p7s",
         "lib/net45/System.Reactive.PlatformServices.dll",
         "lib/net45/System.Reactive.PlatformServices.xml",
@@ -2227,10 +2241,11 @@
       ]
     },
     "System.Runtime.InteropServices.WindowsRuntime/4.0.1": {
-      "sha512": "DfTIr/mWBABiRQ4ROzrViCgxLF7nkAtUBL9KeMAqxph55pqMjhjCqas/SYqor2UEljWKr7wrShG0F7xNfkNveQ==",
+      "sha512": "oIIXM4w2y3MiEZEXA+RTtfPV+SZ1ymbFdWppHlUciNdNIL0/Uo3HW9q9iN2O7T7KUmRdvjA7C2Gv4exAyW4zEQ==",
       "type": "package",
       "path": "system.runtime.interopservices.windowsruntime/4.0.1",
       "files": [
+        ".nupkg.metadata",
         ".signature.p7s",
         "ThirdPartyNotices.txt",
         "dotnet_library_license.txt",
@@ -2476,10 +2491,11 @@
       ]
     },
     "Xamarin.Essentials/0.11.0-preview": {
-      "sha512": "12YM3Na6inAHj5imaYFVVq2qeLXJ7ZUzrje2AvOu2nDTj0cZYlOAfaP2N7otqpiIF8SV9TQOa8GafgGd4fYOyw==",
+      "sha512": "39EteOCVLATsOKolPlEO/ZSolV1SszcDODLi01R0cLX9imWWSEap3bcNKTW0NOOxObi2lwO8oH9SNr70CCwnqw==",
       "type": "package",
       "path": "xamarin.essentials/0.11.0-preview",
       "files": [
+        ".nupkg.metadata",
         ".signature.p7s",
         "lib/monoandroid71/Xamarin.Essentials.dll",
         "lib/monoandroid71/Xamarin.Essentials.pdb",
@@ -2488,6 +2504,7 @@
         "lib/monoandroid80/Xamarin.Essentials.pdb",
         "lib/monoandroid80/Xamarin.Essentials.xml",
         "lib/monoandroid81/Xamarin.Essentials.dll",
+        "lib/monoandroid81/Xamarin.Essentials.dll.mdb",
         "lib/monoandroid81/Xamarin.Essentials.pdb",
         "lib/monoandroid81/Xamarin.Essentials.xml",
         "lib/netstandard1.0/Xamarin.Essentials.dll",
@@ -2501,6 +2518,7 @@
         "lib/uap10.0.16299/Xamarin.Essentials.pri",
         "lib/uap10.0.16299/Xamarin.Essentials.xml",
         "lib/xamarinios10/Xamarin.Essentials.dll",
+        "lib/xamarinios10/Xamarin.Essentials.dll.mdb",
         "lib/xamarinios10/Xamarin.Essentials.pdb",
         "lib/xamarinios10/Xamarin.Essentials.xml",
         "readme.txt",
