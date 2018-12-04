@@ -1,6 +1,7 @@
 ﻿using System;
 using TicketingApp.ViewModels;
 using Xamarin.Forms;
+using Xamarin.Forms.PlatformConfiguration.iOSSpecific;
 
 namespace TicketingApp.Views
 {
@@ -17,6 +18,8 @@ namespace TicketingApp.Views
             };
 
             this.ToolbarItems.Add(account);
+
+            On<Xamarin.Forms.PlatformConfiguration.iOS>().SetLargeTitleDisplay(LargeTitleDisplayMode.Always);
         }
     }
 }

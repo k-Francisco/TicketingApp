@@ -66,7 +66,7 @@ namespace TicketingApp.ViewModels
                             }
                             else
                             {
-                                await NavigationService.NavigateAsync(new Uri("app:///NavigationPage/TicketsPage", UriKind.Absolute));
+                                await NavigationService.NavigateAsync(new Uri("app:///CustomNavigationPage/TicketsPage", UriKind.Absolute));
                             }
                             PageDialog.HideLoading();
                         }

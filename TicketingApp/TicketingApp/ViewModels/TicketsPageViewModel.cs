@@ -418,7 +418,7 @@ namespace TicketingApp.ViewModels
                         await NavigationService.NavigateAsync(nameof(Views.TicketDetailsPage),
                                                         navParams,
                                                         false,
-                                                        false);
+                                                        true);
                     });
                 }
 
