@@ -121,6 +121,30 @@ namespace SpevoCore.Services
             return domain;
         }
 
+        public string ExtractExpiry()
+        {
+            string expireDate = string.Empty;
+
+            try
+            {
+                string[] token = JsonConvert.DeserializeObject<string>(Preferences.Get(COOKIE_KEY, string.Empty)).Split(new char[] { ';' });
+
+                for (int i = 0; i < token.Length; i++)
+                {
+                    if (token[i].Contains("CookieExpire"))
+                    {
+                        expireDate = token[i].Replace("CookieExpire=", "");
+                    }
+                }
+            }
+            catch(Exception e)
+            {
+                Debug.WriteLine("ExtractDomain", e.Message);
+            }
+
+            return expireDate;
+        }
+
         public bool IsAlreadyLoggedIn()
         {
             bool isLogged = false;
